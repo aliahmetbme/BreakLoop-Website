@@ -19,3 +19,10 @@
 - [ ] Inspect signed Release archive, privacy manifests/required-reason APIs and physical-device network behavior. Static audit is not release sign-off.
 - [ ] Apply native legal-link proposal only in a separately authorized task; compile and device-test it.
 - [ ] Set verification/review flags only after evidence exists; run `npm run check:release`. `SITE_RELEASE_APPROVED=true` must still fail while legal draft text remains.
+
+## Focus / Life marketing review
+
+- [ ] Approve final EN/TR positioning and set `MARKETING_COPY_APPROVED=true` only after review.
+- [ ] Keep preview-only labels separate from publication copy; run public-copy contamination tests and design-baseline checks.
+- [ ] Review natural headline wrapping against the recorded mobile/desktop baseline. Existing header overlap is documented, not silently redesigned.
+- [ ] Passing isolated release fixtures does not approve actual legal documents or enable indexing; all existing publication blockers remain.

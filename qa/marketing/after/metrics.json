@@ -1,0 +1,218 @@
+[
+  {
+    "background": "rgb(248, 249, 252)",
+    "device": {
+      "bottom": 735.9765625,
+      "height": 590.4921875,
+      "left": 896.1171875,
+      "right": 1176.1171875,
+      "top": 145.484375,
+      "width": 280,
+      "x": 896.1171875,
+      "y": 145.484375
+    },
+    "header": "104px",
+    "hero": {
+      "bottom": 848.46875,
+      "height": 744.46875,
+      "left": 120.5,
+      "right": 1304.5,
+      "top": 104,
+      "width": 1184,
+      "x": 120.5,
+      "y": 104
+    },
+    "lang": "en",
+    "theme": "light",
+    "width": 1440
+  },
+  {
+    "background": "rgb(12, 14, 20)",
+    "device": {
+      "bottom": 735.9765625,
+      "height": 590.4921875,
+      "left": 896.1171875,
+      "right": 1176.1171875,
+      "top": 145.484375,
+      "width": 280,
+      "x": 896.1171875,
+      "y": 145.484375
+    },
+    "header": "104px",
+    "hero": {
+      "bottom": 848.46875,
+      "height": 744.46875,
+      "left": 120.5,
+      "right": 1304.5,
+      "top": 104,
+      "width": 1184,
+      "x": 120.5,
+      "y": 104
+    },
+    "lang": "en",
+    "theme": "dark",
+    "width": 1440
+  },
+  {
+    "background": "rgb(248, 249, 252)",
+    "device": {
+      "bottom": 1221.296875,
+      "height": 527.2265625,
+      "left": 62.5,
+      "right": 312.5,
+      "top": 694.0703125,
+      "width": 250,
+      "x": 62.5,
+      "y": 694.0703125
+    },
+    "header": "84px",
+    "hero": {
+      "bottom": 1310.1875,
+      "height": 1226.1875,
+      "left": 20,
+      "right": 355,
+      "top": 84,
+      "width": 335,
+      "x": 20,
+      "y": 84
+    },
+    "lang": "en",
+    "theme": "light",
+    "width": 390
+  },
+  {
+    "background": "rgb(12, 14, 20)",
+    "device": {
+      "bottom": 1221.296875,
+      "height": 527.2265625,
+      "left": 62.5,
+      "right": 312.5,
+      "top": 694.0703125,
+      "width": 250,
+      "x": 62.5,
+      "y": 694.0703125
+    },
+    "header": "84px",
+    "hero": {
+      "bottom": 1310.1875,
+      "height": 1226.1875,
+      "left": 20,
+      "right": 355,
+      "top": 84,
+      "width": 335,
+      "x": 20,
+      "y": 84
+    },
+    "lang": "en",
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "background": "rgb(248, 249, 252)",
+    "device": {
+      "bottom": 733.7421875,
+      "height": 590.4921875,
+      "left": 896.1171875,
+      "right": 1176.1171875,
+      "top": 143.25,
+      "width": 280,
+      "x": 896.1171875,
+      "y": 143.25
+    },
+    "header": "104px",
+    "hero": {
+      "bottom": 844,
+      "height": 740,
+      "left": 120.5,
+      "right": 1304.5,
+      "top": 104,
+      "width": 1184,
+      "x": 120.5,
+      "y": 104
+    },
+    "lang": "tr",
+    "theme": "light",
+    "width": 1440
+  },
+  {
+    "background": "rgb(12, 14, 20)",
+    "device": {
+      "bottom": 733.7421875,
+      "height": 590.4921875,
+      "left": 896.1171875,
+      "right": 1176.1171875,
+      "top": 143.25,
+      "width": 280,
+      "x": 896.1171875,
+      "y": 143.25
+    },
+    "header": "104px",
+    "hero": {
+      "bottom": 844,
+      "height": 740,
+      "left": 120.5,
+      "right": 1304.5,
+      "top": 104,
+      "width": 1184,
+      "x": 120.5,
+      "y": 104
+    },
+    "lang": "tr",
+    "theme": "dark",
+    "width": 1440
+  },
+  {
+    "background": "rgb(248, 249, 252)",
+    "device": {
+      "bottom": 1124.78125,
+      "height": 527.2265625,
+      "left": 62.5,
+      "right": 312.5,
+      "top": 597.5546875,
+      "width": 250,
+      "x": 62.5,
+      "y": 597.5546875
+    },
+    "header": "84px",
+    "hero": {
+      "bottom": 1213.671875,
+      "height": 1129.671875,
+      "left": 20,
+      "right": 355,
+      "top": 84,
+      "width": 335,
+      "x": 20,
+      "y": 84
+    },
+    "lang": "tr",
+    "theme": "light",
+    "width": 390
+  },
+  {
+    "background": "rgb(12, 14, 20)",
+    "device": {
+      "bottom": 1124.78125,
+      "height": 527.2265625,
+      "left": 62.5,
+      "right": 312.5,
+      "top": 597.5546875,
+      "width": 250,
+      "x": 62.5,
+      "y": 597.5546875
+    },
+    "header": "84px",
+    "hero": {
+      "bottom": 1213.671875,
+      "height": 1129.671875,
+      "left": 20,
+      "right": 355,
+      "top": 84,
+      "width": 335,
+      "x": 20,
+      "y": 84
+    },
+    "lang": "tr",
+    "theme": "dark",
+    "width": 390
+  }
+]

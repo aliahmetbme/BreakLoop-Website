@@ -1,4 +1,85 @@
-export const legalCopy={
- en:{privacyDescription:'How BreakLoop handles on-device settings, Screen Time tokens, diagnostics, support requests and website access.',termsDescription:'Draft licensing, availability and use information for BreakLoop.',kvkkDescription:'Turkish personal data processing notice for BreakLoop.',supportDataTitle:'Support and privacy',supportIntro:'Troubleshooting, local diagnostic controls and how to contact support.',privacy:'Privacy Policy',terms:'Terms of Use',kvkk:'KVKK Notice (Turkish)',draft:'Legal draft · Local preview · Not approved for publication',pending:'To be verified',contents:'On this page',support:'Support',related:'Related information',kvkkLanguage:'This notice is provided in Turkish. There is no approved English equivalent.',supportContact:'Contact support',supportProcessing:'When you email support, your email address, message, attachments and any diagnostic file you choose to include may be received. The provider and retention rules are disclosed below once verified. This website does not automatically upload your logs.',supportRetention:'Support records',hostingRetention:'Website request logs',pendingDetails:'Provider, processing location and retention must be verified before publication.'},
- tr:{privacyDescription:'BreakLoop’ta cihaz içi ayarlar, Ekran Süresi belirteçleri, tanılama, destek başvuruları ve web sitesi verilerinin işlenmesi.',termsDescription:'BreakLoop için taslak lisans, kullanılabilirlik ve kullanım bilgileri.',kvkkDescription:'BreakLoop kişisel veri işleme faaliyetlerine ilişkin ayrı KVKK aydınlatma taslağı.',supportDataTitle:'Destek ve gizlilik',supportIntro:'Sorun giderme, yerel tanılama kontrolleri ve destek iletişimi.',privacy:'Gizlilik Politikası',terms:'Kullanım Koşulları',kvkk:'KVKK Aydınlatma Metni',draft:'Hukuki taslak · Yerel önizleme · Yayın için onaylanmadı',pending:'Doğrulanmayı bekliyor',contents:'Bu sayfada',support:'Destek',related:'İlgili bilgiler',kvkkLanguage:'Bu metin Türkçe olarak sunulmaktadır. Onaylanmış İngilizce karşılığı bulunmamaktadır.',supportContact:'Destek ile iletişime geç',supportProcessing:'Desteğe e-posta gönderdiğinizde e-posta adresiniz, mesajınız, ekleriniz ve paylaşmayı seçtiğiniz tanılama dosyası alınabilir. Sağlayıcı ile saklama kuralları doğrulandığında aşağıda belirtilir. Bu web sitesi kayıtlarınızı otomatik olarak göndermez.',supportRetention:'Destek kayıtları',hostingRetention:'Web sitesi erişim kayıtları',pendingDetails:'Sağlayıcı, işleme ülkesi ve saklama süresi yayından önce doğrulanmalıdır.'}
+export const previewLegalCopy = {
+  "en": {
+    "privacyDescription": "How BreakLoop handles on-device settings, Screen Time tokens, diagnostics, support requests and website access.",
+    "termsDescription": "Draft licensing, availability and use information for BreakLoop.",
+    "kvkkDescription": "Turkish personal data processing notice for BreakLoop.",
+    "supportDataTitle": "Support and privacy",
+    "supportIntro": "Troubleshooting, local diagnostic controls and how to contact support.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "kvkk": "KVKK Notice (Turkish)",
+    "draft": "Legal draft · Local preview · Not approved for publication",
+    "pending": "To be verified",
+    "contents": "On this page",
+    "support": "Support",
+    "related": "Related information",
+    "kvkkLanguage": "This notice is provided in Turkish. There is no approved English equivalent.",
+    "supportContact": "Contact support",
+    "supportProcessing": "When you email support, your email address, message, attachments and any diagnostic file you choose to include may be received. The provider and retention rules are disclosed below once verified. This website does not automatically upload your logs.",
+    "supportRetention": "Support records",
+    "hostingRetention": "Website request logs",
+    "pendingDetails": "Provider, processing location and retention must be verified before publication."
+  },
+  "tr": {
+    "privacyDescription": "BreakLoop’ta cihaz içi ayarlar, Ekran Süresi belirteçleri, tanılama, destek başvuruları ve web sitesi verilerinin işlenmesi.",
+    "termsDescription": "BreakLoop için taslak lisans, kullanılabilirlik ve kullanım bilgileri.",
+    "kvkkDescription": "BreakLoop kişisel veri işleme faaliyetlerine ilişkin ayrı KVKK aydınlatma taslağı.",
+    "supportDataTitle": "Destek ve gizlilik",
+    "supportIntro": "Sorun giderme, yerel tanılama kontrolleri ve destek iletişimi.",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Kullanım Koşulları",
+    "kvkk": "KVKK Aydınlatma Metni",
+    "draft": "Hukuki taslak · Yerel önizleme · Yayın için onaylanmadı",
+    "pending": "Doğrulanmayı bekliyor",
+    "contents": "Bu sayfada",
+    "support": "Destek",
+    "related": "İlgili bilgiler",
+    "kvkkLanguage": "Bu metin Türkçe olarak sunulmaktadır. Onaylanmış İngilizce karşılığı bulunmamaktadır.",
+    "supportContact": "Destek ile iletişime geç",
+    "supportProcessing": "Desteğe e-posta gönderdiğinizde e-posta adresiniz, mesajınız, ekleriniz ve paylaşmayı seçtiğiniz tanılama dosyası alınabilir. Sağlayıcı ile saklama kuralları doğrulandığında aşağıda belirtilir. Bu web sitesi kayıtlarınızı otomatik olarak göndermez.",
+    "supportRetention": "Destek kayıtları",
+    "hostingRetention": "Web sitesi erişim kayıtları",
+    "pendingDetails": "Sağlayıcı, işleme ülkesi ve saklama süresi yayından önce doğrulanmalıdır."
+  }
 } as const;
+
+export const legalCopy = {
+  "en": {
+    "privacyDescription": "How BreakLoop handles on-device settings, Screen Time tokens, diagnostics, support requests and website access.",
+    "termsDescription": "Licensing, availability and use information for BreakLoop.",
+    "kvkkDescription": "Turkish personal data processing notice for BreakLoop.",
+    "supportDataTitle": "Support and privacy",
+    "supportIntro": "Troubleshooting, local diagnostic controls and how to contact support.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "kvkk": "KVKK Notice (Turkish)",
+    "contents": "On this page",
+    "support": "Support",
+    "related": "Related information",
+    "kvkkLanguage": "This notice is available in Turkish.",
+    "supportContact": "Contact support",
+    "supportProcessing": "When you email support, your email address, message, attachments and any diagnostic file you choose to include may be received. The provider and retention rules are disclosed below once verified. This website does not automatically upload your logs.",
+    "supportRetention": "Support records",
+    "hostingRetention": "Website request logs"
+  },
+  "tr": {
+    "privacyDescription": "BreakLoop’ta cihaz içi ayarlar, Ekran Süresi belirteçleri, tanılama, destek başvuruları ve web sitesi verilerinin işlenmesi.",
+    "termsDescription": "BreakLoop lisans, kullanılabilirlik ve kullanım bilgileri.",
+    "kvkkDescription": "BreakLoop kişisel veri işleme faaliyetlerine ilişkin KVKK aydınlatma metni.",
+    "supportDataTitle": "Destek ve gizlilik",
+    "supportIntro": "Sorun giderme, yerel tanılama kontrolleri ve destek iletişimi.",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Kullanım Koşulları",
+    "kvkk": "KVKK Aydınlatma Metni",
+    "contents": "Bu sayfada",
+    "support": "Destek",
+    "related": "İlgili bilgiler",
+    "kvkkLanguage": "Bu metin Türkçe olarak sunulmaktadır.",
+    "supportContact": "Destek ile iletişime geç",
+    "supportProcessing": "Desteğe e-posta gönderdiğinizde e-posta adresiniz, mesajınız, ekleriniz ve paylaşmayı seçtiğiniz tanılama dosyası alınabilir. Sağlayıcı ile saklama kuralları doğrulandığında aşağıda belirtilir. Bu web sitesi kayıtlarınızı otomatik olarak göndermez.",
+    "supportRetention": "Destek kayıtları",
+    "hostingRetention": "Web sitesi erişim kayıtları"
+  }
+} as const;
+
+export function getLegalCopy(locale: keyof typeof legalCopy, publication: boolean) { return publication ? legalCopy[locale] : previewLegalCopy[locale]; }

@@ -1,0 +1,394 @@
+[
+  {
+    "client": 305,
+    "path": "/en",
+    "scroll": 305,
+    "theme": "light",
+    "width": 320
+  },
+  {
+    "client": 360,
+    "path": "/en",
+    "scroll": 360,
+    "theme": "light",
+    "width": 375
+  },
+  {
+    "client": 375,
+    "path": "/en",
+    "scroll": 375,
+    "theme": "light",
+    "width": 390
+  },
+  {
+    "client": 753,
+    "path": "/en",
+    "scroll": 753,
+    "theme": "light",
+    "width": 768
+  },
+  {
+    "client": 1009,
+    "path": "/en",
+    "scroll": 1009,
+    "theme": "light",
+    "width": 1024
+  },
+  {
+    "client": 1425,
+    "path": "/en",
+    "scroll": 1425,
+    "theme": "light",
+    "width": 1440
+  },
+  {
+    "client": 1905,
+    "path": "/en",
+    "scroll": 1905,
+    "theme": "light",
+    "width": 1920
+  },
+  {
+    "client": 305,
+    "path": "/en",
+    "scroll": 305,
+    "theme": "dark",
+    "width": 320
+  },
+  {
+    "client": 360,
+    "path": "/en",
+    "scroll": 360,
+    "theme": "dark",
+    "width": 375
+  },
+  {
+    "client": 375,
+    "path": "/en",
+    "scroll": 375,
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "client": 753,
+    "path": "/en",
+    "scroll": 753,
+    "theme": "dark",
+    "width": 768
+  },
+  {
+    "client": 1009,
+    "path": "/en",
+    "scroll": 1009,
+    "theme": "dark",
+    "width": 1024
+  },
+  {
+    "client": 1425,
+    "path": "/en",
+    "scroll": 1425,
+    "theme": "dark",
+    "width": 1440
+  },
+  {
+    "client": 1905,
+    "path": "/en",
+    "scroll": 1905,
+    "theme": "dark",
+    "width": 1920
+  },
+  {
+    "client": 305,
+    "path": "/en/how-it-works",
+    "scroll": 305,
+    "theme": "light",
+    "width": 320
+  },
+  {
+    "client": 360,
+    "path": "/en/how-it-works",
+    "scroll": 360,
+    "theme": "light",
+    "width": 375
+  },
+  {
+    "client": 375,
+    "path": "/en/how-it-works",
+    "scroll": 375,
+    "theme": "light",
+    "width": 390
+  },
+  {
+    "client": 753,
+    "path": "/en/how-it-works",
+    "scroll": 753,
+    "theme": "light",
+    "width": 768
+  },
+  {
+    "client": 1009,
+    "path": "/en/how-it-works",
+    "scroll": 1009,
+    "theme": "light",
+    "width": 1024
+  },
+  {
+    "client": 1425,
+    "path": "/en/how-it-works",
+    "scroll": 1425,
+    "theme": "light",
+    "width": 1440
+  },
+  {
+    "client": 1905,
+    "path": "/en/how-it-works",
+    "scroll": 1905,
+    "theme": "light",
+    "width": 1920
+  },
+  {
+    "client": 305,
+    "path": "/en/how-it-works",
+    "scroll": 305,
+    "theme": "dark",
+    "width": 320
+  },
+  {
+    "client": 360,
+    "path": "/en/how-it-works",
+    "scroll": 360,
+    "theme": "dark",
+    "width": 375
+  },
+  {
+    "client": 375,
+    "path": "/en/how-it-works",
+    "scroll": 375,
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "client": 753,
+    "path": "/en/how-it-works",
+    "scroll": 753,
+    "theme": "dark",
+    "width": 768
+  },
+  {
+    "client": 1009,
+    "path": "/en/how-it-works",
+    "scroll": 1009,
+    "theme": "dark",
+    "width": 1024
+  },
+  {
+    "client": 1425,
+    "path": "/en/how-it-works",
+    "scroll": 1425,
+    "theme": "dark",
+    "width": 1440
+  },
+  {
+    "client": 1905,
+    "path": "/en/how-it-works",
+    "scroll": 1905,
+    "theme": "dark",
+    "width": 1920
+  },
+  {
+    "client": 305,
+    "path": "/tr",
+    "scroll": 305,
+    "theme": "light",
+    "width": 320
+  },
+  {
+    "client": 360,
+    "path": "/tr",
+    "scroll": 360,
+    "theme": "light",
+    "width": 375
+  },
+  {
+    "client": 375,
+    "path": "/tr",
+    "scroll": 375,
+    "theme": "light",
+    "width": 390
+  },
+  {
+    "client": 753,
+    "path": "/tr",
+    "scroll": 753,
+    "theme": "light",
+    "width": 768
+  },
+  {
+    "client": 1009,
+    "path": "/tr",
+    "scroll": 1009,
+    "theme": "light",
+    "width": 1024
+  },
+  {
+    "client": 1425,
+    "path": "/tr",
+    "scroll": 1425,
+    "theme": "light",
+    "width": 1440
+  },
+  {
+    "client": 1905,
+    "path": "/tr",
+    "scroll": 1905,
+    "theme": "light",
+    "width": 1920
+  },
+  {
+    "client": 305,
+    "path": "/tr",
+    "scroll": 305,
+    "theme": "dark",
+    "width": 320
+  },
+  {
+    "client": 360,
+    "path": "/tr",
+    "scroll": 360,
+    "theme": "dark",
+    "width": 375
+  },
+  {
+    "client": 375,
+    "path": "/tr",
+    "scroll": 375,
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "client": 753,
+    "path": "/tr",
+    "scroll": 753,
+    "theme": "dark",
+    "width": 768
+  },
+  {
+    "client": 1009,
+    "path": "/tr",
+    "scroll": 1009,
+    "theme": "dark",
+    "width": 1024
+  },
+  {
+    "client": 1425,
+    "path": "/tr",
+    "scroll": 1425,
+    "theme": "dark",
+    "width": 1440
+  },
+  {
+    "client": 1905,
+    "path": "/tr",
+    "scroll": 1905,
+    "theme": "dark",
+    "width": 1920
+  },
+  {
+    "client": 305,
+    "path": "/tr/how-it-works",
+    "scroll": 305,
+    "theme": "light",
+    "width": 320
+  },
+  {
+    "client": 360,
+    "path": "/tr/how-it-works",
+    "scroll": 360,
+    "theme": "light",
+    "width": 375
+  },
+  {
+    "client": 375,
+    "path": "/tr/how-it-works",
+    "scroll": 375,
+    "theme": "light",
+    "width": 390
+  },
+  {
+    "client": 753,
+    "path": "/tr/how-it-works",
+    "scroll": 753,
+    "theme": "light",
+    "width": 768
+  },
+  {
+    "client": 1009,
+    "path": "/tr/how-it-works",
+    "scroll": 1009,
+    "theme": "light",
+    "width": 1024
+  },
+  {
+    "client": 1425,
+    "path": "/tr/how-it-works",
+    "scroll": 1425,
+    "theme": "light",
+    "width": 1440
+  },
+  {
+    "client": 1905,
+    "path": "/tr/how-it-works",
+    "scroll": 1905,
+    "theme": "light",
+    "width": 1920
+  },
+  {
+    "client": 305,
+    "path": "/tr/how-it-works",
+    "scroll": 305,
+    "theme": "dark",
+    "width": 320
+  },
+  {
+    "client": 360,
+    "path": "/tr/how-it-works",
+    "scroll": 360,
+    "theme": "dark",
+    "width": 375
+  },
+  {
+    "client": 375,
+    "path": "/tr/how-it-works",
+    "scroll": 375,
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "client": 753,
+    "path": "/tr/how-it-works",
+    "scroll": 753,
+    "theme": "dark",
+    "width": 768
+  },
+  {
+    "client": 1009,
+    "path": "/tr/how-it-works",
+    "scroll": 1009,
+    "theme": "dark",
+    "width": 1024
+  },
+  {
+    "client": 1425,
+    "path": "/tr/how-it-works",
+    "scroll": 1425,
+    "theme": "dark",
+    "width": 1440
+  },
+  {
+    "client": 1905,
+    "path": "/tr/how-it-works",
+    "scroll": 1905,
+    "theme": "dark",
+    "width": 1920
+  }
+]

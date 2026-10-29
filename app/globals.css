@@ -25,3 +25,7 @@
 @media(max-width:760px){.footer nav{justify-content:flex-start}.legal-prose{font-size:14px}.legal-prose h2{font-size:23px}.legal-toc ol{grid-template-columns:1fr}.legal-prose h2:first-child{margin-top:14px}}
 .support-data-note dl{font-size:13px;margin-top:20px}.support-data-note dt{font-weight:600;color:var(--text);margin-top:14px}.support-data-note dd{color:var(--secondary);margin:5px 0 0}
 .legal-language-note{font-size:13px;margin-top:20px;max-width:680px}
+/* Marketing additions reuse the approved cards, typography and responsive grid. */
+.mode-overview .mode-link{margin-top:16px}
+.mode-scenarios{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:760px){.mode-scenarios{grid-template-columns:1fr}}

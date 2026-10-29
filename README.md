@@ -52,3 +52,11 @@ npm run check:routes  # requires the local preview server
 ```
 
 See `docs/LEGAL-INTEGRATION.md` for reconciliation and publication rules, `docs/IOS-PRIVACY-AUDIT.md` for the limited static audit, and `docs/ios-proposal/` for un-applied native link proposals. No final signed-build audit, legal approval, App Store submission or native modification has occurred.
+
+## Focus / Life marketing content
+
+The existing visual design is preserved. Both experiences are explained with existing feature-card and step-list patterns. Focus maps to native Deep Focus; Life maps to the shared usage/cooldown cycle. Copy remains in `lib/content.ts`; preview-only labels are separated in `lib/preview-copy.ts` and `lib/legal-copy.ts`. Publication validation scans the selected public copy and still rejects the actual unresolved legal drafts. `MARKETING_COPY_APPROVED` is an additional release prerequisite.
+
+Localized sharing-image endpoints are `/en/og` and `/tr/og`; their metadata is built in `lib/seo.ts`. No new marketing page, analytics or backend was introduced.
+
+Run `node scripts/check-design-baseline.mjs` to assert the approved baseline CSS/assets/controls/legal text remain intact. See `qa/marketing/REPORT.md` for the exact changed files, before/after screenshots, actual tests, content-reflow notes and remaining blockers.
