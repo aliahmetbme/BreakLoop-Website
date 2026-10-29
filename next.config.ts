@@ -5,5 +5,5 @@ if(process.env.SITE_RELEASE_APPROVED==='true') {
  const issues=releaseIssues();
  if(issues.length)throw new Error(`Publication blocked:\n- ${issues.join('\n- ')}`);
 }
-const config:NextConfig={poweredByHeader:false};
+const config:NextConfig={poweredByHeader:false,images:{qualities:[75,90]}};
 export default config;

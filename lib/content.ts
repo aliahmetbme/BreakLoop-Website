@@ -137,26 +137,36 @@ export const content = {
     "howIntro": "Start a focus session when you want to concentrate. Set a shared usage budget when you want a pause from automatic scrolling.",
     "howNoteTitle": "Designed around iOS.",
     "howNote": "Allow Screen Time access during setup. BreakLoop uses Apple’s Family Controls, Device Activity, and Managed Settings frameworks. Permissions and system behavior affect monitoring and enforcement. The website’s illustrative timers and layouts are explanations, not a promise of a live system shield.",
-    "supportTitle": "A little help finding your rhythm.",
+    "supportTitle": "BreakLoop Support",
+    "supportLead": "If you have a question, suggestion, or technical issue related to BreakLoop, you can contact the developer.",
+    "supportContactHeading": "Contact",
+    "supportEmailLabel": "Support email:",
+    "supportContactNotes": [
+      "When contacting support, describe the issue and, if possible, include your iOS version and the steps that led to the problem.",
+      "Please avoid sending passwords, payment information, or unnecessary personal data."
+    ],
     "supportSections": [
       [
-        "Apps are not pausing as expected",
-        "Check Screen Time authorization, your selected apps and categories, and whether a cycle is active. Reopen BreakLoop to review its current status. iOS callbacks and permissions can affect enforcement timing."
+        "Apps are not being restricted as expected",
+        "Check your Screen Time authorization, selected apps and categories, and whether the relevant BreakLoop cycle is active.",
+        "iOS permissions and system scheduling may affect when restrictions are applied."
       ],
       [
-        "My usage budget seems different",
-        "The allowance is shared across selected apps and categories. Switching apps does not reset it. Natural Rest may begin a fresh cycle based on an estimate from usage checkpoints."
+        "How does the shared usage budget work?",
+        "In Life Mode, your selected apps and categories share a single usage allowance.",
+        "Switching between selected apps does not reset that shared allowance."
       ],
       [
-        "Sharing diagnostics",
-        "Open Settings → Diagnostics in BreakLoop. Choose the relevant period and export logs, then review the file before choosing where to share it. Exporting does not automatically contact support."
-      ],
-      [
-        "Deleting local history",
-        "Use Delete History in Diagnostics and confirm the action. This applies to the local diagnostic archive; system logs, preserved legacy records, and previously exported or shared files are separate."
+        "Can I share diagnostic information?",
+        "You can inspect and export supported diagnostic records from the Diagnostics section in the app's Settings.",
+        "Review any exported file before sharing it.",
+        "Exporting diagnostics does not automatically send the file to the developer."
       ]
     ],
-    "supportContact": "Contact support",
+    "supportPrivacyTitle": "Privacy",
+    "supportPrivacyBody": "You can read the Privacy Policy for more information about how BreakLoop handles information.",
+    "supportRelatedLabel": "Related links:",
+    "supportContact": "Contact",
     "supportContactText": "Contact details are provided above.",
     "seoDescription": "BreakLoop is an iOS screen time and focus app. Start a Deep Focus session, or set shared app usage limits and cooldowns for more mindful phone use.",
     "howSeoDescription": "Learn how BreakLoop’s Focus Mode uses fixed-duration Deep Focus sessions, while Life Mode combines a shared screen time budget, cooldowns and estimated natural rest.",
@@ -374,26 +384,36 @@ export const content = {
     "howIntro": "Bir işe odaklanmak için odak oturumu başlat. Fark etmeden uzayan kaydırmalara ara vermek için ortak kullanım süresi belirle.",
     "howNoteTitle": "iOS etrafında tasarlandı.",
     "howNote": "Kurulum sırasında Ekran Süresi erişimine izin ver. BreakLoop; Apple’ın Family Controls, Device Activity ve Managed Settings altyapılarını kullanır. İzinler ve sistem davranışı izleme ile engellemeyi etkiler. Web sitesindeki temsilî sayaç ve düzenler açıklama amaçlıdır; canlı bir sistem kalkanı vaadi değildir.",
-    "supportTitle": "Ritmini bulmak için biraz yardım.",
+    "supportTitle": "BreakLoop Destek",
+    "supportLead": "BreakLoop ile ilgili soruların, önerilerin veya karşılaştığın teknik sorunlar için bizimle iletişime geçebilirsin.",
+    "supportContactHeading": "İletişim",
+    "supportEmailLabel": "Destek e-postası:",
+    "supportContactNotes": [
+      "Mesajında yaşadığın sorunu, mümkünse kullandığın iOS sürümünü ve sorunun hangi işlem sırasında oluştuğunu açıklayabilirsin.",
+      "Lütfen şifrelerini, ödeme bilgilerini veya destek talebin için gerekli olmayan kişisel verilerini paylaşma."
+    ],
     "supportSections": [
       [
-        "Uygulamalar beklendiği gibi duraklamıyor",
-        "Ekran Süresi iznini, seçtiğin uygulama ve kategorileri ve döngünün etkin olup olmadığını kontrol et. Güncel durumu görmek için BreakLoop’u yeniden aç. iOS geri çağrıları ve izinler engelleme zamanını etkileyebilir."
+        "Uygulamalar beklediğim gibi engellenmiyor",
+        "BreakLoop'un Ekran Süresi iznini kontrol et. Seçtiğin uygulama veya kategorilerin doğru olduğundan ve ilgili döngünün etkin olduğundan emin ol.",
+        "iOS'un izinleri ve sistem zamanlaması, bazı işlemlerin gerçekleşme zamanını etkileyebilir."
       ],
       [
-        "Kalan kullanım sürem neden değişti?",
-        "Seçtiğin uygulama ve kategorilerde geçirdiğin süreler birlikte hesaplanır. Başka bir uygulamaya geçmek kalan süreni sıfırlamaz. Doğal Mola, kullanım kontrol noktalarından yapılan tahmine göre yeni bir döngü başlatabilir."
+        "Ortak kullanım süresi nasıl çalışır?",
+        "Life Mode'da seçtiğin uygulamalar ve kategoriler ortak bir kullanım bütçesini paylaşır.",
+        "Bir uygulamadan diğerine geçmek bu ortak bütçeyi sıfırlamaz."
       ],
       [
-        "Tanılama kayıtlarını paylaşma",
-        "BreakLoop’ta Ayarlar → Tanılama ekranını aç. İlgili dönemi seçip kayıtları dışa aktar, ardından nerede paylaşacağına karar vermeden önce dosyayı incele. Dışa aktarmak desteğe otomatik gönderim yapmaz."
-      ],
-      [
-        "Yerel geçmişi silme",
-        "Tanılama ekranında Geçmişi Sil işlemini kullan ve onayla. Bu yerel tanılama arşivini kapsar; sistem kayıtları, korunmuş eski kayıtlar ve daha önce dışa aktarılmış veya paylaşılmış dosyalar ayrı kapsamdadır."
+        "Tanılama kayıtlarını paylaşabilir miyim?",
+        "Uygulamanın Ayarlar bölümündeki Tanılama ekranından desteklenen kayıtları inceleyebilir ve dışa aktarabilirsin.",
+        "Paylaşmadan önce dosyanın içeriğini kontrol et.",
+        "Tanılama dosyasını dışa aktarmak, onu otomatik olarak geliştiriciye göndermez."
       ]
     ],
-    "supportContact": "Destek ile iletişime geç",
+    "supportPrivacyTitle": "Gizlilik",
+    "supportPrivacyBody": "Verilerinin nasıl işlendiği hakkında bilgi almak için Gizlilik Politikası ve KVKK Aydınlatma Metni'ni inceleyebilirsin.",
+    "supportRelatedLabel": "Bağlantılar:",
+    "supportContact": "İletişim",
     "supportContactText": "İletişim bilgileri yukarıda yer alır.",
     "seoDescription": "BreakLoop, iOS için bir ekran süresi ve odaklanma uygulaması. Derin Odak oturumu başlat ya da seçtiğin uygulamalara ortak süre sınırı ve mola belirle.",
     "howSeoDescription": "BreakLoop Odak Modu ile sabit süreli Derin Odak oturumlarını; Yaşam Modu ile ortak kullanım süresi, otomatik mola ve tahmini doğal dinlenmeyi keşfet.",

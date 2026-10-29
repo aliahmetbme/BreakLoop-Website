@@ -1,8 +1,327 @@
-// Adapted from supplied drafts; originals are retained in docs/legal-source.
+// Editorial baseline for BreakLoop's official promotional website; placeholders require verification before public release.
 export const legalDocuments: Record<string, string> = {
-  "en/privacy": "# Privacy Policy — BreakLoop\n\n**Last updated:** 29 October 2026 (draft; replace with publication date)  \n**Operator/data controller:** [LEGAL_OPERATOR_NAME]  \n**Privacy contact:** [VERIFIED_SUPPORT_EMAIL]  \n**Scope:** BreakLoop native iOS app and, where specified, the official website at [VERIFIED_DOMAIN].\n\n## 1. Our approach\nBreakLoop helps people manage distraction by setting a shared usage allowance for selected applications, taking breaks, and starting Deep Focus sessions. Privacy is central to the way the current app is designed. It uses Apple's Screen Time frameworks and keeps its settings and runtime records locally on your device in the app's protected container and shared App Group container. The current release candidate does not use a BreakLoop account or a BreakLoop-operated cloud backend. This statement must be reconfirmed for the final distributed build.\n\n## 2. Information processed on your device\nWith your authorization, BreakLoop processes the selection you make with Apple's FamilyActivityPicker. Apple’s picker uses privacy-preserving selection tokens. The current BreakLoop v1.0 selection policy accepts apps and app categories only; web-domain selections are not supported. BreakLoop uses these tokens to configure monitoring and temporary restrictions through Apple's FamilyControls, DeviceActivity and ManagedSettings frameworks. BreakLoop does not inspect messages, screenshots, keystrokes, or the contents of the applications you use.\n\nTo operate the features you choose, the app stores information on your device such as:\n- your selected app/category tokens and authorization state;\n- allowance and rest-duration settings, appearance preference, cycle and session state;\n- checkpoint timing, cooldown and focus deadlines and related operational status;\n- local diagnostic events needed to understand failures and reliability, including timestamps, categories, event names, limited numerical metadata, error codes and random operation identifiers. The diagnostic serialization uses an explicit field allowlist rather than raw selected-app identifiers or free-form error messages.\n\nBreakLoop's natural-rest detection uses an *estimate* based on usage checkpoints and elapsed time. It is not a continuous reading of every moment of your phone use.\n\n## 3. What leaves your device\nFor the app version reviewed when this policy was drafted, no automatic transmission of your Screen Time selection, usage checkpoints or diagnostic archive to a BreakLoop server was identified. Apple processes Screen Time authorization and device activity under its own platform framework. App Store downloads, purchases (if introduced), system-level services and diagnostics supplied to Apple may be governed by Apple's policies.\n\n**You control diagnostic sharing.** If you choose Export Logs and then use the iOS share sheet to save, email or otherwise send the exported JSONL file, that copy is handled by the destination service you choose. If you send it to our support address, we receive the file and any identifying information included with your message. Please check it before sharing and remove material you do not wish to disclose.\n\n## 4. Contacting support\nIf you voluntarily email support, we may receive your email address, message, attachments, technical details and any diagnostic export you include. We use them only to answer, investigate and resolve your request, protect the service where necessary and comply with applicable law. These records may be handled by the selected email provider [EMAIL_SERVICE_PROVIDER] and will be retained for [SUPPORT_RETENTION_PERIOD / RULE], unless the law requires or permits another period. **Do not publish this paragraph without verifying these details.**\n\n## 5. Official website\nWhen you visit the official website, its hosting/CDN provider [HOSTING_PROVIDER] may process IP addresses, connection timestamps, browser/device information and technical request logs to serve and secure the site. The deployment must specify the provider, region(s), the actual access-log retention [HOSTING_LOG_RETENTION], and any active analytics, forms or cookies before this policy is published. Do not interpret the application's offline processing design as a promise that a website has no server logs. Any optional analytics or cookies will be disclosed and, where legally required, activated only with consent.\n\n## 6. Storage and retention\nApp preferences and active runtime information remain on your device while needed to provide the chosen functionality, until reset or removed through app/device controls. The current local diagnostic archive is configured with a target of at least 14 days of history and a storage ceiling of approximately 50 MiB. Older events are pruned, and storage pressure can result in earlier removal. Older legacy diagnostic source files may persist after migration; system OSLog entries, copies exported to Files/iCloud or shared with others are outside the managed archive deletion operation. We do not promise that all diagnostic copies disappear automatically after exactly 14 days.\n\nYou can use **Settings → Diagnostics → Delete History** to delete the managed local diagnostic history. It does not remove your monitored-app selections or active settings. Removing the app ordinarily removes its app-managed local storage, subject to Apple's operating-system behavior, backups and any copies you saved or shared. If you have contacted support, request deletion of support records through [VERIFIED_SUPPORT_EMAIL], subject to applicable legal exceptions.\n\n## 7. Permissions and your choices\nScreen Time access is requested using Apple's system authorization flow. You can decline or revoke it through iOS system controls; core blocking and monitoring features cannot function without it. You can change the selected apps and cycle configuration in BreakLoop, remove the app, and delete locally managed diagnostic history. Revoking permissions does not itself delete a diagnostic export already shared outside the app.\n\n## 8. Sharing, security and international transfers\nThe current app is not designed to sell personal information, run third-party advertising trackers or send Screen Time selections to advertising networks. If you contact support or visit the website, providers described above may process your information to provide those services. Their names, roles, processing locations and safeguards must be verified before publication. We use protections appropriate to the information and service, but no transmission or storage can be guaranteed perfectly secure.\n\n## 9. Children and platform requirements\nBreakLoop requests the appropriate iOS Screen Time authorization. Any use by minors is subject to Apple's applicable authorization and family controls. The app does not intentionally provide an independent user account or child-data collection service in the present scope. If the audience, age controls or product behavior changes, this section will be updated.\n\n## 10. Your privacy rights\nDepending on your location, you may have rights to access information, correct inaccurate data, request deletion, object to certain processing, or contact the relevant data protection authority. Because core settings are stored on-device, we usually cannot remotely retrieve or edit them. For website or support information we hold, contact [VERIFIED_SUPPORT_EMAIL]. In Türkiye, please also read the separate **KVKK Aydınlatma Metni** at [VERIFIED_DOMAIN]/tr/kvkk.\n\n## 11. Changes and contact\nWe may revise this policy as the app, website, providers or law change. We will post the updated date and provide further notice where required. Contact [LEGAL_OPERATOR_NAME] at [VERIFIED_SUPPORT_EMAIL] for privacy requests.\n",
-  "tr/privacy": "# Gizlilik Politikası — BreakLoop\n\n**Son güncelleme:** 29 Ekim 2026 (taslak; yayın tarihiyle değiştirilecek)  \n**İşleten/veri sorumlusu:** [HUKUKİ_YAYINCI_UNVANI]  \n**Gizlilik iletişimi:** [DOĞRULANMIŞ_DESTEK_EPOSTASI]  \n**Kapsam:** BreakLoop iOS uygulaması ve belirtilen bölümlerde [DOĞRULANMIŞ_ALAN_ADI] üzerindeki resmi web sitesi.\n\n## 1. Gizliliğe yaklaşımımız\nBreakLoop, kullanıcının seçtiği uygulamalar için ortak kullanım süresi belirlemesine, molalar vermesine ve Deep Focus oturumları başlatmasına yardımcı olur. İncelenen güncel iOS sürümü Apple'ın Screen Time altyapısını kullanır; uygulama ayarları ve çalışma verileri cihazın korumalı uygulama alanında ve App Group alanında yerel olarak saklanır. İncelenen kodda kullanıcı hesabı, bağımsız BreakLoop sunucusu veya üçüncü taraf analitik SDK'sı bulunmamaktadır. Bu durum App Store'a gönderilecek kesin build için yeniden doğrulanmalıdır.\n\n## 2. Cihazda işlenen bilgiler\nİzninizle Apple FamilyActivityPicker üzerinden uygulama ve kategori seçersiniz. Apple’ın seçim altyapısı web alanı belirteçlerini de desteklese de BreakLoop v1.0 web alanı seçimlerini kabul etmez. BreakLoop'a içerik yerine gizliliği koruyan seçim belirteçleri (token) sağlanır. Bu belirteçler Apple'ın FamilyControls, DeviceActivity ve ManagedSettings servisleriyle kullanım izleme ve geçici engelleme için kullanılır. BreakLoop mesajlarınızı, ekran görüntülerini, tuş vuruşlarını veya kullandığınız uygulamaların içeriklerini incelemez.\n\nUygulama, seçtiğiniz özellikleri sağlamak için cihazda şu bilgileri işleyebilir: seçili uygulama/kategori belirteçleri, izin durumu, kullanım ve dinlenme süresi ayarları, görünüm tercihi, döngü ve oturum durumları, zaman kontrol noktaları, mola ve Deep Focus bitiş zamanları. Ayrıca hata ayıklama amacıyla zaman damgası, sınırlı sayısal alan, olay türü, hata kodu ve rastgele işlem kimlikleri içeren yerel tanılama geçmişi tutulur. Tanılama alanları izinli alan listesiyle sınırlandırılmıştır; ham uygulama seçimi veya serbest biçimli hata mesajları arşivlenmek üzere tasarlanmamıştır.\n\nNatural Rest Detection, zaman ve kullanım kontrol noktalarından **tahmini** mola hesaplaması yapar; tüm telefon faaliyetlerini kesintisiz izlediği anlamına gelmez.\n\n## 3. Cihaz dışına aktarım\nİncelenen mevcut uygulama kodunda Screen Time seçimlerinin, kullanım kontrol noktalarının veya yerel tanılama arşivinin BreakLoop sunucularına otomatik gönderimi tespit edilmedi. Apple'ın işletim sistemi, App Store ve (ileride sunulursa) satın alma işlemleri kendi şartlarına tabidir.\n\n**Tanılama paylaşımı sizin tercihinizdir.** Ayarlar → Diagnostics → Export Logs ile dosya oluşturup iOS paylaşım menüsünden e-posta, Dosyalar veya başka bir hizmete gönderebilirsiniz. Dışa aktarılan JSONL kopyasının saklanması seçtiğiniz hedefin koşullarına bağlıdır. Bu dosyayı destek ekibine gönderirseniz dosyayı ve mesajınızda belirttiğiniz iletişim bilgilerini alırız. Paylaşmadan önce içeriği gözden geçirmenizi öneririz.\n\n## 4. Destek talepleri\nBize e-posta gönderirseniz e-posta adresiniz, mesajınız, ekleriniz ve sizin seçerek gönderdiğiniz tanılama dosyaları tarafımıza ulaşabilir. Bu veriler sorununuzu yanıtlamak, araştırmak ve gerektiğinde hukuki yükümlülükleri karşılamak için işlenir. Kullanılacak e-posta hizmeti [EPOSTA_HİZMET_SAĞLAYICISI], kayıtların saklama süresi [DESTEK_KAYDI_SAKLAMA_SÜRESİ] ve silme yöntemi doğrulanmadan bu metin yayınlanmamalıdır.\n\n## 5. Resmi web sitesi\nWeb sitesini ziyaret ettiğinizde barındırma veya CDN hizmeti [BARINDIRMA_SAĞLAYICISI], siteyi sunmak ve güvenliğini sağlamak için IP adresi, erişim zamanı, tarayıcı/cihaz türü ve teknik istek kayıtlarını işleyebilir. Kullanılan sağlayıcı, ülkeler, erişim kayıtlarının saklama süresi [WEB_LOG_SAKLAMA_SÜRESİ], analiz araçları, form ve çerezlerin gerçek kullanım durumu yayın öncesinde netleştirilmelidir. Uygulamanın yerel çalışması, web sitesinin sunucu erişim kaydı bulunmadığı anlamına gelmez. Gerekli durumlarda isteğe bağlı çerezler/analiz için hukuken uygun izin mekanizması sağlanır.\n\n## 6. Saklama ve silme\nUygulamanın yerel ayarları, işlevlerini yerine getirmek için gerektiği sürece cihazda tutulur. Tanılama arşivinin hedefi en az 14 günlük geçmişi tutmaktır; kapasite sınırı yaklaşık 50 MiB'dir. Eski kayıtlar temizlenebilir ve yer baskısı daha erken silinmeye yol açabilir. Önceki sürümlere ait eski kayıt dosyaları geçişten sonra kalabilir; işletim sisteminin OSLog kayıtları, kullanıcı tarafından dışa aktarılmış/iCloud'a kaydedilmiş veya üçüncü kişilere gönderilmiş kopyalar ayrı kapsamdır. **Tüm tanılama verilerinin tam 14 gün sonunda silindiğini vaat etmiyoruz.**\n\n**Ayarlar → Diagnostics → Delete History** işlemi, uygulamanın yönettiği yerel tanılama geçmişini siler; seçimleri ve döngü ayarlarını korur. Uygulamanın kaldırılması normalde uygulamanın yönettiği yerel verileri kaldırır; işletim sistemi, yedekleme ve dışa aktarılmış kopyalar farklı davranabilir. Destek ekibine ulaştırılmış kayıtların silinmesini, yasal istisnalar saklı kalmak üzere, [DOĞRULANMIŞ_DESTEK_EPOSTASI] üzerinden isteyebilirsiniz.\n\n## 7. İzinler ve tercihleriniz\nScreen Time izni Apple'ın sistem penceresi üzerinden alınır. İzin vermeyebilir veya iOS ayarlarından daha sonra kaldırabilirsiniz; temel kullanım izleme ve engelleme bu izin olmadan çalışmaz. İzlenecek uygulamaları ve ayarları değiştirebilir, tanılama geçmişini silebilir ve uygulamayı kaldırabilirsiniz. İzni kaldırmak daha önce bir başkasıyla paylaştığınız dosyaları silmez.\n\n## 8. Aktarımlar ve güvenlik\nİncelenen sürüm, Screen Time seçimini reklam ağına iletmek, kullanıcı verilerini satmak veya çapraz uygulama izleme yapmak için tasarlanmamıştır. Destek e-postası ve web sitesi hizmet sağlayıcıları, belirtilen hizmetleri sunmak için verileri işleyebilir. Sağlayıcıların kimliği, veri işleme ülkeleri ve koruma tedbirleri yayın öncesinde doğrulanacaktır. Hiçbir dijital sistem için mutlak güvenlik garanti edilemez.\n\n## 9. Çocukların gizliliği\nİlgili Screen Time yetkilendirmesi iOS üzerinden alınır. Reşit olmayan kişilerin kullanımı, Apple'ın yaşa ve aile denetimlerine ilişkin sistem kurallarına tabidir. Ürün kapsamı veya çocuklarla ilgili veri işleme değişirse metin güncellenir.\n\n## 10. Haklarınız\nUygulanabilir mevzuata göre verileriniz hakkında bilgi edinme, düzeltme, silme ve diğer yasal haklarınız olabilir. Yerel ayarlarınızı uzaktan göremediğimiz veya yönetemediğimiz için bu işlemler çoğunlukla cihazınızdan yapılır. Destek ve web sitesiyle ilgili tarafımızda bulunan veriler bakımından [DOĞRULANMIŞ_DESTEK_EPOSTASI] üzerinden iletişime geçebilirsiniz. Türkiye'deki işleme faaliyetleri hakkında ayrı **KVKK Aydınlatma Metni**: [DOĞRULANMIŞ_ALAN_ADI]/tr/kvkk.\n\n## 11. Değişiklikler ve iletişim\nUygulama, web sitesi veya veri işleme uygulamalarımız değişirse politikayı günceller ve gerektiğinde ayrıca bilgilendiririz. İletişim: [HUKUKİ_YAYINCI_UNVANI], [DOĞRULANMIŞ_DESTEK_EPOSTASI].\n",
-  "tr/kvkk": "# BreakLoop — KVKK Aydınlatma Metni (ayrı taslak)\n\n**Durum: HUKUKİ DOĞRULAMA GEREKLİ — Çalışır durumdaki veri akışları, veri sorumlusu ve hukuki dayanaklar belirlenmeden yayınlamayın.** 6698 sayılı KVKK m.10 uyarınca aydınlatma, veri toplandığı sırada ve somut işleme faaliyetiyle bağlantılı olarak yapılmalıdır. Genel gizlilik politikası bu metnin otomatik yerine geçmez.\n\n## 1. Veri sorumlusu\n[GERÇEK KİŞİ ADI SOYADI VEYA TAM TİCARİ UNVAN], [İŞ ADRESİ / GEREKLİ KİMLİK VE İLETİŞİM BİLGİLERİ], [DOĞRULANMIŞ GİZLİLİK EPOSTASI]. Apple geliştirici satıcı hesabıyla hukuki kimlik arasında tutarlılık doğrulanmalıdır.\n\n## 2. İşleme faaliyetleri, veri kategorileri, amaç ve toplama yöntemi\n\n| Faaliyet | Olası veri kategorisi / kaynak | Amaç | Aktarım | Hukuki sebep (yayın öncesi kesinleştir) |\n|---|---|---|---|---|\n| Uygulamanın yerel Screen Time işlevi | Cihazda kullanıcı tarafından seçilen opak tokenlar, süre ayarları, zamanlar, teknik durum; Apple framework'leri | Belirlenen ortak kullanım süresi, mola ve Deep Focus işlevlerini yürütmek | Uygulama geliştiricisinin sunucusuna aktarım tespit edilmedi; Apple'ın sistem düzeyindeki işlemesi ayrıdır | [KVKK m.5 kapsamında somut faaliyet için değerlendirme; salt cihaz içi işleme ve veri sorumlusu kapsamını ayrıca hukuken incele] |\n| Kullanıcının başlattığı destek başvurusu | E-posta, destek mesajı, seçilerek gönderilen dosya; e-posta kanalı | Başvuruyu yanıtlamak, hatayı çözmek | [EPOSTA_SAĞLAYICISI, ALT İŞLEYEN, ÜLKE] | [SÖZLEŞME/MEŞRU MENFAAT/HAK TESİSİ VB. UYGUN SOMUT M.5 ŞARTI] |\n| Resmi web sitesi erişimi | IP, tarayıcı özellikleri, istek zamanı, sunucu kayıtları; doğrudan bağlantı | Web sunumu, güvenlik, teknik hata analizi | [HOSTING/CDN, ÜLKE] | [DOĞRU M.5 ŞARTI] |\n\nBu web sitesi sürümünde isteğe bağlı analiz araçları, takip çerezleri veya iletişim formu kullanılmaz. Tema tercihi tarayıcının yerel depolama alanında saklanır.\n\nVeri kategorileri, gerçek sunucu sözleşmeleri ve uygulama davranışı doğrulandıktan sonra tablo sadeleştirilmeli; ilgili olmayan satırlar çıkarılmalıdır. Amaç, hukuki sebep ve aktarım ayrı ayrı açıkça belirtilmelidir.\n\n## 3. Saklama\n- Yerel tanılama arşivi cihazdaki uygulama tarafından yönetilir; hedef geçmiş en az 14 gün, kapasite tavanı yaklaşık 50 MiB, erken silme mümkün; eski ve dışa aktarılan dosyalar ayrıca değerlendirilir.\n- Destek yazışmaları: [SAKLAMA KRİTERİ VE SÜRESİ].\n- Web/CDN erişim kayıtları: [SAKLAMA KRİTERİ VE SÜRESİ].\n- Uluslararası aktarım söz konusuysa KVKK m.9 ve güncel geçerli aktarım mekanizmasını hukuk danışmanıyla doğrulayın; varsaymayın.\n\n## 4. KVKK m.11 kapsamındaki haklar\nİlgili kişiler; kişisel verilerinin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işleme amacını ve amaca uygun kullanımı öğrenme, yurt içi/yurt dışı aktarılan üçüncü kişileri bilme, eksik/yanlış işlenmişse düzeltme, kanuni şartlar içinde silinmesini veya yok edilmesini isteme, bu işlemlerin aktarım yapılan üçüncü kişilere bildirilmesini isteme, sadece otomatik sistemlerle analizden doğan aleyhe sonuçlara itiraz etme ve kanuna aykırı işleme nedeniyle zararın giderilmesini talep etme haklarını kullanabilir. Başvuru kanalları ve usulleri: [DOĞRULANMIŞ KANAL + KİMLİK DOĞRULAMA YÖNTEMİ].\n\n## 5. Başvuru ve güncelleme\nVeri sorumlusuna talepler: [DOĞRULANMIŞ_DESTEK/GİZLİLİK_EPOSTASI] / [DİĞER KANUNİ KANAL]. Son güncelleme: [YAYIN TARİHİ].\n\n**Kaynak:** https://www.kvkk.gov.tr/Icerik/2033/Aydinlatma-Yukumlulugu- ; https://www.kvkk.gov.tr/Icerik/6765/AYDINLATMA-YUKUMLULUGUNUN-YERINE-GETIRILMESI-HAKKINDA-KAMUOYU-DUYURUSU (web bağlantısını yayın öncesi doğrulayın).\n",
-  "en/terms": "# Terms of Use — BreakLoop\n\n**Status:** Draft for local review. The operator, contact and final release terms must be verified before publication.\n\n**Operator:** [LEGAL_OPERATOR_NAME]  \n**Contact:** [VERIFIED_SUPPORT_EMAIL]  \n**Publication date:** [PUBLICATION_DATE]\n\n## 1. Availability and scope\nBreakLoop is coming soon to iOS. This website presents the product and illustrative interface concepts; it does not provide a download, account or purchase service at this stage.\n\n## 2. App license\nThe proposed default for an App Store release is [Apple’s Standard End User License Agreement](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/). The agreement selected for the distributed build must be confirmed in App Store Connect. This page does not replace Apple’s agreement or announce a custom EULA.\n\n## 3. Screen Time functionality\nBreakLoop uses Apple’s Screen Time frameworks with your authorization. The current v1.0 selection policy covers apps and categories. Monitoring and restriction timing depend on iOS and permissions; instant, perfect or unbypassable enforcement is not guaranteed. Natural Rest is an estimate based on usage checkpoints, not a continuous measurement of all phone activity.\n\n## 4. Pricing and purchases\nPricing and any Pro model have not been finalized. This preview offers no subscriptions, lifetime purchases, trial or free-use promise. If purchases are introduced, the actual product, price, billing model, restore flow and applicable terms must be verified and disclosed before release.\n\n## 5. Privacy and help\nSee the [Privacy Policy](/en/privacy) for local storage, diagnostic sharing and website processing. See [Support](/en/support) for troubleshooting and the verified contact once configured. Draft text does not establish a final support commitment or retention rule.\n\n## 6. Release review\nFinal operator details, publication date, applicable consumer requirements and the distributed app’s license must be reviewed before these terms are published. No governing law, liability waiver or commercial promise has been invented for this preview.\n",
-  "tr/terms": "# Kullanım Koşulları — BreakLoop\n\n**Durum:** Yerel inceleme taslağı. İşleten, iletişim bilgileri ve nihai sürüm koşulları yayınlanmadan önce doğrulanmalıdır.\n\n**İşleten:** [HUKUKİ_YAYINCI_UNVANI]  \n**İletişim:** [DOĞRULANMIŞ_DESTEK_EPOSTASI]  \n**Yayın tarihi:** [PUBLICATION_DATE]\n\n## 1. Kullanılabilirlik ve kapsam\nBreakLoop yakında iOS’ta. Bu web sitesi ürünü ve temsilî arayüzleri tanıtır; şu aşamada indirme, hesap veya satın alma hizmeti sunmaz.\n\n## 2. Uygulama lisansı\nApp Store sürümü için önerilen varsayılan lisans [Apple Standart Son Kullanıcı Lisans Sözleşmesi’dir](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/). Dağıtılacak sürümde seçilen sözleşme App Store Connect üzerinden doğrulanmalıdır. Bu sayfa Apple sözleşmesinin yerini almaz ve özel bir lisans sözleşmesi duyurmaz.\n\n## 3. Ekran Süresi işlevleri\nBreakLoop, izninizle Apple’ın Ekran Süresi altyapısını kullanır. Mevcut v1.0 seçim politikası uygulama ve kategorileri kapsar. İzleme ve engellemenin zamanlaması iOS’a ve izinlere bağlıdır; anında, kusursuz veya atlatılamaz engelleme garanti edilmez. Doğal Mola, kullanım kontrol noktalarından yapılan bir tahmindir; tüm telefon kullanımının sürekli ölçümü değildir.\n\n## 4. Fiyatlandırma ve satın alma\nFiyatlandırma ve olası Pro modeli henüz kesinleşmemiştir. Bu önizlemede abonelik, ömür boyu satın alma, deneme veya ücretsiz kullanım vaadi sunulmaz. Satın alma eklenirse gerçek ürün, fiyat, ödeme modeli, satın alımları geri yükleme akışı ve ilgili koşullar sürümden önce doğrulanıp açıklanmalıdır.\n\n## 5. Gizlilik ve yardım\nYerel saklama, tanılama paylaşımı ve web sitesi verileri için [Gizlilik Politikası’nı](/tr/privacy); sorun giderme ve doğrulandığında iletişim bilgileri için [Destek sayfasını](/tr/support) inceleyin. Türkiye için ayrı [KVKK Aydınlatma Metni](/tr/kvkk) bulunur. Taslak metin nihai destek taahhüdü veya saklama kuralı oluşturmaz.\n\n## 6. Yayın öncesi inceleme\nBu koşullar yayınlanmadan önce işleten bilgileri, yayın tarihi, uygulanabilir tüketici gereklilikleri ve dağıtılacak uygulamanın lisansı incelenmelidir. Bu önizleme için yargı yetkisi, sorumluluktan feragat veya ticari vaat uydurulmamıştır.\n"
+  "tr/privacy": `# BreakLoop Gizlilik Politikası
+
+**Son güncelleme:** [DOĞRULANMIŞ_YAYIN_TARİHİ]
+
+**Geliştirici:** [DOĞRULANMIŞ_YASAL_AD_SOYAD]
+
+**İletişim:** [DOĞRULANMIŞ_DESTEK_EPOSTASI]
+
+## 1. Hakkımızda ve kapsam
+
+BreakLoop, dikkat dağıtıcı uygulamalarla geçirilen zamanı yönetmeye ve odaklanmayı desteklemeye yardımcı olmak amacıyla bağımsız olarak geliştirilen bir iOS uygulamasıdır.
+
+Bu gizlilik politikası, BreakLoop'un tanıtım web sitesini ve iOS uygulamasını kapsar. Web sitesinin veri işleme faaliyetleri ile uygulamanın cihaz üzerinde gerçekleştirdiği işlemler birbirinden farklıdır.
+
+Web sitesi, uygulama App Store'da yayımlanmadan önce kullanıma açılabilir. Bu durum, iOS uygulamasının yayımlandığı veya tüm özelliklerinin kullanıma hazır olduğu anlamına gelmez.
+
+## 2. Web sitesinde işlenen bilgiler
+
+BreakLoop web sitesi yalnızca tanıtım ve bilgilendirme amacıyla hazırlanmıştır.
+
+Web sitesinde kullanıcı hesabı açılması, üyelik oluşturulması, satın alma yapılması veya bekleme listesine kayıt olunması için bir sistem bulunmaz.
+
+Web sitesinin mevcut kaynak kodunda reklam veya kullanıcı davranışı izlemeye yönelik üçüncü taraf analitik araçları bulunmadığı doğrulanırsa, bu tür araçların kullanılmadığı bilgisi korunacaktır.
+
+Sitenin güvenli ve düzgün çalışması için kullanılan barındırma ve içerik dağıtım hizmetleri; IP adresi, erişim zamanı, tarayıcı bilgisi ve talep edilen sayfa gibi teknik erişim bilgilerini işleyebilir.
+
+Bu işlemlerin ayrıntıları, gerçek hizmet sağlayıcının uygulamaları doğrultusunda belirlenir.
+
+Web sitesindeki görünüm tercihi, tarayıcının yerel depolama alanında saklanabilir. Bu tercih, açık, koyu veya sistem temasının hatırlanması için kullanılır.
+
+BreakLoop web sitesini ziyaret etmek, iPhone'unuzdaki Ekran Süresi kayıtlarını web sitesine göndermez.
+
+## 3. iOS uygulamasındaki veriler
+
+BreakLoop, seçtiğiniz uygulamalar ve uygulama kategorileri üzerinde odaklanma ve kullanım sınırı özelliklerini gerçekleştirmek için Apple'ın FamilyControls, DeviceActivity ve ManagedSettings framework'lerinden yararlanır.
+
+Gerekli izinleri vermeniz durumunda, Apple'ın gizliliği korumaya yönelik seçim sistemi üzerinden uygulama ve kategori seçimleri yapılabilir.
+
+Mevcut uygulama mimarisinde bu seçimlerle ilişkili belirteçler, döngü ayarları, kullanım kontrol noktaları ve uygulamanın çalışması için gereken durum bilgileri cihaz üzerinde ve ilgili App Group alanında tutulur.
+
+Bu bilgiler; ortak kullanım bütçesini takip etmek, mola döngülerini yönetmek ve Deep Focus oturumlarını gerçekleştirmek amacıyla kullanılır.
+
+Uygulamanın geliştirme sürümünde BreakLoop'a ait bir kullanıcı hesabı veya geliştirici tarafından işletilen bulut tabanlı hesap sistemi bulunmamaktadır.
+
+Nihai App Store sürümündeki SDK'lar, ağ bağlantıları ve veri işleme davranışları ayrıca doğrulanacaktır.
+
+## 4. Tanılama kayıtları
+
+BreakLoop, uygulamanın çalışmasını incelemeye ve teknik sorunları anlamaya yardımcı olmak amacıyla cihaz üzerinde tanılama kayıtları oluşturabilir.
+
+Bu kayıtlar, kullanıcı tarafından uygulama içerisindeki tanılama araçları üzerinden incelenebilir, dışa aktarılabilir veya ilgili yerel geçmiş silme işleviyle kaldırılabilir.
+
+Tanılama kayıtlarının dışa aktarılması, kayıtların otomatik olarak geliştiriciye gönderildiği anlamına gelmez.
+
+Bir tanılama dosyasını destek ekibiyle paylaşmayı seçerseniz, dosyanın içeriği destek talebinin incelenmesi amacıyla işlenebilir.
+
+Uygulama tarafından tutulan yerel tanılama geçmişinin silinmesi; daha önce dışa aktardığınız dosyaları, başka bir uygulamayla paylaştığınız kopyaları veya iOS tarafından yönetilen sistem kayıtlarını otomatik olarak silmez.
+
+## 5. Destek iletişimi
+
+Destek amacıyla e-posta gönderdiğinizde e-posta adresiniz, mesajınız ve paylaşmayı seçtiğiniz ekler alınabilir.
+
+Bu bilgiler yalnızca talebinizi değerlendirmek, sorununuzu çözmek ve gerekli durumlarda sizinle iletişime geçmek amacıyla kullanılır.
+
+Destek yazışmaları ve ekleri için uygulanacak saklama ve silme kriterleri, doğrulanmış destek süreci ve e-posta hizmet sağlayıcısı bilgileri üzerinden açıklanacaktır.
+
+## 6. Hizmet sağlayıcılar ve veri aktarımı
+
+Web sitesinin barındırılması ve e-posta hizmetinin sunulması için üçüncü taraf altyapı sağlayıcılarından yararlanılabilir.
+
+Kullanılan sağlayıcılar, işleme ülkeleri, veri alıcı grupları ve varsa uluslararası veri aktarımı koşulları doğrulandıktan sonra bu bölüm tamamlanacaktır.
+
+Geliştirici, web sitesindeki destek mesajlarını kullanıcı izni dışında reklam veya kullanıcı profilleme amacıyla kullanmak üzere bir sistem oluşturmamıştır.
+
+## 7. Tercihleriniz ve haklarınız
+
+Uygulamanın Ekran Süresi erişim izinlerini iOS ayarlarından yönetebilirsiniz.
+
+Uygulama içindeki uygun kontrollerle yerel tanılama kayıtlarını silebilirsiniz.
+
+Destek yazışmalarıyla ilgili bilgi, düzeltme veya uygun koşullarda silme talebinde bulunabilirsiniz.
+
+Türkiye'deki kişisel veri işleme faaliyetlerine ilişkin ayrıntılar ve başvuru hakları için [KVKK Aydınlatma Metni](/tr/kvkk)'ni inceleyebilirsiniz.
+
+## 8. Politika güncellemeleri
+
+BreakLoop'un özellikleri veya veri işleme uygulamaları değişirse bu gizlilik politikası güncellenebilir.
+
+Güncel metin, resmi web sitesinde erişilebilir olacaktır.
+
+**İlgili bağlantılar:** [Destek](/tr/support) | [KVKK Aydınlatma Metni](/tr/kvkk)
+`,
+  "en/privacy": `# BreakLoop Privacy Policy
+
+**Last updated:** [VERIFIED_PUBLICATION_DATE]
+
+**Developer:** [VERIFIED_LEGAL_NAME]
+
+**Contact:** [VERIFIED_SUPPORT_EMAIL]
+
+## 1. About BreakLoop
+
+BreakLoop is an independently developed iOS application designed to help users manage distracting apps, create intentional breaks, and focus on what matters.
+
+This policy covers both the promotional website and the BreakLoop iOS application. Data processed through the website is different from data processed locally by the iOS app.
+
+The website may become publicly available before the iOS application is released on the App Store.
+
+## 2. Website information
+
+The BreakLoop website is intended for promotional and informational purposes.
+
+It does not provide user accounts, registration, payments, newsletters, or waitlist forms.
+
+If confirmed by the final website source and deployment audit, the website does not use third-party advertising or behavioral analytics tools.
+
+The website's hosting and content delivery providers may process technical request information, such as IP addresses, access timestamps, browser information, and requested pages.
+
+The details depend on the actual hosting configuration and provider practices.
+
+Your appearance preference may be stored locally in your browser to remember light, dark, or system theme settings.
+
+Visiting the website does not transmit Screen Time information from your iPhone to the website.
+
+## 3. Information processed by the iOS app
+
+With your authorization, BreakLoop uses Apple's FamilyControls, DeviceActivity, and ManagedSettings frameworks to provide app usage management and focus features.
+
+You can select supported apps and app categories through Apple's privacy-preserving selection interface.
+
+The current application architecture stores selection tokens, cycle settings, usage checkpoint information, and operational state locally on the device, including the shared App Group container used by the app and its extensions.
+
+This information supports shared usage budgets, cooldown cycles, and Deep Focus sessions.
+
+The current development version does not include a BreakLoop user account or developer-operated cloud account service.
+
+The final distributed iOS build, included SDKs, and network behavior must be reviewed before publication.
+
+## 4. Diagnostics
+
+BreakLoop may maintain local diagnostic records to help investigate technical problems and understand application behavior.
+
+You may be able to inspect, export, or delete local diagnostic history using the controls available in the app.
+
+Exporting diagnostics does not automatically send them to the developer.
+
+If you choose to send diagnostic files to support, the information contained in those files may be processed to investigate your request.
+
+Deleting local diagnostic history does not automatically remove previously exported files, copies shared with others, or system-managed logs.
+
+## 5. Email support
+
+If you contact support, we may receive your email address, message, and any attachments you voluntarily provide.
+
+This information is used to understand and respond to your request.
+
+Support correspondence and attachments are retained and deleted according to the verified support retention policy and the practices of the selected email provider.
+
+## 6. Service providers and transfers
+
+Website hosting and email communication may involve third-party service providers.
+
+The actual providers, processing locations, recipient categories, and any applicable international data transfer arrangements will be disclosed following verification.
+
+The website is not designed to use support communications for advertising or behavioral profiling.
+
+## 7. Your choices and rights
+
+You can manage Screen Time permissions through the settings available on your Apple device.
+
+You can use the application's supported controls to delete local diagnostic history.
+
+You may contact the developer about your support correspondence and request access, correction, or deletion where applicable.
+
+For information about personal data rights under Turkish law, please see the [Turkish KVKK Notice](/tr/kvkk).
+
+## 8. Changes to this policy
+
+This Privacy Policy may be updated when the application's functionality or data practices change.
+
+The latest version will remain accessible on the official website.
+
+**Related links:** [Support](/en/support) | [KVKK Notice (Turkish)](/tr/kvkk)
+`,
+  "tr/kvkk": `# BreakLoop Kişisel Verilerin İşlenmesine İlişkin Aydınlatma Metni
+
+**Son güncelleme:** [DOĞRULANMIŞ_YAYIN_TARİHİ]
+
+## 1. Veri sorumlusu
+
+6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında, BreakLoop tanıtım web sitesi üzerinden gerçekleştirilen ve aşağıda belirtilen kişisel veri işleme faaliyetleri bakımından veri sorumlusu:
+
+**Ad Soyad:** [DOĞRULANMIŞ_YASAL_AD_SOYAD]
+
+**İletişim:** [DOĞRULANMIŞ_DESTEK_VE_GİZLİLİK_EPOSTASI]
+
+**Diğer gerekli başvuru bilgileri:** [DOĞRULANMIŞ_BAŞVURU_KANALI_VE_GEREKLİ_ADRES_BİLGİSİ]
+
+BreakLoop, bireysel olarak geliştirilen bir iOS uygulamasıdır. Bu metinde gerçekte mevcut olmayan bir şirket veya tüzel kişilik tanımlanmamaktadır.
+
+## 2. Hangi kişisel veriler işlenebilir?
+
+**A. Web sitesi erişim verileri**
+
+Barındırma hizmetinin gerçek yapılandırmasına bağlı olarak IP adresi, talep zamanı, tarayıcı bilgisi, erişilen sayfa ve teknik bağlantı kayıtları işlenebilir.
+
+Bu veriler, web sitesinin sunulması, teknik işleyişin sağlanması ve gerektiğinde bilgi güvenliğinin korunması amaçlarıyla işlenir.
+
+Veriler teknik erişim süreçleri aracılığıyla otomatik yollarla elde edilebilir.
+
+**İlgili KVKK m.5 işleme şartı:** [SOMUT_FAALİYETE_UYGUN_DOĞRULANMIŞ_HUKUKİ_SEBEP]
+
+**B. Destek ve iletişim verileri**
+
+BreakLoop destek adresine kendi isteğinizle e-posta gönderdiğinizde e-posta adresiniz, mesajınız, ilettiğiniz kimlik veya iletişim bilgileri ve paylaşmayı seçtiğiniz dosyalar işlenebilir.
+
+Bu veriler, destek talebinizi incelemek, yanıtlamak, teknik sorunları çözmek ve gerekli yazışmaları yürütmek amacıyla işlenir.
+
+Veriler, elektronik posta aracılığıyla otomatik yollarla elde edilir.
+
+**İlgili KVKK m.5 işleme şartı:** [SOMUT_DESTEK_FAALİYETİNE_UYGUN_DOĞRULANMIŞ_HUKUKİ_SEBEP]
+
+Destek talebinize konu olmayan özel nitelikli kişisel verileri veya gereksiz kişisel bilgileri göndermemenizi öneririz.
+
+## 3. Kişisel verilerin aktarımı
+
+Teknik erişim verileri, web sitesinin hizmet aldığı doğrulanmış barındırma ve altyapı sağlayıcıları tarafından işlenebilir.
+
+Destek yazışmaları, kullanılan doğrulanmış elektronik posta hizmet sağlayıcısının altyapısında işlenebilir.
+
+Bu hizmet sağlayıcılarının adları, işleme ülkeleri, aktarım amaçları ve uygulanabilir yurt dışına aktarım şartları, gerçek hizmet yapılandırması ve KVKK'nın 9. maddesi kapsamında değerlendirilerek tamamlanacaktır.
+
+**Doğrulanmış alıcı grupları:** [GERÇEK_ALICILAR]
+
+**Varsa yurt dışına aktarımın hukuki mekanizması:** [DOĞRULANMIŞ_AKTARIM_DAYANAĞI]
+
+## 4. Saklama ve silme
+
+Kişisel veriler, işlenme amaçlarının gerektirdiği süre ve uygulanabilir hukuki yükümlülükler kapsamında saklanır.
+
+Web sitesi teknik erişim kayıtlarının saklama kriteri:
+
+[DOĞRULANMIŞ_HOSTING_LOG_SAKLAMA_KRİTERİ]
+
+Destek e-postaları ve eklerinin saklama kriteri:
+
+[DOĞRULANMIŞ_DESTEK_KAYDI_SAKLAMA_KRİTERİ]
+
+Verilerin işlenmesini gerektiren şartların ortadan kalkması durumunda, uygulanabilir mevzuat doğrultusunda silme, yok etme veya anonimleştirme işlemleri gerçekleştirilir.
+
+## 5. İlgili kişinin hakları
+
+KVKK'nın 11. maddesi kapsamında, koşulları çerçevesinde kişisel verilerinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işleme amacını öğrenme, aktarım yapılan üçüncü kişileri bilme, yanlış veya eksik verilerin düzeltilmesini isteme, silme veya yok etme talebinde bulunma ve ilgili işlemlerin verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme haklarına sahipsiniz.
+
+Ayrıca yalnızca otomatik sistemlerle yapılan analizlerin aleyhinize sonuç doğurmasına itiraz edebilir ve hukuka aykırı işleme nedeniyle zarar doğmuşsa giderilmesini talep edebilirsiniz.
+
+## 6. Başvuru
+
+Kişisel verilerinize ilişkin taleplerinizi, kimliğinizin gerektiği ölçüde doğrulanmasına imkân sağlayan ve ilgili mevzuata uygun başvuru yöntemleriyle veri sorumlusuna iletebilirsiniz.
+
+**Başvuru iletişimi:** [DOĞRULANMIŞ_KVKK_BAŞVURU_KANALI]
+
+Başvurular ilgili mevzuatta öngörülen usul ve süreler kapsamında değerlendirilecektir.
+
+**İlgili bağlantı:** [Gizlilik Politikası](/tr/privacy)
+`,
+  "tr/terms": `# BreakLoop Kullanım ve Lisans Bilgileri
+
+BreakLoop, bireysel olarak geliştirilen ve Apple App Store üzerinden dağıtılması planlanan bir iOS uygulamasıdır.
+
+Uygulama henüz App Store'da yayımlanmamış olabilir. Bu web sitesinde yer alan tanıtım içerikleri, uygulamanın mevcut geliştirme hedeflerini ve özelliklerini açıklamak amacıyla hazırlanmıştır.
+
+## Uygulama lisansı
+
+BreakLoop için ayrı bir özel son kullanıcı lisans sözleşmesi belirlenmediği sürece, uygulama App Store üzerinden kullanıma sunulduğunda Apple'ın Standart Son Kullanıcı Lisans Sözleşmesi (Standard EULA) geçerli olacaktır.
+
+**Apple Standard EULA:**
+
+https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+## Özellikler ve kullanılabilirlik
+
+BreakLoop'un Ekran Süresi ile ilgili özellikleri, Apple tarafından sunulan sistem izinlerine ve iOS'un çalışma koşullarına bağlıdır.
+
+Bu nedenle uygulama engelleme ve zamanlama davranışları sistem izinleri ve iOS koşullarından etkilenebilir.
+
+## Web sitesi
+
+Bu web sitesi BreakLoop hakkında bilgi sunmak amacıyla hazırlanmıştır. Web sitesindeki açıklamalar, duyurulmamış özelliklerin, kesin bir çıkış tarihinin veya belirli bir fiyatlandırma modelinin taahhüdü değildir.
+
+## İletişim
+
+BreakLoop ile ilgili sorularınız için [Destek](/tr/support) sayfasını kullanabilirsiniz.
+`,
+  "en/terms": `# BreakLoop Terms & License Information
+
+BreakLoop is an independently developed iOS application intended for distribution through Apple's App Store.
+
+The application may not yet be available on the App Store. Information on this website describes the product and its intended functionality.
+
+## Application license
+
+Unless the developer provides a separate custom end-user license agreement, Apple's Standard End User License Agreement will apply when BreakLoop is distributed through the App Store.
+
+**Apple Standard EULA:**
+
+https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+## Features and availability
+
+BreakLoop uses Apple Screen Time-related frameworks.
+
+Certain functionality depends on operating system permissions, scheduling behavior, and platform limitations.
+
+Application restrictions and timing may therefore be affected by iOS behavior and available permissions.
+
+## Website information
+
+This website provides information about BreakLoop. Its content does not guarantee an unannounced feature, release date, or pricing model.
+
+## Contact
+
+For questions about BreakLoop, please visit the [Support](/en/support) page.
+`
 };

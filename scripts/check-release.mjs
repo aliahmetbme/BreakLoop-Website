@@ -10,14 +10,21 @@ try {
  const source=fs.readFileSync(`lib/${name}.ts`,'utf8');
  fs.writeFileSync(path.join(temp,`${name}.js`),ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText);
  }
- const require=createRequire(import.meta.url);const {releaseIssues,verifiedHttps,supportEmail,resolveLegalText,publicCopyIssues,publicationEnabled}=require(path.join(temp,'release.js'));
+ const require=createRequire(import.meta.url);const {releaseIssues,websiteReleaseIssues,appStoreReleaseIssues,verifiedHttps,supportEmail,verifiedSupportEmail,resolveLegalText,publicCopyIssues,publicationEnabled}=require(path.join(temp,'release.js'));
  assert.ok(releaseIssues({}).length>10,'missing prerequisites must block publication');
  for(const url of ['http://verified.tld','https://localhost','https://site.example','https://127.0.0.1','https://user:pass@site.tld','https://site.tld/path','not a url'])assert.equal(verifiedHttps(url),undefined,url);
  assert.equal(verifiedHttps('https://verified.tld/'),'https://verified.tld');
  assert.equal(supportEmail('a@b.tld\nBcc:test@x.tld'),undefined);
+ assert.equal(supportEmail('aliahmet44@icloud.com'),undefined,'personal iCloud address must never be accepted as public support email');
+ assert.equal(supportEmail('ALIAHMET44@ICLOUD.COM'),undefined,'case-insensitive personal email block');
+ assert.equal(supportEmail('breakloopSupport@icloud.com'),'breakloopSupport@icloud.com');
+ assert.equal(verifiedSupportEmail({NEXT_PUBLIC_SUPPORT_EMAIL:'breakloopSupport@icloud.com',SUPPORT_EMAIL_MONITORED:'false'}),undefined,'unmonitored alias must not become active');
+ assert.equal(verifiedSupportEmail({NEXT_PUBLIC_SUPPORT_EMAIL:'breakloopSupport@icloud.com'}),undefined,'missing monitored flag must not become active');
+ assert.equal(verifiedSupportEmail({NEXT_PUBLIC_SUPPORT_EMAIL:'breakloopSupport@icloud.com',SUPPORT_EMAIL_MONITORED:'true'}),'breakloopSupport@icloud.com');
+ assert.equal(verifiedSupportEmail({NEXT_PUBLIC_SUPPORT_EMAIL:'aliahmet44@icloud.com',SUPPORT_EMAIL_MONITORED:'true'}),undefined,'personal email blocked even if monitored flag is true');
  assert.equal(resolveLegalText('[VERIFIED_SUPPORT_EMAIL]',{NEXT_PUBLIC_SUPPORT_EMAIL:'support@verified.tld'}),'support@verified.tld');
- const env=Object.fromEntries(['DOMAIN_OWNERSHIP_VERIFIED','SUPPORT_EMAIL_MONITORED','FINAL_PRIVACY_INVENTORY_APPROVED','LEGAL_COPY_APPROVED','KVKK_LEGAL_REVIEW_APPROVED','IOS_RELEASE_AUDIT_APPROVED','MARKETING_COPY_APPROVED'].map(k=>[k,'true']));
- Object.assign(env,{NEXT_PUBLIC_SITE_URL:'https://verified.tld',NEXT_PUBLIC_SUPPORT_EMAIL:'support@verified.tld'});
+ const env=Object.fromEntries(['DOMAIN_OWNERSHIP_VERIFIED','SUPPORT_EMAIL_MONITORED','WEBSITE_PRIVACY_APPROVED','LEGAL_COPY_APPROVED','KVKK_LEGAL_REVIEW_APPROVED','MARKETING_COPY_APPROVED'].map(k=>[k,'true']));
+ Object.assign(env,{NEXT_PUBLIC_SITE_URL:'https://verified.tld',NEXT_PUBLIC_SUPPORT_EMAIL:'breakloopSupport@icloud.com',IOS_RELEASE_AUDIT_APPROVED:'false'});
  for(const key of ['NEXT_PUBLIC_OPERATOR','LEGAL_EMAIL_PROVIDER','LEGAL_SUPPORT_RETENTION','LEGAL_HOSTING_PROVIDER','LEGAL_HOSTING_RETENTION','LEGAL_HOSTING_PROCESSING','LEGAL_EMAIL_PROCESSING','LEGAL_OPERATOR_ADDRESS','LEGAL_PUBLICATION_DATE','LEGAL_RIGHTS_PROCESS','LEGAL_RIGHTS_CHANNEL','LEGAL_KVKK_LOCAL_BASIS','LEGAL_KVKK_SUPPORT_BASIS','LEGAL_KVKK_HOSTING_BASIS'])env[key]='Test-only verified value';
  const issues=releaseIssues(env);assert.ok(issues.some(v=>v.includes('Draft/review language')),'approvals alone must not publish draft copy');
  assert.ok(!issues.some(v=>v.includes('Unresolved legal fields')),'known legal values must resolve all placeholders');
@@ -31,11 +38,15 @@ try {
   assert.notEqual(getContent(locale,false).rights,getContent(locale,true).rights);
  }
  const fixtureDocs=Object.fromEntries(['en/privacy','tr/privacy','en/terms','tr/terms','tr/kvkk'].map(key=>[key,'# Reviewed test fixture\nFinal test policy without unresolved fields.']));
- assert.equal(publicationEnabled({...env,SITE_RELEASE_APPROVED:'true'},{documents:fixtureDocs}),true);
+ assert.deepEqual(websiteReleaseIssues(env,{documents:fixtureDocs}),[],'website publication readiness passes without iOS App Store release gates');
+ assert.equal(publicationEnabled({...env,SITE_RELEASE_APPROVED:'true'},{documents:fixtureDocs}),true,'promotional website can publish before App Store release once website gates pass');
  assert.equal(publicationEnabled({...env,SITE_RELEASE_APPROVED:'true',VERCEL_ENV:'preview'},{documents:fixtureDocs}),false);
  assert.equal(publicationEnabled(env,{documents:fixtureDocs}),false);
  assert.equal(publicationEnabled({...env,SITE_RELEASE_APPROVED:'true'}),false);
  assert.deepEqual(releaseIssues(env,{documents:fixtureDocs}),[],'isolated completed fixture may pass; actual documents are never replaced');
+ assert.ok(appStoreReleaseIssues(env,{documents:fixtureDocs}).includes('IOS_RELEASE_AUDIT_APPROVED'),'App Store readiness remains separately gated');
+ const appStoreEnv={...env,IOS_RELEASE_AUDIT_APPROVED:'true',FINAL_PRIVACY_INVENTORY_APPROVED:'true',FAMILY_CONTROLS_ENTITLEMENT_VERIFIED:'true',APP_STORE_PRIVACY_ANSWERS_VERIFIED:'true',IOS_DEVICE_QA_APPROVED:'true',NATIVE_LEGAL_LINKS_VERIFIED:'true'};
+ assert.deepEqual(appStoreReleaseIssues(appStoreEnv,{documents:fixtureDocs}),[],'App Store readiness passes only when all iOS release gates are verified');
  assert.ok(releaseIssues(env).length>0,'real legal publication remains blocked');
  assert.ok(releaseIssues(env,{documents:fixtureDocs,marketing:{...content,nested:{label:'Local website preview'}}}).some(v=>v.includes('content.nested.label')));
  assert.ok(releaseIssues(env,{documents:fixtureDocs,legalLabels:{label:'Gizlilik taslağını incele'}}).some(v=>v.includes('legal-copy.label')));

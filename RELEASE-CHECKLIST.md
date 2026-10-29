@@ -1,28 +1,30 @@
-# Publication blockers
+# Release & Publication Checklist
 
-- [ ] Confirm brand/domain ownership and potential naming conflict. Do not assume breakloop.app belongs to this product.
-- [ ] Confirm legal operator, verified support contact, and retention/deletion of diagnostics received by support.
-- [ ] Approve final release data/SDK inventory and privacy text, including hosting request processing.
-- [ ] Complete signed-device iOS release QA and verify promoted functionality.
-- [ ] Replace illustrative screens with approved screenshots, or explicitly approve labeled illustrations for release.
-- [ ] Configure verified HTTPS URL/contact/operator and verify canonical, hreflang, OG and sitemap in the release build.
-- [ ] Verify native Settings Privacy/Support links in the iOS release (outside this read-only task).
-- [ ] Approve EN/TR copy, browser/accessibility QA and final legal/support drafts.
-- [ ] Obtain explicit deployment authorization; only then enable release indexing.
+Website publication readiness and iOS App Store release readiness are tracked separately so the promotional **Coming Soon** website can be published before the iOS app is released on the App Store.
 
-## Added legal pack gates
+## 1. Website Publication Readiness (`websiteReleaseIssues`)
 
-- [ ] Replace every legal placeholder and editorial draft/review note in `lib/legal-documents.ts` with reviewed publication copy.
-- [ ] Legally review separate KVKK notice, actual m.5 bases, controller/address, request verification channels and any m.9 transfer mechanism.
-- [ ] Verify email/hosting provider, countries/subprocessors and separate support/hosting retention decisions.
-- [ ] Confirm final App Store license choice; only add purchase-specific terms if an actual purchase model is implemented.
-- [ ] Inspect signed Release archive, privacy manifests/required-reason APIs and physical-device network behavior. Static audit is not release sign-off.
-- [ ] Apply native legal-link proposal only in a separately authorized task; compile and device-test it.
-- [ ] Set verification/review flags only after evidence exists; run `npm run check:release`. `SITE_RELEASE_APPROVED=true` must still fail while legal draft text remains.
+- [ ] Confirm brand/domain ownership (`NEXT_PUBLIC_SITE_URL`, `DOMAIN_OWNERSHIP_VERIFIED=true`). Do not assume `breakloop.app` belongs to this product.
+- [ ] Resolve the iCloud Mail 5 GB / 5 GB storage blocker for `breakloopSupport@icloud.com` and complete all 5 mailbox checks before setting `SUPPORT_EMAIL_MONITORED=true`:
+  1. iCloud storage is no longer preventing incoming or outgoing email.
+  2. A message sent from an unrelated email provider reaches `breakloopSupport@icloud.com`.
+  3. A response sent from the alias is received successfully.
+  4. The sender shown to the recipient is `breakloopSupport@icloud.com` (never the primary personal address `aliahmet44@icloud.com`).
+  5. The developer has approved public publication of the alias (`NEXT_PUBLIC_SUPPORT_EMAIL=breakloopSupport@icloud.com`).
+- [ ] Confirm the individual developer's legal identity (`Ali Ahmet Erdoğdu`) against the Apple Developer account (`NEXT_PUBLIC_OPERATOR`) and confirm the legally required application channel/notification address (`LEGAL_OPERATOR_ADDRESS`) for the KVKK notice. Do not invent a company name.
+- [ ] Verify hosting/CDN provider and processing region (`LEGAL_HOSTING_PROVIDER`, `LEGAL_HOSTING_PROCESSING`, `LEGAL_HOSTING_RETENTION`) and email provider/retention (`LEGAL_EMAIL_PROVIDER`, `LEGAL_EMAIL_PROCESSING`, `LEGAL_SUPPORT_RETENTION`).
+- [ ] Replace every legal placeholder and editorial draft/review note in `lib/legal-documents.ts` with reviewed publication copy (`WEBSITE_PRIVACY_APPROVED=true`, `LEGAL_COPY_APPROVED=true`).
+- [ ] Legally review the separate KVKK notice (`/tr/kvkk`), concrete KVKK m.5 legal bases (`LEGAL_KVKK_LOCAL_BASIS`, `LEGAL_KVKK_SUPPORT_BASIS`, `LEGAL_KVKK_HOSTING_BASIS`), data subject application channel (`LEGAL_RIGHTS_PROCESS`, `LEGAL_RIGHTS_CHANNEL`), and any KVKK m.9 cross-border transfer mechanism (`KVKK_LEGAL_REVIEW_APPROVED=true`).
+- [ ] Approve final EN/TR marketing positioning (`MARKETING_COPY_APPROVED=true`), keep preview-only labels separate from publication copy, and run `npm run check:release`.
+- [ ] Obtain explicit deployment authorization; only then set `SITE_RELEASE_APPROVED=true` to enable release indexing, canonical/hreflang tags, and sitemap output.
 
-## Focus / Life marketing review
+## 2. iOS App Store Release Readiness (`appStoreReleaseIssues`)
 
-- [ ] Approve final EN/TR positioning and set `MARKETING_COPY_APPROVED=true` only after review.
-- [ ] Keep preview-only labels separate from publication copy; run public-copy contamination tests and design-baseline checks.
-- [ ] Review natural headline wrapping against the recorded mobile/desktop baseline. Existing header overlap is documented, not silently redesigned.
-- [ ] Passing isolated release fixtures does not approve actual legal documents or enable indexing; all existing publication blockers remain.
+These gates apply before submitting or releasing the native iOS app on the App Store (they do not block publishing the Coming Soon promotional website once Section 1 is complete):
+
+- [ ] Verify production Apple `FamilyControls` / Screen Time distribution entitlement approval (`FAMILY_CONTROLS_ENTITLEMENT_VERIFIED=true`).
+- [ ] Inspect the signed iOS Release archive, `PrivacyInfo.xcprivacy` / required-reason APIs, and physical-device network behavior (`IOS_RELEASE_AUDIT_APPROVED=true`, `FINAL_PRIVACY_INVENTORY_APPROVED=true`).
+- [ ] Complete signed-device iOS QA for Focus Mode (Deep Focus), Life Mode (shared budget + cooldown), Natural Rest Detection, and Diagnostics export/delete (`IOS_DEVICE_QA_APPROVED=true`).
+- [ ] Verify that App Store Connect privacy nutrition labels match the published Privacy Policy and actual release binary (`APP_STORE_PRIVACY_ANSWERS_VERIFIED=true`).
+- [ ] Confirm final App Store license selection in App Store Connect (Apple Standard EULA by default, or custom EULA if later added) and only add StoreKit/subscription terms if a paid/subscription model is actually implemented.
+- [ ] Wire and device-test native iOS Settings Privacy, Support, Terms, and KVKK links against the live HTTPS website (`NATIVE_LEGAL_LINKS_VERIFIED=true`).

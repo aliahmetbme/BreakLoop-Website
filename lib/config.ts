@@ -1,7 +1,7 @@
-import { publicationEnabled, supportEmail, verifiedHttps } from './release';
+import { publicationEnabled, verifiedSupportEmail, verifiedHttps } from './release';
 export const site = {
  url: verifiedHttps(process.env.NEXT_PUBLIC_SITE_URL),
- email: supportEmail(process.env.NEXT_PUBLIC_SUPPORT_EMAIL),
+ email: verifiedSupportEmail(process.env),
  operator: process.env.NEXT_PUBLIC_OPERATOR?.trim() || undefined,
  indexable: publicationEnabled(),
 };

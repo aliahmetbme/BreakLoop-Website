@@ -11,7 +11,7 @@ function Inline({text,locale}:{text:string;locale:Locale}){
  return <>{parts.map((part,i):ReactNode=>{
  if(part.startsWith('**')&&part.endsWith('**'))return <strong key={i}><Inline text={part.slice(2,-2)} locale={locale}/></strong>;
  const link=part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
- if(link){const href=safeHref(link[2]);return href?<Link key={i} href={href}>{link[1]}</Link>:link[1];}
+ if(link){const href=safeHref(link[2]);return href?<Link key={i} href={href} lang={href==='/tr/kvkk'?'tr':undefined}>{link[1]}</Link>:link[1];}
  if(/^\[[^\]]+\]$/.test(part))return <span className="legal-pending" key={i}>{previewLegalCopy[locale].pending}: {part.slice(1,-1).replaceAll('_',' ')}</span>;
  if(part.startsWith('https://'))return <a key={i} href={part}>{part}</a>;
  return part;
@@ -26,7 +26,7 @@ function MarkdownBlock({block,locale,index}:{block:string;locale:Locale;index:nu
 }
 export function LegalLinks({locale}:{locale:Locale}){const c=getLegalCopy(locale,site.indexable);return <nav className="legal-links" aria-label={c.related}><Link href={`/${locale}/privacy`}>{c.privacy}</Link><Link href={`/${locale}/terms`}>{c.terms}</Link><Link href="/tr/kvkk" lang="tr">{c.kvkk}</Link><Link href={`/${locale}/support`}>{c.support}</Link></nav>;}
 export function LegalDocument({locale,page}:{locale:Locale;page:LegalPage}){
- const c=getLegalCopy(locale,site.indexable);const text=resolveLegalText(legalDocuments[`${locale}/${page}`]);const blocks=text.replace(/^(## [^\n]+)\n(?!\n)/gm,'$1\n\n').split(/\n\s*\n/).filter(Boolean).filter(b=>!b.startsWith('# '));
+ const c=getLegalCopy(locale,site.indexable);const text=resolveLegalText(legalDocuments[`${locale}/${page}`]);const titleMatch=text.match(/^# ([^\n]+)/m);const pageTitle=titleMatch?titleMatch[1].trim():c[page];const blocks=text.replace(/^(## [^\n]+)\n(?!\n)/gm,'$1\n\n').split(/\n\s*\n/).filter(Boolean).filter(b=>!b.startsWith('# '));
  const headings=blocks.map((b,index)=>({b,index})).filter(({b})=>b.startsWith('## '));
- return <main id="main" className="wrap legal-document"><div className="legal-header">{!site.indexable&&<p className="draft">{previewLegalCopy[locale].draft}</p>}<p className="eyebrow">BREAKLOOP / {c[page]}</p><h1>{c[page]}</h1>{page==='kvkk'&&<p className="legal-language-note">{c.kvkkLanguage}</p>}</div><div className="legal-layout"><nav className="legal-toc" aria-label={c.contents}><p>{c.contents}</p><ol>{headings.map(({b,index})=><li key={index}><a href={`#legal-section-${index}`}>{b.slice(3).replace(/^\d+\.\s*/,'')}</a></li>)}</ol></nav><article className="legal-prose">{blocks.map((block,index)=><MarkdownBlock key={index} block={block} locale={locale} index={index}/>)}{page==='privacy'&&<p><Link href="/tr/kvkk" lang="tr">{c.kvkk}</Link></p>}</article></div><LegalLinks locale={locale}/></main>;
+ return <main id="main" className="wrap legal-document"><div className="legal-header">{!site.indexable&&<p className="draft">{previewLegalCopy[locale].draft}</p>}<p className="eyebrow">BREAKLOOP / {c[page]}</p><h1>{pageTitle}</h1>{page==='kvkk'&&<p className="legal-language-note">{c.kvkkLanguage}</p>}</div><div className="legal-layout"><nav className="legal-toc" aria-label={c.contents}><p>{c.contents}</p><ol>{headings.map(({b,index})=><li key={index}><a href={`#legal-section-${index}`}>{b.slice(3).replace(/^\d+\.\s*/,'')}</a></li>)}</ol></nav><article className="legal-prose">{blocks.map((block,index)=><MarkdownBlock key={index} block={block} locale={locale} index={index}/>)}</article></div><LegalLinks locale={locale}/></main>;
 }
