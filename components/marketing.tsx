@@ -27,24 +27,33 @@ export function ModeOverview({ locale }: { locale: Locale }) {
   );
 }
 
+const scenarioImages = [
+  ['scenario-study-before-v2', 'scenario-study-after-v2'],
+  ['scenario-life-day-v2', 'scenario-life-evening-v2'],
+] as const;
+
 export function RealLifeScenarios({ locale }: { locale: Locale }) {
   const c = getContent(locale, site.indexable);
   return (
-    <section className="wrap steps-section" aria-labelledby="scenarios-heading">
+    <section className="wrap scenario-section" aria-labelledby="scenarios-heading">
       <p className="eyebrow">{c.scenarioKicker}</p>
       <h2 id="scenarios-heading">{c.scenarioTitle}</h2>
-      <ol className="steps mode-scenarios">
-        {c.scenarios.map(([title, body], i) => (
-          <li key={title}>
-            {i === 0 ? <Image className="scenario-photo" src="/images/scenario-study-v1.webp" width={1200} height={800} sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1280px) 45vw, 570px" alt={c.scenarioAlts[0]} /> : <div className="scenario-time-pair" role="group" aria-label={title}>
-              {['daylight', 'evening'].map((time, index) => <figure key={time}>
-                <Image src={`/images/scenario-${time}-v1.webp`} width={1200} height={800} sizes="(max-width: 760px) 43vw, (max-width: 1280px) 22vw, 280px" alt={c.timePairAlts[index]} />
-                <figcaption>{c.timePairLabels[index]}</figcaption>
-              </figure>)}
-            </div>}
-            <span className="step-number">0{i + 1}</span>
-            <h3>{title}</h3>
-            <p>{body}</p>
+      <ol className="scenario-list">
+        {c.scenarioRows.map((row, i) => (
+          <li className="scenario-row" key={row.title}>
+            <div className="scenario-visual-pair" role="group" aria-label={row.title}>
+              {row.images.map((image, index) => ({ image, index })).sort((a, b) => (i === 0 ? b.index - a.index : a.index - b.index)).map(({ image, index }) => (
+                <figure key={image.label}>
+                  <Image src={`/images/${scenarioImages[i][index]}.webp`} width={896} height={1200} quality={90} sizes="(max-width: 760px) 45vw, (max-width: 999px) 340px, 360px" alt={image.alt} />
+                  <figcaption>{image.label}</figcaption>
+                </figure>
+              ))}
+            </div>
+            <div className="scenario-copy">
+              <span className="step-number">0{i + 1}</span>
+              <h3>{row.title}</h3>
+              <p>{row.body}</p>
+            </div>
           </li>
         ))}
       </ol>

@@ -178,23 +178,40 @@ export const content = {
     ],
     "modeNaming": "Focus Mode uses the app’s Deep Focus feature. Life Mode describes its repeating use-and-rest cycle. Both work with your selected apps and categories.",
     "scenarioKicker": "IN EVERYDAY LIFE",
-    "scenarioAlts": ["A student looking at a phone with open books and notes on the desk.", "A person scrolling on a sofa as the light outside fades into evening."],
     "scenarioVisualNote": "Illustrative scenes created with AI, not customer photographs.",
     "productKicker": "INSIDE BREAKLOOP",
     "productTitle": "A closer look at your rhythm.",
     "productScreens": [["Deep Focus", "A dedicated session for your selected apps and categories."], ["Cooldown", "A pause after your shared usage allowance is reached."]],
-    "scenarioTitle": "Different moments. A little space.",
-    "timePairLabels": ["Just five minutes…", "And now it’s evening."],
-    "timePairAlts": ["The same person in the same sofa pose, scrolling in bright daylight.", "The same person and room in the same framing, still scrolling at dusk."],
-    "scenarios": [
-      [
-        "Before studying, you check your phone",
-        "Your books are open, but one notification turns into a scroll. Start Deep Focus before studying to put a boundary around your selected distractions."
-      ],
-      [
-        "Just five minutes. Then the day is gone.",
-        "Same sofa. Same position. You picked up your phone in daylight; now it’s evening. Life Mode adds a pause when your shared usage allowance is reached."
-      ]
+    "scenarioTitle": "How it shows up in real life.",
+    "scenarioRows": [
+      {
+        "title": "You meant to study. Your phone had other plans.",
+        "body": "Your books are open and your notes are ready, but your attention drifts to your phone. Start Deep Focus to pause selected distractions and make room to return to your work.",
+        "images": [
+          {
+            "alt": "A student at a desk with open textbooks, a notebook and a laptop, scrolling on her phone instead of studying.",
+            "label": "Distracted"
+          },
+          {
+            "alt": "The same student at the same desk, phone face down, writing in her notebook with her attention on her books.",
+            "label": "Back to focus"
+          }
+        ]
+      },
+      {
+        "title": "Just five more minutes. Forty minutes later, you’re still scrolling.",
+        "body": "One more video turns into another. Life Mode gives your selected apps a shared usage budget and introduces a pause when that allowance runs out.",
+        "images": [
+          {
+            "alt": "A woman curled up on a sofa scrolling on her phone in bright daylight.",
+            "label": "Just five minutes…"
+          },
+          {
+            "alt": "The same woman in the same pose on the same sofa, still scrolling as the room and sky turn to evening.",
+            "label": "Time slipped away."
+          }
+        ]
+      }
     ],
     "naturalRestNote": "Natural Rest estimates rest from usage checkpoints and elapsed time. It does not continuously observe all phone activity or prove uninterrupted rest.",
     "focusKicker": "HOW FOCUS MODE WORKS",
@@ -398,23 +415,40 @@ export const content = {
     ],
     "modeNaming": "Odak Modu, uygulamadaki Deep Focus (Derin Odak) özelliğini; Yaşam Modu ise tekrarlayan kullanım ve mola döngüsünü anlatır. İkisi de seçtiğin uygulama ve kategorilerle çalışır.",
     "scenarioKicker": "GÜNLÜK HAYATTA",
-    "scenarioAlts": ["Önünde açık kitaplar ve notlar varken telefonuna bakan bir öğrenci.", "Dışarıda hava akşama dönerken koltukta telefonunda kaydıran biri."],
     "scenarioVisualNote": "Yapay zekâyla oluşturulmuş temsilî sahnelerdir; kullanıcı fotoğrafları değildir.",
     "productKicker": "BREAKLOOP’A YAKINDAN BAK",
     "productTitle": "Ritmin uygulamada nasıl görünür?",
     "productScreens": [["Derin Odak", "Seçtiğin uygulama ve kategoriler için ayrı bir odak oturumu."], ["Mola", "Ortak kullanım süren dolduğunda başlayan kısa bir ara."]],
-    "scenarioTitle": "Farklı anlar. Biraz alan.",
-    "timePairLabels": ["Sadece beş dakika…", "Bir bakmışsın, akşam."],
-    "timePairAlts": ["Aynı kişi, aynı koltukta ve aynı pozisyonda gündüz telefonuna bakıyor.", "Aynı kişi ve aynı kadraj; hava akşam olmuş ama telefon hâlâ elinde."],
-    "scenarios": [
-      [
-        "Derse başlamadan “bir bakayım” dediğinde",
-        "Kitaplar açık, ama bir bildirim derken kendini kaydırırken buldun. Çalışmaya başlamadan Derin Odak’ı başlat; seçtiğin dikkat dağıtıcı uygulamalara bir sınır koy."
-      ],
-      [
-        "Bir beş dakika dedin. Bir baktın, akşam olmuş.",
-        "Aynı koltuk, aynı pozisyon. Telefonu eline aldığında hava aydınlıktı; şimdi akşam. Yaşam Modu, belirlediğin ortak kullanım süresi dolduğunda bu akışa bir mola koyar."
-      ]
+    "scenarioTitle": "Gerçek hayatta buna benzeyen anlar.",
+    "scenarioRows": [
+      {
+        "title": "Ders çalışacaktın. Dikkatini telefon aldı.",
+        "body": "Kitaplar açık, notlar hazır. Ama dikkatini telefonuna kaptırdın. Derin Odak’ı başlat, seçtiğin dikkat dağıtıcı uygulamalara ara ver ve başladığın işe geri dön.",
+        "images": [
+          {
+            "alt": "Açık ders kitapları, defter ve dizüstü bilgisayarla masada oturan, ders çalışmak yerine telefonunda kaydıran bir öğrenci.",
+            "label": "Dikkatin dağıldı"
+          },
+          {
+            "alt": "Aynı öğrenci, aynı masada; telefon ters çevrilmiş, dikkati kitaplarında, defterine yazıyor.",
+            "label": "Odağına geri döndün"
+          }
+        ]
+      },
+      {
+        "title": "Telefona bir beş dakika bakayım dedin. Kırk dakika geçti, hâlâ oradasın.",
+        "body": "Bir video daha derken zaman geçti. Yaşam Modu, seçtiğin uygulamalardaki ortak kullanım süren dolduğunda mola başlatarak bu döngüye ara vermene yardımcı olur.",
+        "images": [
+          {
+            "alt": "Parlak gün ışığında koltukta kıvrılmış, telefonunda kaydıran bir kadın.",
+            "label": "Sadece beş dakika…"
+          },
+          {
+            "alt": "Aynı kadın, aynı koltukta ve aynı pozisyonda; oda ve gökyüzü akşama dönerken hâlâ kaydırıyor.",
+            "label": "Zaman akıp gitti."
+          }
+        ]
+      }
     ],
     "naturalRestNote": "Doğal Mola, kullanım kontrol noktaları ve geçen zamandan dinlenme tahmini yapar. Tüm telefon etkinliğini sürekli izlemez ve kesintisiz dinlenmeyi kanıtlamaz.",
     "focusKicker": "ODAK MODU NASIL ÇALIŞIR?",

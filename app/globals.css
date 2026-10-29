@@ -27,13 +27,20 @@
 .legal-language-note{font-size:13px;margin-top:20px;max-width:680px}
 /* Marketing additions reuse the approved cards, typography and responsive grid. */
 .mode-overview .mode-link{margin-top:16px}
-.mode-scenarios{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media(max-width:760px){.mode-scenarios{grid-template-columns:1fr}}
-/* Additive scenario photography and existing product previews; original visuals stay intact. */
-.mode-scenarios .scenario-photo{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border:1px solid var(--divider);border-radius:var(--radius-large);margin-bottom:24px}
 .product-walkthrough-card .product-preview{margin:32px auto 0;width:min(250px,100%)}
-/* The identical daylight/evening crop stays side by side, including on mobile. */
-.scenario-time-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:24px}
-.scenario-time-pair figure{min-width:0}
-.scenario-time-pair img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:40% center;border:1px solid var(--divider);border-radius:var(--radius-large)}
-.scenario-time-pair figcaption{font-size:12px;line-height:1.5;color:var(--secondary);margin-top:10px}
+/* Real-life scenarios: two compact rows, each a before/after photo pair beside its copy. */
+.scenario-section{padding-block:64px 56px;border-top:1px solid var(--divider)}
+.scenario-list{list-style:none;margin:40px 0 0;padding:0;display:grid;gap:48px}
+.scenario-row{display:grid;gap:24px;align-items:start}
+.scenario-visual-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.scenario-visual-pair figure{min-width:0}
+.scenario-visual-pair img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border:1px solid var(--divider);border-radius:var(--radius-large)}
+.scenario-visual-pair figcaption{font-size:clamp(12px,0.9vw,15px);line-height:1.5;color:var(--secondary);margin-top:10px}
+.scenario-copy{padding-top:clamp(0px,2vw,24px)}
+.scenario-copy .step-number{padding-bottom:14px;margin-bottom:18px}
+.scenario-copy h3{font-size:clamp(24px,2.4vw,32px)}
+.scenario-copy p{font-size:clamp(15px,1.15vw,18px);margin-top:14px;max-width:500px}
+.scenario-section .feature-caption{margin-top:32px;font-size:clamp(12px,0.9vw,14px)}
+@media(min-width:1000px){.scenario-row{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:56px}.scenario-visual-pair{gap:16px}}
+@media(min-width:761px) and (max-width:999px){.scenario-visual-pair,.scenario-copy{max-width:680px}}
+@media(max-width:760px){.scenario-section{padding-block:44px 40px}.scenario-list{gap:40px;margin-top:28px}.scenario-visual-pair{gap:10px}}
