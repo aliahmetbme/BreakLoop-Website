@@ -1,0 +1,11 @@
+--- a/BreakLoop/Features/Settings/SettingsView.swift
++++ b/BreakLoop/Features/Settings/SettingsView.swift
+@@ -185,6 +185,8 @@
+                 NavigationLink("Event History & Export") { DiagnosticsView() }
+             }
+ 
++            BreakLoopLegalLinks()
++
+             // Section 5: About
+             Section("About") {
+                 HStack {
