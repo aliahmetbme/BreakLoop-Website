@@ -27,8 +27,13 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','
   for(const match of html.matchAll(/href="#([^"]+)"/g))assert.ok(html.includes(`id="${match[1]}"`),url+' valid anchor '+match[1]);
   assert.ok(!/href="https?:\/\/[^\"]*(?:apps\.apple\.com|testflight\.apple\.com)/.test(html),url+' no fake download');
   assert.ok(!/cure phone addiction|guaranteed productivity|100% unbreakable|world’s first shared/i.test(html),url+' no unsupported superlatives');
+  if(path==='/how-it-works')for(const image of ['preview-3.png','preview-1.png'])assert.ok(html.includes(image),url+' product preview '+image);
   if(path===''){
    assert.ok(html.includes(`<h1>${c.headline}<br/>`),url+' hero message');
+   for(const image of ['scenario-study-v1.webp','scenario-daylight-v1.webp','scenario-evening-v1.webp'])assert.ok(html.includes(image),url+' scenario photo '+image);
+   assert.ok(html.includes(lang==='en'?'Illustrative scenes created with AI':'Yapay zekâyla oluşturulmuş temsilî sahnelerdir'),url+' honest scene provenance');
+   assert.ok(html.includes('scenario-time-pair'),url+' side-by-side time comparison');
+   assert.ok(html.includes(lang==='en'?'And now it’s evening.':'Bir bakmışsın, akşam.'),url+' time-passing caption');
    assert.ok(new RegExp(`href="#coming-soon">${c.soon}`).test(html),url+' honest Coming Soon primary CTA');
    assert.ok(html.includes(`href="/${lang}/how-it-works"`),url+' localized secondary navigation');
    assert.ok(html.includes(lang==='en'?'Explore the privacy draft':'Gizlilik taslağını incele'),url+' preview privacy label preserved');
@@ -48,3 +53,5 @@ for(const lang of ['en','tr']){
  console.log('PASS',`/${lang}/og`, '1200×630 PNG');
 }
 assert.ok(!images[0].equals(images[1]),'OG assets must differ by language');
+
+for(const name of ['study','daylight','evening']){const r=await fetch(`${origin}/images/scenario-${name}-v1.webp`);assert.equal(r.status,200);assert.ok(r.headers.get('content-type')?.includes('image/webp'));console.log('PASS scenario image',name);}

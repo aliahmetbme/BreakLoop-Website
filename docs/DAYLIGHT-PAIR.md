@@ -1,0 +1,9 @@
+# Daylight / evening continuity edit
+
+Built-in image_gen editing mode, using the original evening photograph as the edit target. Final asset: `public/images/scenario-daylight-v1.webp` (1200×800). The original evening asset remains unchanged. Identical CSS portrait crops (3:4, object position 40% center) put the two scenes side by side on desktop and mobile.
+
+The study copy now describes distraction *before* starting Deep Focus, so the image no longer contradicts an already-active focus session. The sofa story describes daylight becoming evening rather than claiming that exact transition happened in forty minutes. Both remain fictional AI-created illustrative scenes.
+
+## Final edit prompt
+
+Edit target: the attached original evening sofa photograph. Precise lighting-weather edit only. Create the matching bright daytime version of this EXACT photograph. Preserve the same woman, face, gaze, expression, hair, lavender sweater, curled-up body pose, both hands, smartphone angle, couch cushions, blanket folds, closed book, cup, plants, window framing, city skyline, camera angle, lens, crop and every object position EXACTLY. She must be in the identical position, not a new interpretation. Only change the time of day and corresponding illumination: unmistakably bright clear late-morning daylight outside the window, pale blue sunlit sky and daytime city, bright soft natural daylight filling the room; the lamp is switched off and candles unlit. Keep realistic light direction and material textures. Do not move anything, add anything, remove anything, change the pose or change the camera. No text, clocks, captions, graphics, panels or watermark. Output one photograph with the same landscape framing and dimensions as the source; it will be cropped identically next to the unchanged original evening photo on the website so time passing is immediately obvious.

@@ -29,3 +29,11 @@
 .mode-overview .mode-link{margin-top:16px}
 .mode-scenarios{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:760px){.mode-scenarios{grid-template-columns:1fr}}
+/* Additive scenario photography and existing product previews; original visuals stay intact. */
+.mode-scenarios .scenario-photo{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border:1px solid var(--divider);border-radius:var(--radius-large);margin-bottom:24px}
+.product-walkthrough-card .product-preview{margin:32px auto 0;width:min(250px,100%)}
+/* The identical daylight/evening crop stays side by side, including on mobile. */
+.scenario-time-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:24px}
+.scenario-time-pair figure{min-width:0}
+.scenario-time-pair img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:40% center;border:1px solid var(--divider);border-radius:var(--radius-large)}
+.scenario-time-pair figcaption{font-size:12px;line-height:1.5;color:var(--secondary);margin-top:10px}

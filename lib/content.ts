@@ -178,15 +178,22 @@ export const content = {
     ],
     "modeNaming": "Focus Mode uses the app’s Deep Focus feature. Life Mode describes its repeating use-and-rest cycle. Both work with your selected apps and categories.",
     "scenarioKicker": "IN EVERYDAY LIFE",
+    "scenarioAlts": ["A student looking at a phone with open books and notes on the desk.", "A person scrolling on a sofa as the light outside fades into evening."],
+    "scenarioVisualNote": "Illustrative scenes created with AI, not customer photographs.",
+    "productKicker": "INSIDE BREAKLOOP",
+    "productTitle": "A closer look at your rhythm.",
+    "productScreens": [["Deep Focus", "A dedicated session for your selected apps and categories."], ["Cooldown", "A pause after your shared usage allowance is reached."]],
     "scenarioTitle": "Different moments. A little space.",
+    "timePairLabels": ["Just five minutes…", "And now it’s evening."],
+    "timePairAlts": ["The same person in the same sofa pose, scrolling in bright daylight.", "The same person and room in the same framing, still scrolling at dusk."],
     "scenarios": [
       [
-        "When you sit down to study",
-        "You choose a focus session before opening your notes. Selected distractions take a break while you spend time on what you came to do."
+        "Before studying, you check your phone",
+        "Your books are open, but one notification turns into a scroll. Start Deep Focus before studying to put a boundary around your selected distractions."
       ],
       [
-        "When five more minutes becomes forty",
-        "One more video leads to another. Once your shared allowance is used up, a cooldown gives you a moment to notice and step away."
+        "Just five minutes. Then the day is gone.",
+        "Same sofa. Same position. You picked up your phone in daylight; now it’s evening. Life Mode adds a pause when your shared usage allowance is reached."
       ]
     ],
     "naturalRestNote": "Natural Rest estimates rest from usage checkpoints and elapsed time. It does not continuously observe all phone activity or prove uninterrupted rest.",
@@ -391,15 +398,22 @@ export const content = {
     ],
     "modeNaming": "Odak Modu, uygulamadaki Deep Focus (Derin Odak) özelliğini; Yaşam Modu ise tekrarlayan kullanım ve mola döngüsünü anlatır. İkisi de seçtiğin uygulama ve kategorilerle çalışır.",
     "scenarioKicker": "GÜNLÜK HAYATTA",
+    "scenarioAlts": ["Önünde açık kitaplar ve notlar varken telefonuna bakan bir öğrenci.", "Dışarıda hava akşama dönerken koltukta telefonunda kaydıran biri."],
+    "scenarioVisualNote": "Yapay zekâyla oluşturulmuş temsilî sahnelerdir; kullanıcı fotoğrafları değildir.",
+    "productKicker": "BREAKLOOP’A YAKINDAN BAK",
+    "productTitle": "Ritmin uygulamada nasıl görünür?",
+    "productScreens": [["Derin Odak", "Seçtiğin uygulama ve kategoriler için ayrı bir odak oturumu."], ["Mola", "Ortak kullanım süren dolduğunda başlayan kısa bir ara."]],
     "scenarioTitle": "Farklı anlar. Biraz alan.",
+    "timePairLabels": ["Sadece beş dakika…", "Bir bakmışsın, akşam."],
+    "timePairAlts": ["Aynı kişi, aynı koltukta ve aynı pozisyonda gündüz telefonuna bakıyor.", "Aynı kişi ve aynı kadraj; hava akşam olmuş ama telefon hâlâ elinde."],
     "scenarios": [
       [
-        "Ders çalışmaya oturduğunda",
-        "Notlarını açmadan bir odak oturumu başlatırsın. Seçtiğin dikkat dağıtıcı uygulamalar duraklatılır; yapmak istediğin işe alan açılır."
+        "Derse başlamadan “bir bakayım” dediğinde",
+        "Kitaplar açık, ama bir bildirim derken kendini kaydırırken buldun. Çalışmaya başlamadan Derin Odak’ı başlat; seçtiğin dikkat dağıtıcı uygulamalara bir sınır koy."
       ],
       [
-        "Beş dakika daha derken kırk dakika geçtiğinde",
-        "Bir video daha derken zaman geçer. Belirlediğin toplam süre dolunca başlayan mola, bunu fark edip ekrandan uzaklaşman için bir fırsat sunar."
+        "Bir beş dakika dedin. Bir baktın, akşam olmuş.",
+        "Aynı koltuk, aynı pozisyon. Telefonu eline aldığında hava aydınlıktı; şimdi akşam. Yaşam Modu, belirlediğin ortak kullanım süresi dolduğunda bu akışa bir mola koyar."
       ]
     ],
     "naturalRestNote": "Doğal Mola, kullanım kontrol noktaları ve geçen zamandan dinlenme tahmini yapar. Tüm telefon etkinliğini sürekli izlemez ve kesintisiz dinlenmeyi kanıtlamaz.",

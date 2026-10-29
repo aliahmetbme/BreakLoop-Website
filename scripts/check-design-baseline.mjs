@@ -7,7 +7,9 @@ const original=path=>execFileSync('git',['show',`${baseline}:${path}`],{encoding
 const exportsOf=source=>{const m={exports:{}};new Function('exports','module',ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText)(m.exports,m);return m.exports;};
 const css=fs.readFileSync('app/globals.css','utf8');assert.ok(css.startsWith(original('app/globals.css')),'all existing CSS must remain unchanged');
 assert.equal(fs.readFileSync('lib/legal-documents.ts','utf8'),original('lib/legal-documents.ts'),'actual legal drafts are preserved');
-assert.equal(execFileSync('git',['diff',baseline,'--','public/images','app/icon.png','app/apple-icon.png','components/controls.tsx'],{encoding:'utf8'}),'','assets and navigation/theme controls must not change');
+const baselineAssets=execFileSync('git',['ls-tree','-r','--name-only',baseline,'public/images','app/icon.png','app/apple-icon.png'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
+for(const asset of baselineAssets)assert.ok(fs.readFileSync(asset).equals(execFileSync('git',['show',`${baseline}:${asset}`])),`existing asset must not change: ${asset}`);
+assert.equal(execFileSync('git',['diff',baseline,'--','components/controls.tsx'],{encoding:'utf8'}),'','navigation/theme controls must not change');
 const oldLegal=exportsOf(original('lib/legal-copy.ts')).legalCopy;
 const newLegal=exportsOf(fs.readFileSync('lib/legal-copy.ts','utf8')).previewLegalCopy;
 assert.deepEqual(newLegal,oldLegal,'preview legal/support labels preserve the approved baseline');
