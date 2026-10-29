@@ -28,7 +28,7 @@ export function ModeOverview({ locale }: { locale: Locale }) {
 }
 
 const scenarioImages = [
-  ['scenario-study-before-v2', 'scenario-study-after-v2'],
+  ['scenario-study-after-v2', 'scenario-study-before-v2'],
   ['scenario-life-day-v2', 'scenario-life-evening-v2'],
 ] as const;
 
@@ -42,7 +42,7 @@ export function RealLifeScenarios({ locale }: { locale: Locale }) {
         {c.scenarioRows.map((row, i) => (
           <li className="scenario-row" key={row.title}>
             <div className="scenario-visual-pair" role="group" aria-label={row.title}>
-              {row.images.map((image, index) => ({ image, index })).sort((a, b) => (i === 0 ? b.index - a.index : a.index - b.index)).map(({ image, index }) => (
+              {row.images.map((image, index) => (
                 <figure key={image.label}>
                   <Image src={`/images/${scenarioImages[i][index]}.webp`} width={896} height={1200} quality={90} sizes="(max-width: 760px) 45vw, (max-width: 999px) 340px, 360px" alt={image.alt} />
                   <figcaption>{image.label}</figcaption>

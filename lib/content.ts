@@ -185,21 +185,21 @@ export const content = {
     "scenarioTitle": "How it shows up in real life.",
     "scenarioRows": [
       {
-        "title": "You meant to study. Your phone had other plans.",
-        "body": "Your books are open and your notes are ready, but your attention drifts to your phone. Start Deep Focus to pause selected distractions and make room to return to your work.",
+        "title": "You started studying. Then your phone pulled you away.",
+        "body": "You were studying and taking notes before a quick look at your phone pulled you in. Start a Deep Focus session to intentionally restrict your selected distracting apps and return to studying.",
         "images": [
           {
-            "alt": "A student at a desk with open textbooks, a notebook and a laptop, scrolling on her phone instead of studying.",
-            "label": "Distracted"
+            "alt": "A student at a desk with open textbooks, a notebook and a laptop, phone face down, writing in her notebook with her attention on her books.",
+            "label": "You started studying"
           },
           {
-            "alt": "The same student at the same desk, phone face down, writing in her notebook with her attention on her books.",
-            "label": "Back to focus"
+            "alt": "The same student at the same desk, pen resting on her notebook, scrolling on her phone instead of studying.",
+            "label": "Then you got distracted"
           }
         ]
       },
       {
-        "title": "Just five more minutes. Forty minutes later, you’re still scrolling.",
+        "title": "Just five more minutes. Hours later, you’re still scrolling.",
         "body": "One more video turns into another. Life Mode gives your selected apps a shared usage budget and introduces a pause when that allowance runs out.",
         "images": [
           {
@@ -235,8 +235,8 @@ export const content = {
         "When the session ends, its restrictions end; any active cooldown still applies."
       ]
     ],
-    "philosophyTitle": "Less autopilot. More intention.",
-    "philosophyBody": "Phone use isn’t something to punish. Sometimes, all you need is a moment to stop—and a little space to choose what comes next."
+    "philosophyTitle": "Pause the distractions.\nMake room for what matters.",
+    "philosophyBody": "Whether you're sitting down to study or stepping away from endless scrolling, BreakLoop helps you create a little distance from the apps that take up your time and attention."
   },
   "tr": {
     "mainNav": "Ana gezinme",
@@ -422,21 +422,21 @@ export const content = {
     "scenarioTitle": "Gerçek hayatta buna benzeyen anlar.",
     "scenarioRows": [
       {
-        "title": "Ders çalışacaktın. Dikkatini telefon aldı.",
-        "body": "Kitaplar açık, notlar hazır. Ama dikkatini telefonuna kaptırdın. Derin Odak’ı başlat, seçtiğin dikkat dağıtıcı uygulamalara ara ver ve başladığın işe geri dön.",
+        "title": "Ders çalışmaya başladın. Sonra telefona daldın.",
+        "body": "Notlarını alıp ders çalışırken telefona kısa bir bakış dikkatini dağıttı. Seçtiğin dikkat dağıtıcı uygulamaları bilinçli olarak kısıtlamak ve dersine geri dönmek için Derin Odak’ı başlat.",
         "images": [
           {
-            "alt": "Açık ders kitapları, defter ve dizüstü bilgisayarla masada oturan, ders çalışmak yerine telefonunda kaydıran bir öğrenci.",
-            "label": "Dikkatin dağıldı"
+            "alt": "Açık ders kitapları, defter ve dizüstü bilgisayarla masada oturan; telefonu ters çevrilmiş, dikkati kitaplarında, defterine yazan bir öğrenci.",
+            "label": "Derse başladın"
           },
           {
-            "alt": "Aynı öğrenci, aynı masada; telefon ters çevrilmiş, dikkati kitaplarında, defterine yazıyor.",
-            "label": "Odağına geri döndün"
+            "alt": "Aynı öğrenci, aynı masada; kalemi defterin üzerinde bırakmış, ders çalışmak yerine telefonunda kaydırıyor.",
+            "label": "Sonra telefona daldın"
           }
         ]
       },
       {
-        "title": "Telefona bir beş dakika bakayım dedin. Kırk dakika geçti, hâlâ oradasın.",
+        "title": "Telefona bir beş dakika bakayım dedin. Saatler geçti, hâlâ oradasın.",
         "body": "Bir video daha derken zaman geçti. Yaşam Modu, seçtiğin uygulamalardaki ortak kullanım süren dolduğunda mola başlatarak bu döngüye ara vermene yardımcı olur.",
         "images": [
           {
@@ -472,8 +472,8 @@ export const content = {
         "Oturum bitince bu oturumun kısıtlamaları kalkar; devam eden bir mola varsa o molanın kısıtlamaları sürer."
       ]
     ],
-    "philosophyTitle": "Daha az otomatik alışkanlık.\nDaha bilinçli seçim.",
-    "philosophyBody": "Telefon kullanmak cezalandırılacak bir şey değil. Bazen yalnızca durmak için kısa bir an ve sonrasında ne yapacağını seçmek için biraz alan gerekir."
+    "philosophyTitle": "Dikkatini dağıtanlara ara ver.\nÖnemli olana yer aç.",
+    "philosophyBody": "Bazen ders çalışmak için, bazen de fark etmeden uzayan kaydırmaya son vermek için. BreakLoop, zamanını alan uygulamalarla arana küçük bir mesafe koymana yardımcı olur."
   }
 } as const;
 

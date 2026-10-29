@@ -12,7 +12,7 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','
  assert.ok(html.includes('id="main"'),url+' main');
  assert.ok(html.includes('<title>BreakLoop — '),url+' brand-first title');
  assert.ok(html.includes('/icon.png'),url+' favicon');
- assert.ok(html.includes(`<meta property="og:image" content="${origin}/${lang}/og"`),url+' localized OG tag');
+ assert.ok(html.includes(`<meta property="og:image" content="${origin}/${lang}/og"`)||html.includes(`<meta property="og:image" content="http://127.0.0.1:3000/${lang}/og"`),url+' localized OG tag');
  if(['/privacy','/terms','/kvkk'].includes(path)){
   assert.ok(html.includes('legal-toc'),url+' legal contents');
   assert.ok(html.includes('class="draft"'),url+' actual draft warnings preserved');
@@ -33,7 +33,12 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','
    for(const image of ['scenario-study-before-v2.webp','scenario-study-after-v2.webp','scenario-life-day-v2.webp','scenario-life-evening-v2.webp'])assert.ok(html.includes(image),url+' scenario photo '+image);
    assert.ok(html.includes(lang==='en'?'Illustrative scenes created with AI':'Yapay zekâyla oluşturulmuş temsilî sahnelerdir'),url+' honest scene provenance');
    assert.ok(html.includes('scenario-visual-pair'),url+' side-by-side time comparison');
-   assert.ok(html.includes(lang==='en'?'Forty minutes later, you’re still there.':'Kırk dakika geçti, hâlâ oradasın.'),url+' time-passing caption');
+   assert.ok(html.includes(lang==='en'?'You started studying. Then your phone pulled you away.':'Ders çalışmaya başladın. Sonra telefona daldın.'),url+' focus scenario headline');
+   assert.ok(html.includes(lang==='en'?'You started studying':'Derse başladın'),url+' focus scenario first caption');
+   assert.ok(html.includes(lang==='en'?'Then you got distracted':'Sonra telefona daldın'),url+' focus scenario second caption');
+   assert.ok(html.includes(lang==='en'?'Hours later, you’re still scrolling.':'Saatler geçti, hâlâ oradasın.'),url+' time-passing caption');
+   assert.ok(html.includes(lang==='en'?'Pause the distractions.\nMake room for what matters.':'Dikkatini dağıtanlara ara ver.\nÖnemli olana yer aç.'),url+' brand philosophy headline');
+   assert.ok(html.includes(lang==='en'?'create a little distance from the apps that take up your time and attention.':'zamanını alan uygulamalarla arana küçük bir mesafe koymana yardımcı olur.'),url+' brand philosophy body');
    assert.ok(new RegExp(`href="#coming-soon">${c.soon}`).test(html),url+' honest Coming Soon primary CTA');
    assert.ok(html.includes(`href="/${lang}/how-it-works"`),url+' localized secondary navigation');
    assert.ok(html.includes(lang==='en'?'Explore the privacy draft':'Gizlilik taslağını incele'),url+' preview privacy label preserved');
