@@ -129,7 +129,7 @@ export const content = {
         "Pricing and any Pro model have not been finalized. We are not announcing prices, regional offers or a free-use promise yet."
       ]
     ],
-    "closing": "Less autopilot.\nMore intention.",
+    "closing": "Pause the distractions.\nMake room for what matters.",
     "closingBody": "Focus when you choose. Pause when you need. BreakLoop is coming soon to iOS.",
     "footer": "A little space for what matters.",
     "rights": "BreakLoop",
@@ -366,7 +366,7 @@ export const content = {
         "Fiyatlandırma ve olası Pro modeli henüz kesinleşmedi. Şu aşamada fiyat, bölgesel teklif veya ücretsiz kullanım vaadi açıklamıyoruz."
       ]
     ],
-    "closing": "Daha az otomatik alışkanlık.\nDaha bilinçli seçim.",
+    "closing": "Dikkatini dağıtanlara ara ver.\nÖnemli olana yer aç.",
     "closingBody": "İstediğinde odaklan. Gerektiğinde mola ver. BreakLoop yakında iOS’ta.",
     "footer": "Önem verdiklerine biraz alan.",
     "rights": "BreakLoop",

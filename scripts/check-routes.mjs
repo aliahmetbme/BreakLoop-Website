@@ -38,6 +38,7 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','
    assert.ok(html.includes(lang==='en'?'Then you got distracted':'Sonra telefona daldın'),url+' focus scenario second caption');
    assert.ok(html.includes(lang==='en'?'Hours later, you’re still scrolling.':'Saatler geçti, hâlâ oradasın.'),url+' time-passing caption');
    assert.ok(html.includes(lang==='en'?'Pause the distractions.\nMake room for what matters.':'Dikkatini dağıtanlara ara ver.\nÖnemli olana yer aç.'),url+' brand philosophy headline');
+   assert.ok(!/Less autopilot|Daha az otomatik alışkanlık/i.test(html),url+' no legacy autopilot headline');
    assert.ok(html.includes(lang==='en'?'create a little distance from the apps that take up your time and attention.':'zamanını alan uygulamalarla arana küçük bir mesafe koymana yardımcı olur.'),url+' brand philosophy body');
    assert.ok(new RegExp(`href="#coming-soon">${c.soon}`).test(html),url+' honest Coming Soon primary CTA');
    assert.ok(html.includes(`href="/${lang}/how-it-works"`),url+' localized secondary navigation');
