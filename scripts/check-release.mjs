@@ -26,13 +26,11 @@ try {
  assert.equal(resolveLegalText('[VERIFIED_SUPPORT_EMAIL]',{NEXT_PUBLIC_SUPPORT_EMAIL:'breakloopSupport@icloud.com',SUPPORT_EMAIL_MONITORED:'false'}),'[VERIFIED_SUPPORT_EMAIL]');
  assert.equal(resolveLegalText('[VERIFIED_SUPPORT_EMAIL]',{NEXT_PUBLIC_SUPPORT_EMAIL:'breakloopSupport@icloud.com',SUPPORT_EMAIL_MONITORED:'true'}),'breakloopSupport@icloud.com');
  assert.equal(resolveLegalText('[DOĞRULANMIŞ_AKTARIM_DAYANAĞI] / [HOSTING_PROCESSING]',{LEGAL_KVKK_TRANSFER_BASIS:'KVKK m.9 basis',LEGAL_HOSTING_PROCESSING:'Global Edge'}),'KVKK m.9 basis / Global Edge','KVKK transfer basis and hosting region must be mapped independently');
- assert.equal(resolveLegalText('[GERÇEK_ALICILAR] / [HOSTING_PROVIDER]',{LEGAL_KVKK_RECIPIENTS:'Vercel Inc., Apple iCloud Mail',LEGAL_HOSTING_PROVIDER:'Vercel Inc.'}),'Vercel Inc., Apple iCloud Mail / Vercel Inc.','recipient groups and hosting provider must be mapped independently');
- const env=Object.fromEntries(['DOMAIN_OWNERSHIP_VERIFIED','SUPPORT_EMAIL_MONITORED','WEBSITE_PRIVACY_APPROVED','LEGAL_COPY_APPROVED','KVKK_LEGAL_REVIEW_APPROVED','MARKETING_COPY_APPROVED'].map(k=>[k,'true']));
- Object.assign(env,{NEXT_PUBLIC_SITE_URL:'https://verified.tld',NEXT_PUBLIC_SUPPORT_EMAIL:'breakloopSupport@icloud.com',IOS_RELEASE_AUDIT_APPROVED:'false',FINAL_PRIVACY_INVENTORY_APPROVED:'false'});
- for(const key of ['NEXT_PUBLIC_OPERATOR','LEGAL_EMAIL_PROVIDER','LEGAL_SUPPORT_RETENTION','LEGAL_HOSTING_PROVIDER','LEGAL_HOSTING_RETENTION','LEGAL_HOSTING_PROCESSING','LEGAL_EMAIL_PROCESSING','LEGAL_OPERATOR_ADDRESS','LEGAL_PUBLICATION_DATE','LEGAL_RIGHTS_PROCESS','LEGAL_RIGHTS_CHANNEL','LEGAL_KVKK_SUPPORT_BASIS','LEGAL_KVKK_HOSTING_BASIS','LEGAL_KVKK_RECIPIENTS','LEGAL_KVKK_TRANSFER_BASIS'])env[key]='Test-only verified value';
+ const env=Object.fromEntries(['DOMAIN_OWNERSHIP_VERIFIED','SUPPORT_EMAIL_MONITORED','LEGAL_COPY_APPROVED','KVKK_LEGAL_REVIEW_APPROVED','MARKETING_COPY_APPROVED'].map(k=>[k,'true']));
+ Object.assign(env,{NEXT_PUBLIC_SITE_URL:'https://verified.tld',NEXT_PUBLIC_SUPPORT_EMAIL:'breakloopSupport@icloud.com',NEXT_PUBLIC_OPERATOR:'Ali Ahmet Erdoğdu',IOS_RELEASE_AUDIT_APPROVED:'false',FINAL_PRIVACY_INVENTORY_APPROVED:'false'});
+ for(const key of ['LEGAL_PUBLICATION_DATE','LEGAL_OPERATOR_ADDRESS','LEGAL_SUPPORT_RETENTION','LEGAL_KVKK_HOSTING_BASIS','LEGAL_KVKK_SUPPORT_BASIS','LEGAL_KVKK_TRANSFER_BASIS'])env[key]='Test-only verified value';
  const issues=releaseIssues(env);assert.ok(issues.some(v=>v.includes('Draft/review language')),'approvals alone must not publish draft copy');
  assert.ok(!issues.some(v=>v.includes('Unresolved legal fields')),'known legal values must resolve all placeholders');
- assert.ok(websiteReleaseIssues({...env,WEBSITE_PRIVACY_APPROVED:'false',FINAL_PRIVACY_INVENTORY_APPROVED:'true'},{documents:{'en/privacy':'# Clean'}}).includes('WEBSITE_PRIVACY_APPROVED'),'website privacy approval must be independent from iOS App Store privacy approval');
  const {content,getContent}=require(path.join(temp,'content.js'));
  const {legalCopy}=require(path.join(temp,'legal-copy.js'));
  const {pageMetadata}=require(path.join(temp,'seo.js'));

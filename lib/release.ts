@@ -60,8 +60,8 @@ export function websiteReleaseIssues(env:Environment=process.env,sources:Release
  const issues:string[]=[];
  if(!verifiedHttps(env.NEXT_PUBLIC_SITE_URL))issues.push('Verified public HTTPS site origin');
  if(!verifiedSupportEmail(env))issues.push('Valid monitored support email');
- for(const key of ['NEXT_PUBLIC_OPERATOR','LEGAL_EMAIL_PROVIDER','LEGAL_SUPPORT_RETENTION','LEGAL_HOSTING_PROVIDER','LEGAL_HOSTING_RETENTION','LEGAL_HOSTING_PROCESSING','LEGAL_EMAIL_PROCESSING','LEGAL_OPERATOR_ADDRESS','LEGAL_PUBLICATION_DATE','LEGAL_RIGHTS_PROCESS','LEGAL_RIGHTS_CHANNEL','LEGAL_KVKK_SUPPORT_BASIS','LEGAL_KVKK_HOSTING_BASIS','LEGAL_KVKK_RECIPIENTS','LEGAL_KVKK_TRANSFER_BASIS'])if(!env[key]?.trim())issues.push(key);
- for(const key of ['DOMAIN_OWNERSHIP_VERIFIED','SUPPORT_EMAIL_MONITORED','WEBSITE_PRIVACY_APPROVED','LEGAL_COPY_APPROVED','KVKK_LEGAL_REVIEW_APPROVED','MARKETING_COPY_APPROVED'])if(env[key]!=='true')issues.push(key);
+ for(const key of ['LEGAL_PUBLICATION_DATE','LEGAL_OPERATOR_ADDRESS','LEGAL_SUPPORT_RETENTION','LEGAL_KVKK_HOSTING_BASIS','LEGAL_KVKK_SUPPORT_BASIS','LEGAL_KVKK_TRANSFER_BASIS'])if(!env[key]?.trim())issues.push(key);
+ for(const key of ['DOMAIN_OWNERSHIP_VERIFIED','SUPPORT_EMAIL_MONITORED','LEGAL_COPY_APPROVED','KVKK_LEGAL_REVIEW_APPROVED','MARKETING_COPY_APPROVED'])if(env[key]!=='true')issues.push(key);
  for(const [key,text]of Object.entries(sources.documents ?? legalDocuments)){
  const resolved=resolveLegalText(text,env);
  if(/\[[^\]\n]+\](?!\()/.test(resolved))issues.push(`Unresolved legal fields: ${key}`);

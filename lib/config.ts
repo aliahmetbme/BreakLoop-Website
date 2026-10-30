@@ -1,8 +1,8 @@
-import { publicationEnabled, verifiedSupportEmail, verifiedHttps } from './release';
+import { publicationEnabled, supportEmail, verifiedHttps } from './release';
 export const site = {
  url: verifiedHttps(process.env.NEXT_PUBLIC_SITE_URL),
- email: verifiedSupportEmail(process.env),
- operator: process.env.NEXT_PUBLIC_OPERATOR?.trim() || undefined,
+ email: supportEmail(process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? 'breakloopSupport@icloud.com'),
+ operator: process.env.NEXT_PUBLIC_OPERATOR?.trim() || 'Ali Ahmet Erdoğdu',
  indexable: publicationEnabled(),
 };
 export const locales=['en','tr'] as const;

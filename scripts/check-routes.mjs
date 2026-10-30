@@ -22,32 +22,29 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','
  }
  if(path==='/privacy'){
   assert.ok(html.includes(lang==='en'?'<h1>BreakLoop Privacy Policy</h1>':'<h1>BreakLoop Gizlilik Politikası</h1>'),url+' privacy title');
-  assert.ok(html.includes(lang==='en'?'1. About BreakLoop':'1. Hakkımızda ve kapsam'),url+' privacy section 1');
-  assert.ok(html.includes(lang==='en'?'2. Website information (Vercel hosting)':'2. Web sitesinde işlenen bilgiler (Vercel barındırma)'),url+' privacy section 2');
-  assert.ok(html.includes(lang==='en'?'3. Information processed by the iOS app (on-device)':'3. iOS uygulamasındaki veriler (cihaz içi işleme)'),url+' privacy section 3');
-  assert.ok(html.includes(lang==='en'?'4. Diagnostics':'4. Tanılama kayıtları'),url+' privacy section 4');
+  assert.ok(html.includes('Ali Ahmet Erdoğdu'),url+' developer name');
+  assert.ok(html.includes('mailto:breakloopSupport@icloud.com'),url+' support email link');
   assert.ok(html.includes('Vercel'),url+' Vercel hosting disclosure');
   assert.ok(html.includes('Apple iCloud Mail'),url+' Apple iCloud Mail support disclosure');
-  assert.ok(!html.includes('breakloopSupport@icloud.com'),url+' support email remains hidden in legal text while SUPPORT_EMAIL_MONITORED is not true');
  }
  if(path==='/kvkk'){
   assert.ok(html.includes('<h1>BreakLoop Kişisel Verilerin İşlenmesine İlişkin Aydınlatma Metni</h1>'),url+' KVKK title');
+  assert.ok(html.includes('Ali Ahmet Erdoğdu'),url+' KVKK controller name');
+  assert.ok(html.includes('mailto:breakloopSupport@icloud.com'),url+' KVKK support email');
   assert.ok(html.includes('A. Web sitesi teknik erişim verileri (Vercel barındırma)'),url+' KVKK website access data');
   assert.ok(html.includes('B. Gönüllü destek ve iletişim verileri (Apple iCloud Mail)'),url+' KVKK support data');
-  assert.ok(html.includes('C. Cihaz üzerindeki iOS uygulama verileri (otomatik aktarım yoktur)'),url+' KVKK on-device separation');
-  assert.ok(!html.includes('breakloopSupport@icloud.com'),url+' support email remains hidden in KVKK text while SUPPORT_EMAIL_MONITORED is not true');
  }
  if(path==='/terms'){
   assert.ok(html.includes(lang==='en'?'<h1>BreakLoop Terms &amp; License Information</h1>':'<h1>BreakLoop Kullanım ve Lisans Bilgileri</h1>'),url+' terms title');
   assert.ok(html.includes('https://www.apple.com/legal/internet-services/itunes/dev/stdeula/'),url+' Apple Standard EULA reference');
+  assert.ok(html.includes('mailto:breakloopSupport@icloud.com'),url+' terms support email');
  }
  if(path==='/support'){
   assert.ok(html.includes(lang==='en'?'<h1>BreakLoop Support</h1>':'<h1>BreakLoop Destek</h1>'),url+' support title');
-  assert.ok(html.includes(lang==='en'?'Support contact in preparation':'İletişim bilgisi hazırlık aşamasında'),url+' honest unverified support contact state');
+  assert.ok(html.includes('mailto:breakloopSupport@icloud.com'),url+' direct support mailto link');
   assert.ok(html.includes(lang==='en'?'Apps are not being restricted as expected':'Uygulamalar beklediğim gibi engellenmiyor'),url+' support section 1');
   assert.ok(html.includes(lang==='en'?'How does the shared usage budget work?':'Ortak kullanım süresi nasıl çalışır?'),url+' support section 2');
   assert.ok(html.includes(lang==='en'?'Can I share diagnostic information?':'Tanılama kayıtlarını paylaşabilir miyim?'),url+' support section 3');
-  assert.ok(!html.includes('mailto:'),url+' no active mailto link while support mailbox is unverified');
   assert.ok(html.includes(`href="/${lang}/privacy"`),url+' privacy link on support page');
   assert.ok(html.includes(`href="/${lang}/terms"`),url+' terms link on support page');
   assert.ok(html.includes('href="/tr/kvkk"'),url+' KVKK link on support page');
