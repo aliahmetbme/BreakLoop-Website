@@ -23,9 +23,36 @@ export function supportEmail(value: string | undefined) {
 export function verifiedSupportEmail(env: Environment = process.env) {
  return env.SUPPORT_EMAIL_MONITORED === 'true' ? supportEmail(env.NEXT_PUBLIC_SUPPORT_EMAIL) : undefined;
 }
+export function verifiedPublicationDate(value: string | undefined): string | undefined {
+ if (!value) return undefined;
+ const trimmed = value.trim();
+ const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(trimmed);
+ if (!match) return undefined;
+ const year = Number(match[1]);
+ const month = Number(match[2]);
+ const day = Number(match[3]);
+ if (year < 2000 || year > 2100 || month < 1 || month > 12 || day < 1 || day > 31) return undefined;
+ const utc = new Date(Date.UTC(year, month - 1, day, 12, 0, 0));
+ if (utc.getUTCFullYear() !== year || utc.getUTCMonth() !== month - 1 || utc.getUTCDate() !== day) return undefined;
+ return trimmed;
+}
+export function formatPublicationDate(value: string | undefined, locale: 'en' | 'tr'): string | undefined {
+ const valid = verifiedPublicationDate(value);
+ if (!valid) return undefined;
+ const [year, month, day] = valid.split('-').map(Number);
+ const utc = new Date(Date.UTC(year, month - 1, day, 12, 0, 0));
+ return new Intl.DateTimeFormat(locale === 'tr' ? 'tr-TR' : 'en-US', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+ }).format(utc);
+}
 export function legalValues(env:Environment):Record<string,string|undefined>{
  const url=verifiedHttps(env.NEXT_PUBLIC_SITE_URL);
  const email=verifiedSupportEmail(env);
+ const trDate=formatPublicationDate(env.LEGAL_PUBLICATION_DATE,'tr');
+ const enDate=formatPublicationDate(env.LEGAL_PUBLICATION_DATE,'en');
  return {
  LEGAL_OPERATOR_NAME:env.NEXT_PUBLIC_OPERATOR,HUKUKİ_YAYINCI_UNVANI:env.NEXT_PUBLIC_OPERATOR,VERIFIED_LEGAL_NAME:env.NEXT_PUBLIC_OPERATOR,DOĞRULANMIŞ_YASAL_AD_SOYAD:env.NEXT_PUBLIC_OPERATOR,
  VERIFIED_SUPPORT_EMAIL:email,DOĞRULANMIŞ_DESTEK_EPOSTASI:email,'DOĞRULANMIŞ GİZLİLİK EPOSTASI':email,'DOĞRULANMIŞ_DESTEK/GİZLİLİK_EPOSTASI':email,DOĞRULANMIŞ_DESTEK_VE_GİZLİLİK_EPOSTASI:email,
@@ -45,7 +72,7 @@ export function legalValues(env:Environment):Record<string,string|undefined>{
  'DOĞRU M.5 ŞARTI':env.LEGAL_KVKK_HOSTING_BASIS,SOMUT_FAALİYETE_UYGUN_DOĞRULANMIŞ_HUKUKİ_SEBEP:env.LEGAL_KVKK_HOSTING_BASIS,
  'DOĞRULANMIŞ KANAL + KİMLİK DOĞRULAMA YÖNTEMİ':env.LEGAL_RIGHTS_PROCESS,
  'DİĞER KANUNİ KANAL':env.LEGAL_RIGHTS_CHANNEL,DOĞRULANMIŞ_KVKK_BAŞVURU_KANALI:env.LEGAL_RIGHTS_CHANNEL,
- 'YAYIN TARİHİ':env.LEGAL_PUBLICATION_DATE,PUBLICATION_DATE:env.LEGAL_PUBLICATION_DATE,VERIFIED_PUBLICATION_DATE:env.LEGAL_PUBLICATION_DATE,DOĞRULANMIŞ_YAYIN_TARİHİ:env.LEGAL_PUBLICATION_DATE,
+ 'YAYIN TARİHİ':trDate,DOĞRULANMIŞ_YAYIN_TARİHİ:trDate,PUBLICATION_DATE:enDate,VERIFIED_PUBLICATION_DATE:enDate,
  // The two retention fields in the KVKK notice are replaced by context below.
  };
 }
@@ -66,7 +93,8 @@ export function websiteReleaseIssues(env:Environment=process.env,sources:Release
  const issues:string[]=[];
  if(!verifiedHttps(env.NEXT_PUBLIC_SITE_URL))issues.push('Verified public HTTPS site origin');
  if(!verifiedSupportEmail(env))issues.push('Valid monitored support email');
- for(const key of ['LEGAL_PUBLICATION_DATE','LEGAL_OPERATOR_ADDRESS','LEGAL_SUPPORT_RETENTION','LEGAL_KVKK_HOSTING_BASIS','LEGAL_KVKK_SUPPORT_BASIS','LEGAL_KVKK_TRANSFER_BASIS'])if(!env[key]?.trim())issues.push(key);
+ if(!verifiedPublicationDate(env.LEGAL_PUBLICATION_DATE))issues.push('LEGAL_PUBLICATION_DATE');
+ for(const key of ['LEGAL_OPERATOR_ADDRESS','LEGAL_SUPPORT_RETENTION','LEGAL_KVKK_HOSTING_BASIS','LEGAL_KVKK_SUPPORT_BASIS','LEGAL_KVKK_TRANSFER_BASIS'])if(!env[key]?.trim())issues.push(key);
  for(const key of ['DOMAIN_OWNERSHIP_VERIFIED','SUPPORT_EMAIL_MONITORED','LEGAL_COPY_APPROVED','KVKK_LEGAL_REVIEW_APPROVED','MARKETING_COPY_APPROVED'])if(env[key]!=='true')issues.push(key);
  for(const [key,text]of Object.entries(sources.documents ?? legalDocuments)){
  const resolved=resolveLegalText(text,env);

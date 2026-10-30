@@ -6,7 +6,7 @@ BreakLoop Website is an informational promotional website for an upcoming iOS ap
 
 - [ ] Confirm public HTTPS domain (`NEXT_PUBLIC_SITE_URL`, `DOMAIN_OWNERSHIP_VERIFIED=true`).
 - [ ] Confirm active support mailbox monitoring (`NEXT_PUBLIC_SUPPORT_EMAIL=breakloopSupport@icloud.com`, `SUPPORT_EMAIL_MONITORED=true`).
-- [ ] Fill the remaining legal/KVKK fields (`LEGAL_PUBLICATION_DATE`, `LEGAL_OPERATOR_ADDRESS`, `LEGAL_SUPPORT_RETENTION`, `LEGAL_KVKK_HOSTING_BASIS`, `LEGAL_KVKK_SUPPORT_BASIS`, `LEGAL_KVKK_TRANSFER_BASIS`) and remove draft/review wording in `lib/legal-documents.ts` (`LEGAL_COPY_APPROVED=true`, `KVKK_LEGAL_REVIEW_APPROVED=true`).
+- [ ] Fill the remaining legal/KVKK fields (`LEGAL_PUBLICATION_DATE` in `YYYY-MM-DD` calendar format, `LEGAL_OPERATOR_ADDRESS`, `LEGAL_SUPPORT_RETENTION`, `LEGAL_KVKK_HOSTING_BASIS`, `LEGAL_KVKK_SUPPORT_BASIS`, `LEGAL_KVKK_TRANSFER_BASIS`) and remove draft/review wording in `lib/legal-documents.ts` (`LEGAL_COPY_APPROVED=true`, `KVKK_LEGAL_REVIEW_APPROVED=true`).
 - [ ] Confirm EN/TR marketing copy (`MARKETING_COPY_APPROVED=true`), run `npm run check:release`, and set `SITE_RELEASE_APPROVED=true` only when ready to enable public indexing.
 
 ## 2. Separate iOS App Store Release Checks (`appStoreReleaseIssues`)

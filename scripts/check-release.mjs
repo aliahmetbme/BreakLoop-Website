@@ -10,13 +10,28 @@ try {
  const source=fs.readFileSync(`lib/${name}.ts`,'utf8');
  fs.writeFileSync(path.join(temp,`${name}.js`),ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText);
  }
- const require=createRequire(import.meta.url);const {releaseIssues,websiteReleaseIssues,appStoreReleaseIssues,verifiedHttps,vercelOrigin,supportEmail,verifiedSupportEmail,resolveLegalText,publicCopyIssues,publicationEnabled}=require(path.join(temp,'release.js'));
+ const require=createRequire(import.meta.url);const {releaseIssues,websiteReleaseIssues,appStoreReleaseIssues,verifiedHttps,vercelOrigin,supportEmail,verifiedSupportEmail,verifiedPublicationDate,formatPublicationDate,resolveLegalText,publicCopyIssues,publicationEnabled}=require(path.join(temp,'release.js'));
+ const {legalDocuments}=require(path.join(temp,'legal-documents.js'));
  assert.ok(releaseIssues({}).length>10,'missing prerequisites must block publication');
  for(const url of ['http://verified.tld','https://localhost','https://site.example','https://127.0.0.1','https://user:pass@site.tld','https://site.tld/path','not a url'])assert.equal(verifiedHttps(url),undefined,url);
  assert.equal(verifiedHttps('https://verified.tld/'),'https://verified.tld');
  assert.equal(vercelOrigin('breakloop-preview.vercel.app'),'https://breakloop-preview.vercel.app');
  assert.equal(vercelOrigin('https://breakloop-preview.vercel.app/'),'https://breakloop-preview.vercel.app');
  assert.equal(vercelOrigin('localhost:3000'),undefined);
+ for(const badDate of ['','2026-02-30','2025-02-29','2026-04-31','2026-13-01','2026-00-10','2026-10-00','30-10-2026','2026/10/30','2026-10-30T00:00:00Z','October 30, 2026','not-a-date']){
+  assert.equal(verifiedPublicationDate(badDate),undefined,`invalid calendar date must be rejected: ${badDate}`);
+  assert.equal(formatPublicationDate(badDate,'tr'),undefined);
+  assert.equal(formatPublicationDate(badDate,'en'),undefined);
+ }
+ assert.equal(verifiedPublicationDate('2026-10-30'),'2026-10-30');
+ assert.equal(verifiedPublicationDate('2024-02-29'),'2024-02-29');
+ assert.equal(formatPublicationDate('2026-10-30','tr'),'30 Ekim 2026');
+ assert.equal(formatPublicationDate('2026-10-30','en'),'October 30, 2026');
+ assert.ok(resolveLegalText(legalDocuments['tr/privacy'],{LEGAL_PUBLICATION_DATE:'2026-10-30'}).includes('**Son güncelleme:** 30 Ekim 2026'),'tr/privacy formatted date');
+ assert.ok(resolveLegalText(legalDocuments['tr/kvkk'],{LEGAL_PUBLICATION_DATE:'2026-10-30'}).includes('**Son güncelleme:** 30 Ekim 2026'),'tr/kvkk formatted date');
+ assert.ok(resolveLegalText(legalDocuments['en/privacy'],{LEGAL_PUBLICATION_DATE:'2026-10-30'}).includes('**Last updated:** October 30, 2026'),'en/privacy formatted date');
+ assert.ok(resolveLegalText(legalDocuments['tr/privacy'],{}).includes('[DOĞRULANMIŞ_YAYIN_TARİHİ]'),'preview without date preserves placeholder');
+ assert.ok(resolveLegalText(legalDocuments['en/privacy'],{LEGAL_PUBLICATION_DATE:'2026-02-30'}).includes('[VERIFIED_PUBLICATION_DATE]'),'invalid date preserves placeholder');
  assert.equal(supportEmail('a@b.tld\nBcc:test@x.tld'),undefined);
  assert.equal(supportEmail('aliahmet44@icloud.com'),undefined,'personal iCloud address must never be accepted as public support email');
  assert.equal(supportEmail('ALIAHMET44@ICLOUD.COM'),undefined,'case-insensitive personal email block');
@@ -30,10 +45,12 @@ try {
  assert.equal(resolveLegalText('[VERIFIED_SUPPORT_EMAIL]',{NEXT_PUBLIC_SUPPORT_EMAIL:'breakloopSupport@icloud.com',SUPPORT_EMAIL_MONITORED:'true'}),'breakloopSupport@icloud.com');
  assert.equal(resolveLegalText('[DOĞRULANMIŞ_AKTARIM_DAYANAĞI] / [HOSTING_PROCESSING]',{LEGAL_KVKK_TRANSFER_BASIS:'KVKK m.9 basis',LEGAL_HOSTING_PROCESSING:'Global Edge'}),'KVKK m.9 basis / Global Edge','KVKK transfer basis and hosting region must be mapped independently');
  const env=Object.fromEntries(['DOMAIN_OWNERSHIP_VERIFIED','SUPPORT_EMAIL_MONITORED','LEGAL_COPY_APPROVED','KVKK_LEGAL_REVIEW_APPROVED','MARKETING_COPY_APPROVED'].map(k=>[k,'true']));
- Object.assign(env,{NEXT_PUBLIC_SITE_URL:'https://verified.tld',NEXT_PUBLIC_SUPPORT_EMAIL:'breakloopSupport@icloud.com',NEXT_PUBLIC_OPERATOR:'Ali Ahmet Erdoğdu',IOS_RELEASE_AUDIT_APPROVED:'false',FINAL_PRIVACY_INVENTORY_APPROVED:'false'});
- for(const key of ['LEGAL_PUBLICATION_DATE','LEGAL_OPERATOR_ADDRESS','LEGAL_SUPPORT_RETENTION','LEGAL_KVKK_HOSTING_BASIS','LEGAL_KVKK_SUPPORT_BASIS','LEGAL_KVKK_TRANSFER_BASIS'])env[key]='Test-only verified value';
+ Object.assign(env,{NEXT_PUBLIC_SITE_URL:'https://verified.tld',NEXT_PUBLIC_SUPPORT_EMAIL:'breakloopSupport@icloud.com',NEXT_PUBLIC_OPERATOR:'Ali Ahmet Erdoğdu',LEGAL_PUBLICATION_DATE:'2026-10-30',IOS_RELEASE_AUDIT_APPROVED:'false',FINAL_PRIVACY_INVENTORY_APPROVED:'false'});
+ for(const key of ['LEGAL_OPERATOR_ADDRESS','LEGAL_SUPPORT_RETENTION','LEGAL_KVKK_HOSTING_BASIS','LEGAL_KVKK_SUPPORT_BASIS','LEGAL_KVKK_TRANSFER_BASIS'])env[key]='Test-only verified value';
  const issues=releaseIssues(env);assert.ok(issues.some(v=>v.includes('Draft/review language')),'approvals alone must not publish draft copy');
  assert.ok(!issues.some(v=>v.includes('Unresolved legal fields')),'known legal values must resolve all placeholders');
+ assert.ok(websiteReleaseIssues({...env,LEGAL_PUBLICATION_DATE:''}).includes('LEGAL_PUBLICATION_DATE'),'missing publication date must block release');
+ assert.ok(websiteReleaseIssues({...env,LEGAL_PUBLICATION_DATE:'2026-02-30'}).includes('LEGAL_PUBLICATION_DATE'),'impossible calendar date must block release');
  const {content,getContent}=require(path.join(temp,'content.js'));
  const {legalCopy}=require(path.join(temp,'legal-copy.js'));
  const {pageMetadata}=require(path.join(temp,'seo.js'));
