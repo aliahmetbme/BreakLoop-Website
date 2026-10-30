@@ -16,7 +16,7 @@ export function pageMetadata(locale: Locale, path: string, config: SeoConfig): M
   const previewOrigin = !config.indexable ? vercelOrigin(config.previewUrl ?? config.vercelUrl ?? process.env.VERCEL_URL) : undefined;
   const imageOrigin = prodOrigin || previewOrigin;
   const url = prodOrigin ? `${prodOrigin}/${locale}${suffix}` : undefined;
-  const imageUrl = `${imageOrigin || ''}/${locale}/og`;
+  const imageUrl = imageOrigin ? `${imageOrigin}/${locale}/og` : undefined;
   const imageAlt = `BreakLoop — ${c.hero.join(' ')}`;
   return {
     title: `BreakLoop — ${title}`, description,
@@ -33,14 +33,14 @@ export function pageMetadata(locale: Locale, path: string, config: SeoConfig): M
       locale: locale === 'en' ? 'en_US' : 'tr_TR',
       ...(path !== 'kvkk' ? { alternateLocale: locale === 'en' ? 'tr_TR' : 'en_US' } : {}),
       type: 'website',
-      // In preview, VERCEL_URL resolves OG/Twitter image URLs without enabling canonicals or indexing; in local dev, relative paths work.
-      images: [{ url: imageUrl, width: 1200, height: 630, alt: imageAlt }],
+      // Only emit share images with a verified public origin; local builds omit them.
+      ...(imageUrl ? { images: [{ url: imageUrl, width: 1200, height: 630, alt: imageAlt }] } : {}),
       ...(url ? { url } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title: `BreakLoop — ${title}`, description,
-      images: [{ url: imageUrl, alt: imageAlt }],
+      ...(imageUrl ? { images: [{ url: imageUrl, alt: imageAlt }] } : {}),
     },
   };
 }

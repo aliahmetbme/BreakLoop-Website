@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { Locale } from '@/lib/config';
@@ -7,7 +7,14 @@ import { content } from '@/lib/content';
 export function Controls({ locale }: { locale: Locale }) {
  const c = content[locale]; const pathname = usePathname();
  const [theme, setTheme] = useState('system'); const [open, setOpen] = useState(false);
- useEffect(() => { try { setTheme(localStorage.getItem('breakloop-theme') || 'system'); } catch {} }, []);
+ // Locale navigation can replace <html>; restore its theme before the new page paints.
+ useLayoutEffect(() => {
+  let saved = document.documentElement.dataset.theme || 'system';
+  try { saved = localStorage.getItem('breakloop-theme') || saved; } catch {}
+  const selected = ['light', 'dark', 'system'].includes(saved) ? saved : 'system';
+  document.documentElement.dataset.theme = selected;
+  setTheme(selected);
+ }, [locale, pathname]);
  useEffect(() => { setOpen(false); }, [pathname]);
  function change(value: string) { setTheme(value); try { localStorage.setItem('breakloop-theme', value); } catch {} document.documentElement.dataset.theme = value; }
  const other = locale === 'en' ? 'tr' : 'en';

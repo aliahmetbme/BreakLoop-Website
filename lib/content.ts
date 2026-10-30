@@ -400,8 +400,8 @@ export const content = {
       ],
       [
         "Ortak kullanım süresi nasıl çalışır?",
-        "Life Mode'da seçtiğin uygulamalar ve kategoriler ortak bir kullanım bütçesini paylaşır.",
-        "Bir uygulamadan diğerine geçmek bu ortak bütçeyi sıfırlamaz."
+        "Yaşam Modu’nda seçtiğin uygulamalar ve kategoriler aynı kullanım süresini paylaşır.",
+        "Bir uygulamadan diğerine geçmek bu süreyi sıfırlamaz."
       ],
       [
         "Tanılama kayıtlarını paylaşabilir miyim?",

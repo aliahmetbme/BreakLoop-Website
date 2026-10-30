@@ -13,9 +13,11 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','
  assert.ok(html.includes('<title>BreakLoop — '),url+' brand-first title');
  assert.ok(html.includes('/icon.png'),url+' favicon');
  assert.ok(html.includes("<script>(function(){try{var t=localStorage.getItem('breakloop-theme')"),url+' pre-paint theme script');
- assert.ok(html.includes(`<meta property="og:image" content="${origin}/${lang}/og"`)||html.includes(`<meta property="og:image" content="http://127.0.0.1:3000/${lang}/og"`),url+' localized OG tag');
+ assert.ok(html.indexOf("<script>(function(){try{var t=localStorage.getItem('breakloop-theme')")<html.indexOf('</head>'),url+' theme script in head before body');
  assert.ok(html.includes('<meta name="twitter:card" content="summary_large_image"'),url+' twitter card');
- assert.ok(html.includes(`<meta name="twitter:image" content="${origin}/${lang}/og"`)||html.includes(`<meta name="twitter:image" content="http://127.0.0.1:3000/${lang}/og"`),url+' localized Twitter image tag');
+ const shareTags=html.match(/<meta (?:property="og:[^"]+"|name="twitter:[^"]+")[^>]*>/g)||[];
+ assert.ok(!shareTags.some(tag=>/localhost|127\.0\.0\.1/.test(tag)),url+' no local social URLs');
+ if(lang==='en')assert.ok(!html.includes('href="/tr/kvkk"'),url+' no KVKK link in English');
  assert.ok(!/aliahmet44@icloud\.com/i.test(html),url+' never exposes personal iCloud address');
  if(['/privacy','/terms','/kvkk'].includes(path)){
   assert.ok(html.includes('legal-toc'),url+' legal contents');
@@ -33,8 +35,8 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','
   assert.ok(html.includes('<h1>BreakLoop Kişisel Verilerin İşlenmesine İlişkin Aydınlatma Metni</h1>'),url+' KVKK title');
   assert.ok(html.includes('Ali Ahmet Erdoğdu'),url+' KVKK controller name');
   assert.ok(html.includes('mailto:breakloopSupport@icloud.com'),url+' KVKK support email');
-  assert.ok(html.includes('A. Web sitesi teknik erişim verileri (Vercel barındırma)'),url+' KVKK website access data');
-  assert.ok(html.includes('B. Gönüllü destek ve iletişim verileri (Apple iCloud Mail)'),url+' KVKK support data');
+  assert.ok(html.includes('Web sitesi:'),url+' KVKK website access data');
+  assert.ok(html.includes('Destek e-postaları:'),url+' KVKK support data');
  }
  if(path==='/terms'){
   assert.ok(html.includes(lang==='en'?'<h1>BreakLoop Terms &amp; License Information</h1>':'<h1>BreakLoop Kullanım ve Lisans Bilgileri</h1>'),url+' terms title');
@@ -49,7 +51,7 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','
   assert.ok(html.includes(lang==='en'?'Can I share diagnostic information?':'Tanılama kayıtlarını paylaşabilir miyim?'),url+' support section 3');
   assert.ok(html.includes(`href="/${lang}/privacy"`),url+' privacy link on support page');
   assert.ok(html.includes(`href="/${lang}/terms"`),url+' terms link on support page');
-  assert.ok(html.includes('href="/tr/kvkk"'),url+' KVKK link on support page');
+  if(lang==='tr')assert.ok(html.includes('href="/tr/kvkk"'),url+' KVKK link on Turkish support page');
  }
  if(path===''||path==='/how-it-works'){
   const c=messages[lang];

@@ -1,17 +1,11 @@
-# Release & Publication Checklist
+# Website publication checklist
 
-BreakLoop Website is an informational promotional website for an upcoming iOS application developed by **Ali Ahmet Erdoğdu** (official support contact: `breakloopSupport@icloud.com`, hosted on **Vercel**).
+Current state: local/Preview only. `SITE_PUBLICATION_APPROVED=false`. A push to main can trigger Vercel production: do not commit/push or change remote settings without explicit authorization.
 
-## 1. Website Publication Readiness (`websiteReleaseIssues`)
+1. **Privacy/KVKK:** verify the short notices; complete the lawful processing grounds, international-transfer mechanism, applicable request method and contact details and actual hosting retention scope. Track outstanding work in `lib/legal-review.ts` and `docs/LEGAL-REVIEW.md`; put verified results directly in `lib/legal-documents.ts` before removing completed tasks. Implement and review the proposed support-mail deletion process in `docs/SUPPORT-RETENTION.md`; do not remove its draft warning before it is real. Review commercial hosting eligibility.
+2. **Support:** test send/receive and reply for `breakloopSupport@icloud.com`; check mailto links. Code tests do not prove mailbox delivery.
+3. **Document date and domain:** confirm the real legal document date in `LEGAL_PUBLICATION_DATE=YYYY-MM-DD` and the owned HTTPS origin in `NEXT_PUBLIC_SITE_URL`. Do not use a build date or guess domain ownership.
+4. **EN/TR QA:** check mobile/desktop, theme first paint, image quality, navigation, legal links, OG/Twitter, noindex Preview and absence of localhost metadata. Run typecheck, check:release, build and check:routes.
+5. **Production and final check:** only after the above, obtain explicit deployment authorization and set the single permission `SITE_PUBLICATION_APPROVED=true` in Production only. Build must still reject unresolved fields/drafts. Check final HTTPS pages, canonicals, alternate languages, robots/sitemap and contact. Keep Preview approval false/noindex and retain deployment protection. No production action is authorized by this checklist itself.
 
-- [ ] Confirm public HTTPS domain (`NEXT_PUBLIC_SITE_URL`, `DOMAIN_OWNERSHIP_VERIFIED=true`).
-- [ ] Confirm active support mailbox monitoring (`NEXT_PUBLIC_SUPPORT_EMAIL=breakloopSupport@icloud.com`, `SUPPORT_EMAIL_MONITORED=true`).
-- [ ] Fill the remaining legal/KVKK fields (`LEGAL_PUBLICATION_DATE` in `YYYY-MM-DD` calendar format, `LEGAL_OPERATOR_ADDRESS`, `LEGAL_SUPPORT_RETENTION`, `LEGAL_KVKK_HOSTING_BASIS`, `LEGAL_KVKK_SUPPORT_BASIS`, `LEGAL_KVKK_TRANSFER_BASIS`) and remove draft/review wording in `lib/legal-documents.ts` (`LEGAL_COPY_APPROVED=true`, `KVKK_LEGAL_REVIEW_APPROVED=true`).
-- [ ] Confirm EN/TR marketing copy (`MARKETING_COPY_APPROVED=true`), run `npm run check:release`, and set `SITE_RELEASE_APPROVED=true` only when ready to enable public indexing.
-
-## 2. Separate iOS App Store Release Checks (`appStoreReleaseIssues`)
-
-These checks apply when submitting the native iOS app to the App Store and do not block publishing the promotional website:
-
-- [ ] Verify production Apple `FamilyControls` / Screen Time entitlement and final release archive (`FAMILY_CONTROLS_ENTITLEMENT_VERIFIED=true`, `IOS_RELEASE_AUDIT_APPROVED=true`, `FINAL_PRIVACY_INVENTORY_APPROVED=true`).
-- [ ] Verify App Store Connect privacy nutrition labels, device QA, and native Settings links (`APP_STORE_PRIVACY_ANSWERS_VERIFIED=true`, `IOS_DEVICE_QA_APPROVED=true`, `NATIVE_LEGAL_LINKS_VERIFIED=true`).
+Native TestFlight/App Store acceptance belongs to the iOS release process and is not a website build gate.

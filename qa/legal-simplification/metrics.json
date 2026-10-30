@@ -1,0 +1,66 @@
+[
+  {
+    "stage": "before",
+    "path": "/en/privacy",
+    "height": 844,
+    "overflow": false,
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "stage": "before",
+    "path": "/en",
+    "height": 844,
+    "overflow": false,
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "stage": "after",
+    "path": "/en/privacy",
+    "height": 844,
+    "overflow": false,
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "stage": "after",
+    "path": "/en",
+    "height": 844,
+    "overflow": false,
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "stage": "before",
+    "path": "/tr/privacy",
+    "height": 1000,
+    "overflow": false,
+    "theme": "light",
+    "width": 1440
+  },
+  {
+    "stage": "before",
+    "path": "/tr",
+    "height": 1000,
+    "overflow": false,
+    "theme": "light",
+    "width": 1440
+  },
+  {
+    "stage": "after",
+    "path": "/tr/privacy",
+    "height": 1000,
+    "overflow": false,
+    "theme": "light",
+    "width": 1440
+  },
+  {
+    "stage": "after",
+    "path": "/tr",
+    "height": 1000,
+    "overflow": false,
+    "theme": "light",
+    "width": 1440
+  }
+]

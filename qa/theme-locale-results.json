@@ -1,0 +1,38 @@
+[
+  {
+    "direction": "tr-en",
+    "expected": "light",
+    "selected": "light",
+    "theme": "light"
+  },
+  {
+    "direction": "en-tr",
+    "expected": "light",
+    "selected": "light",
+    "theme": "light"
+  },
+  {
+    "direction": "tr-en",
+    "expected": "dark",
+    "selected": "dark",
+    "theme": "dark"
+  },
+  {
+    "direction": "en-tr",
+    "expected": "dark",
+    "selected": "dark",
+    "theme": "dark"
+  },
+  {
+    "direction": "tr-en",
+    "expected": "system",
+    "selected": "system",
+    "theme": "system"
+  },
+  {
+    "direction": "en-tr",
+    "expected": "system",
+    "selected": "system",
+    "theme": "system"
+  }
+]

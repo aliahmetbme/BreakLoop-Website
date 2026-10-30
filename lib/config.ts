@@ -1,9 +1,10 @@
-import { publicationEnabled, supportEmail, vercelOrigin, verifiedHttps } from './release';
+import { publicationEnabled, vercelOrigin, verifiedHttps } from './release';
+import { siteDetails } from './site-details';
 export const site = {
  url: verifiedHttps(process.env.NEXT_PUBLIC_SITE_URL),
  previewUrl: vercelOrigin(process.env.VERCEL_URL),
- email: supportEmail(process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? 'breakloopSupport@icloud.com'),
- operator: process.env.NEXT_PUBLIC_OPERATOR?.trim() || 'Ali Ahmet Erdoğdu',
+ email: siteDetails.supportEmail,
+ operator: siteDetails.developer,
  indexable: publicationEnabled(),
 };
 export const locales=['en','tr'] as const;

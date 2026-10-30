@@ -1,62 +1,34 @@
 # BreakLoop website
 
-Independent Next.js App Router + strict TypeScript + Tailwind CSS project. iOS repository is read only and has not been modified. No branch, commit, push, PR or deployment was made.
+Next.js 16 App Router, TypeScript, EN/TR. Product introduction, email support and short legal notices. No accounts, database, form backend or analytics. Existing Quiet Horizon design, images and theme controls are preserved.
 
-## Run
+## Local work
 
-Node.js 20.9+ (tested with 22.23.3).
-
-```sh
-npm ci
-npm run dev
-```
-
-Open http://127.0.0.1:3000/en or /tr. Root redirects to /en.
+Node.js 20.9+; tested with Node 22. Run `npm ci`, then `npm run dev`. Open `/tr` or `/en` on http://127.0.0.1:3000. Eleven localized pages include privacy, terms, support and Turkish-only KVKK.
 
 ```sh
 npm run typecheck
-npm run build
-npm start
-```
-
-Eight prerendered localized pages: home, how-it-works, privacy, support. React client code is limited to navigation, mobile menu and theme controls. FAQ uses native accessible details/summary. Theme is applied by a head script before paint and supports Light/Dark/System, including OS preference changes. No external fonts or scripts.
-
-## Editing
-
-- `lib/content.ts`: all EN/TR page copy, including FAQs and draft policies.
-- `lib/config.ts`: validated site URL, contact, operator and indexing policy.
-- `app/globals.css`: semantic design tokens and responsive styling.
-- `components/site.tsx`: reusable presentation blocks.
-- `public/images/preview-*.png`: illustrative screens extracted from supplied INDEX HTML; replace with approved device screenshots and update captions in `lib/content.ts` when available.
-- `public/images/horizon-*.png` and `logo.png`: current native assets.
-
-Public policy/support copy is deliberately marked draft. Source evidence and token mapping are in `SOURCE-REVIEW.md`. Do not remove the draft notice until release requirements are resolved.
-
-## Deployment preparation (not deployed)
-
-Import this folder as a Next.js project in Vercel; standard `npm run build`, no special output directory. Configure verified values from `.env.example`. `NEXT_PUBLIC_*` values are baked into the build, so rebuild after edits. Never use a guessed domain or support address.
-
-Default builds emit noindex/nofollow, robots disallow and an empty sitemap. Canonical/hreflang URLs are generated only with a valid HTTPS site URL. Set `SITE_RELEASE_APPROVED=true` only after completing `RELEASE-CHECKLIST.md`. `VERCEL_ENV=preview` always disables indexing. Domain configuration and publishing require separate explicit authorization.
-
-No database, account system, analytics, forms backend, prices or fabricated store links. Coming Soon is an informational status; the hero action scrolls to that section.
-
-## Legal pack and release gate
-
-Privacy copy now comes from `lib/legal-documents.ts`; original supplied files are in `docs/legal-source/`. Legal UI labels/metadata are in `lib/legal-copy.ts`. Added EN/TR `/terms` and Turkish-only `/tr/kvkk`; there is no fabricated English KVKK translation. Footer/legal navigation links to all appropriate documents.
-
-`lib/release.ts` resolves verified configuration fields and reports publication blockers. Vercel production builds fail without explicit release approval, and requested release builds fail with incomplete fields or unrevised drafts. Fill `.env.example` only with verified decisions, revise the actual legal draft text after review, then rerun checks. Flags do not turn draft copy into approved copy.
-
-```sh
 npm run check:release
-npm run check:routes  # requires the local preview server
+npm run build
+npm start -- --port 3107
+CHECK_ORIGIN=http://127.0.0.1:3107 npm run check:routes
+node scripts/check-design-baseline.mjs
 ```
 
-See `docs/LEGAL-INTEGRATION.md` for reconciliation and publication rules, `docs/IOS-PRIVACY-AUDIT.md` for the limited static audit, and `docs/ios-proposal/` for un-applied native link proposals. No final signed-build audit, legal approval, App Store submission or native modification has occurred.
+## Three configuration values
 
-## Focus / Life marketing content
+See `.env.example`. Actual local/remote env files are not overwritten.
 
-The existing visual design is preserved. Both experiences are explained with existing feature-card and step-list patterns. Focus maps to native Deep Focus; Life maps to the shared usage/cooldown cycle. Copy remains in `lib/content.ts`; preview-only labels are separated in `lib/preview-copy.ts` and `lib/legal-copy.ts`. Publication validation scans the selected public copy and still rejects the actual unresolved legal drafts. `MARKETING_COPY_APPROVED` is an additional release prerequisite.
+- `SITE_PUBLICATION_APPROVED=false`: the only publication permission, false by default. Missing or false blocks a Vercel production build. Setting true still rejects unresolved fields and draft decisions. Preview remains noindex even if approval is accidentally shared.
+- `NEXT_PUBLIC_SITE_URL`: owned and verified public HTTPS origin. No guessed domain; local/Preview has no production canonical or populated sitemap.
+- `LEGAL_PUBLICATION_DATE`: actual document date in YYYY-MM-DD; strict calendar validation and EN/TR formatting. Never automatically use build/deployment time.
 
-Localized sharing-image endpoints are `/en/og` and `/tr/og`; their metadata is built in `lib/seo.ts`. No new marketing page, analytics or backend was introduced.
+Vercel supplies `VERCEL_ENV`/`VERCEL_URL`; no extra approval flags. Legacy flags are ignored. Developer/contact facts live in `lib/site-details.ts`; notices in `lib/legal-documents.ts`; marketing/support copy in `lib/content.ts`; legal labels in `lib/legal-copy.ts`. Local sharing image tags are omitted until a public origin exists; Vercel Preview uses its own HTTPS image URLs without indexing. Image endpoints remain `/en/og`, `/tr/og`, `/opengraph-image`.
 
-Run `node scripts/check-design-baseline.mjs` to assert the approved baseline CSS/assets/controls/legal text remain intact. See `qa/marketing/REPORT.md` for the exact changed files, before/after screenshots, actual tests, content-reflow notes and remaining blockers.
+## Publication remains blocked
+
+Complete the five items in [RELEASE-CHECKLIST.md](RELEASE-CHECKLIST.md). Actual missing KVKK grounds, transfer mechanism, verified request channel, hosting retention and support deletion practice are tracked internally in `lib/legal-review.ts` and `docs/LEGAL-REVIEW.md`. Verified results must be included in the notices before closing tasks; clean visitor copy does not clear these blockers. Six months after support closure is a draft decision, not an implemented guarantee; see [manual procedure](docs/SUPPORT-RETENTION.md). A passing fixture test does not approve actual legal text or prove mail delivery.
+
+**Main is connected to Vercel production. Do not push to main, deploy, change remote settings or migrate hosting without explicit authorization.** This task makes local changes only. Website publication does not depend on iOS TestFlight/App Store QA approval flags.
+
+See [simplification report](docs/SIMPLIFICATION-REPORT.md) and [hosting assessment](docs/HOSTING-OPTIONS.md). Older reports, `docs/legal-source/` and iOS audits are historical evidence; their old multi-flag instructions are superseded by this README and the current checklist. No native iOS changes are applied.
