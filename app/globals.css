@@ -47,3 +47,27 @@
 
 /* Keep the full wordmark visible beside the controls on narrow phones. */
 @media(min-width:375px) and (max-width:430px){.header .brand{gap:6px}.header .controls{gap:4px}.header .theme-control{width:82px}.header .theme-control .theme-icon{display:none}.header .theme-control select{padding-left:10px;padding-right:24px;font-size:11px}.header .language{padding-left:10px}}
+
+/* Quiet Horizon UX refinements: Hero two-experience explainer, non-jumping status badge, breadcrumbs, native feature tags */
+.hero-modes-pill{display:grid;grid-template-columns:1fr 1fr;gap:14px;background:var(--surface);border:1px solid var(--divider);border-radius:var(--radius-card);padding:14px 18px;margin-top:22px;box-shadow:0 4px 16px #0c0e1405}
+.hero-mode-item{display:flex;flex-direction:column;gap:5px}
+.hero-mode-header{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:600}
+.hero-mode-header small{font-size:11px;font-weight:400;color:var(--secondary)}
+.hero-mode-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot-focus{background:var(--focus)}
+.dot-cycle{background:var(--rest)}
+.hero-mode-item p{font-size:12px;line-height:1.55;color:var(--secondary);margin:0}
+@media(max-width:640px){.hero-modes-pill{grid-template-columns:1fr;gap:12px;padding:14px 16px;text-align:left}}
+
+.hero-status-badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--secondary);background:var(--surface);border:1px solid var(--divider);border-radius:var(--radius-control);padding:12px 18px;min-height:52px}
+.hero-status-dot{width:6px;height:6px;border-radius:50%;background:var(--rest);box-shadow:0 0 0 3px color-mix(in srgb,var(--rest) 20%,transparent)}
+
+.breadcrumb{padding-top:28px;margin-bottom:-10px;font-size:12px}
+.breadcrumb ol{display:flex;align-items:center;gap:8px;list-style:none;padding:0;margin:0}
+.breadcrumb a{color:var(--secondary);display:inline-flex;align-items:center;min-height:36px;text-decoration:none}
+.breadcrumb a:hover{color:var(--primary)}
+.breadcrumb [aria-current="page"]{color:var(--text);font-weight:600}
+.breadcrumb-separator{color:var(--secondary);opacity:.6}
+
+.mode-badge-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:550;letter-spacing:.03em;color:var(--rest);background:var(--subtle);border:1px solid var(--divider);padding:4px 10px;border-radius:8px;margin-block:6px 12px}
+

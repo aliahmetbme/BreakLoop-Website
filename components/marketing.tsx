@@ -15,6 +15,11 @@ export function ModeOverview({ locale }: { locale: Locale }) {
         {c.modes.map(([eyebrow, title, description, link], i) => (
           <article className="feature-card cooldown" key={eyebrow}>
             <p className="eyebrow">{eyebrow}</p>
+            <span className="mode-badge-tag">
+              {i === 0
+                ? (locale === 'en' ? 'iOS: Deep Focus' : 'iOS: Derin Odak')
+                : (locale === 'en' ? 'iOS: Usage Cycle' : 'iOS: Kullanım Döngüsü')}
+            </span>
             <h3>{title}</h3>
             <p>{description}</p>
             <Link className="text-link mode-link" href={`/${locale}/${i === 0 ? 'focus-mode' : 'life-mode'}`}>

@@ -28,7 +28,20 @@ export const content = {
       "Focus when you choose.",
       "Pause when you need."
     ],
-    "intro": "Whether you’re trying to concentrate or finding yourself scrolling longer than intended, BreakLoop helps you create a little space between impulse and action.",
+    "intro": "BreakLoop helps you manage distractions by setting boundaries for selected apps. Start a focus session when you need to concentrate, or take automatic breaks when your shared usage allowance is reached.",
+    "heroExperiences": [
+      {
+        "title": "Deep Focus",
+        "mode": "Focus Mode",
+        "desc": "Pause selected apps for a focus session you choose."
+      },
+      {
+        "title": "Usage Cycle",
+        "mode": "Life Mode",
+        "desc": "Take an automatic break when your shared usage allowance runs out."
+      }
+    ],
+    "breadcrumbHome": "Home",
     "cta": "Coming soon on iOS",
     "secondary": "See how it works",
     "heroNote": "Focus with intention. Pause with purpose.",
@@ -275,7 +288,20 @@ export const content = {
       "İstediğinde odaklan.",
       "Gerektiğinde mola ver."
     ],
-    "intro": "İster bir işe odaklanmak iste, ister kendini fark etmeden uzun süre kaydırırken bul. BreakLoop, alışkanlıklarınla arana küçük bir mola koymana yardımcı olur.",
+    "intro": "BreakLoop, seçtiğin uygulamalara sınır koyarak ekran süreni daha bilinçli yönetmene yardımcı olur. İstersen bir odak oturumu başlat, istersen kullanım süren dolduğunda otomatik mola ver.",
+    "heroExperiences": [
+      {
+        "title": "Derin Odak",
+        "mode": "Odak Modu",
+        "desc": "Seçtiğin uygulamalara belirli bir süre ara ver."
+      },
+      {
+        "title": "Kullanım Döngüsü",
+        "mode": "Yaşam Modu",
+        "desc": "Ortak kullanım süren dolduğunda otomatik mola ver."
+      }
+    ],
+    "breadcrumbHome": "Ana Sayfa",
     "cta": "Yakında iOS’ta",
     "secondary": "Nasıl çalıştığını gör",
     "heroNote": "Odaklanmak da mola vermek de senin ritminde.",

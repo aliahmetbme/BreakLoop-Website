@@ -59,6 +59,8 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/focus-mode
   assert.ok(html.includes(c.fixed),url+' fixed duration note');
   assert.ok(html.includes('horizon-deepfocus.png'),url+' deep focus preview image');
   assert.ok(html.includes(`href="/${lang}/life-mode"`),url+' link to other mode');
+  assert.ok(html.includes('breadcrumb'),url+' breadcrumb navigation');
+  assert.ok(html.includes(`href="/${lang}"`),url+' breadcrumb home link');
  }
  if(path==='/life-mode'){
   const c=messages[lang];
@@ -66,6 +68,8 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/focus-mode
   assert.ok(html.includes(c.budget),url+' shared budget');
   assert.ok(html.includes('horizon-cooldown.png'),url+' cooldown preview image');
   assert.ok(html.includes(`href="/${lang}/focus-mode"`),url+' link to other mode');
+  assert.ok(html.includes('breadcrumb'),url+' breadcrumb navigation');
+  assert.ok(html.includes(`href="/${lang}"`),url+' breadcrumb home link');
  }
  if(path===''||path==='/how-it-works'){
   const c=messages[lang];
@@ -78,9 +82,12 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/focus-mode
   if(path==='/how-it-works'){
    assert.ok(html.includes(`href="/${lang}/focus-mode"`),url+' link to focus mode');
    assert.ok(html.includes(`href="/${lang}/life-mode"`),url+' link to life mode');
+   assert.ok(html.includes('breadcrumb'),url+' breadcrumb navigation');
+   assert.ok(html.includes(`href="/${lang}"`),url+' breadcrumb home link');
   }
   if(path===''){
    assert.ok(html.includes(`<h1>${c.headline}<br/>`),url+' hero message');
+   assert.ok(html.includes('hero-modes-pill'),url+' hero compact two-experience explainer');
    // Order assertion: scenarios first, mode-overview second
    assert.ok(html.indexOf('scenario-section')<html.indexOf('mode-overview'),url+' scenarios appear above mode overview');
    // Short FAQ assertion: exactly 3 questions
@@ -92,8 +99,9 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/focus-mode
    assert.ok(html.includes(lang==='en'?'You started studying':'Derse başladın'),url+' focus scenario first caption');
    assert.ok(html.includes(lang==='en'?'Then you got distracted':'Sonra telefona daldın'),url+' focus scenario second caption');
    assert.ok(html.includes(lang==='en'?'Hours later, you’re still scrolling.':'Saatler geçti, hâlâ oradasın.'),url+' time-passing caption');
-   assert.ok(new RegExp(`href="#coming-soon">${c.soon}`).test(html),url+' honest Coming Soon primary CTA');
-   assert.ok(html.includes(`href="/${lang}/how-it-works"`),url+' localized secondary navigation');
+   assert.ok(html.includes(`href="/${lang}/how-it-works"`),url+' hero primary informative CTA');
+   assert.ok(html.includes('hero-status-badge'),url+' hero status badge');
+   assert.ok(!html.includes('href="#coming-soon"'),url+' no misleading jump anchor on hero CTA');
    assert.ok(html.includes(lang==='en'?'Explore the privacy draft':'Gizlilik taslağını incele'),url+' preview privacy label preserved');
   }
  }

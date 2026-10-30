@@ -10,9 +10,20 @@ export function FocusModeView({ locale }: { locale: Locale }) {
 
   return (
     <main id="main">
+      <nav aria-label={isEn ? 'Breadcrumb' : 'İçerik yolu'} className="wrap breadcrumb">
+        <ol>
+          <li>
+            <Link href={`/${locale}`}>{c.breadcrumbHome}</Link>
+          </li>
+          <li aria-hidden="true" className="breadcrumb-separator">/</li>
+          <li aria-current="page">{isEn ? 'Focus Mode' : 'Odak Modu'}</li>
+        </ol>
+      </nav>
+
       <section className="wrap how-hero">
         <p className="eyebrow">{c.modes[0][0]}</p>
         <h1>{isEn ? 'Focus Mode' : 'Odak Modu'}</h1>
+        <p className="mode-badge-tag">{isEn ? 'iOS feature: Deep Focus' : 'iOS özelliği: Derin Odak'}</p>
         <p className="lead">{c.modes[0][2]}</p>
       </section>
 
@@ -41,10 +52,13 @@ export function FocusModeView({ locale }: { locale: Locale }) {
         </p>
       </section>
 
-      <section className="wrap" style={{ textAlign: 'center', margin: '2rem auto 3rem' }}>
+      <section className="wrap" style={{ textAlign: 'center', margin: '2rem auto 3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
         <p className="eyebrow">{isEn ? 'EXPLORE OTHER MODE' : 'DİĞER MODU KEŞFET'}</p>
         <Link className="button" href={`/${locale}/life-mode`}>
           {c.modes[1][3]} <span aria-hidden="true">→</span>
+        </Link>
+        <Link className="text-link" href={`/${locale}`}>
+          ← {isEn ? 'Back to Home' : 'Ana Sayfaya Dön'}
         </Link>
       </section>
 
@@ -59,9 +73,20 @@ export function LifeModeView({ locale }: { locale: Locale }) {
 
   return (
     <main id="main">
+      <nav aria-label={isEn ? 'Breadcrumb' : 'İçerik yolu'} className="wrap breadcrumb">
+        <ol>
+          <li>
+            <Link href={`/${locale}`}>{c.breadcrumbHome}</Link>
+          </li>
+          <li aria-hidden="true" className="breadcrumb-separator">/</li>
+          <li aria-current="page">{isEn ? 'Life Mode' : 'Yaşam Modu'}</li>
+        </ol>
+      </nav>
+
       <section className="wrap how-hero">
         <p className="eyebrow">{c.modes[1][0]}</p>
         <h1>{isEn ? 'Life Mode' : 'Yaşam Modu'}</h1>
+        <p className="mode-badge-tag">{isEn ? 'iOS feature: Usage Cycle' : 'iOS özelliği: Kullanım Döngüsü'}</p>
         <p className="lead">{c.modes[1][2]}</p>
       </section>
 
@@ -108,10 +133,13 @@ export function LifeModeView({ locale }: { locale: Locale }) {
         <p className="feature-caption">{c.naturalRestNote}</p>
       </section>
 
-      <section className="wrap" style={{ textAlign: 'center', margin: '2rem auto 3rem' }}>
+      <section className="wrap" style={{ textAlign: 'center', margin: '2rem auto 3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
         <p className="eyebrow">{isEn ? 'EXPLORE OTHER MODE' : 'DİĞER MODU KEŞFET'}</p>
         <Link className="button" href={`/${locale}/focus-mode`}>
           {c.modes[0][3]} <span aria-hidden="true">→</span>
+        </Link>
+        <Link className="text-link" href={`/${locale}`}>
+          ← {isEn ? 'Back to Home' : 'Ana Sayfaya Dön'}
         </Link>
       </section>
 
@@ -137,4 +165,3 @@ function ClosingSection({ locale }: { locale: Locale }) {
     </section>
   );
 }
-
