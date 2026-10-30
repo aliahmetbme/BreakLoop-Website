@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Production approval is set separately in Netlify's Production context only.
+# These contexts must stay non-indexable even if a UI value was shared accidentally.
+[context.deploy-preview.environment]
+  SITE_PUBLICATION_APPROVED = "false"
+
+[context.branch-deploy.environment]
+  SITE_PUBLICATION_APPROVED = "false"

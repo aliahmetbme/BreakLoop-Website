@@ -1,10 +1,9 @@
 import { legalDocuments } from './legal-documents';
 import { content } from './content';
 import { legalCopy } from './legal-copy';
-import { pendingLegalWork } from './legal-review';
 
 type Environment = Record<string, string | undefined>;
-type ReleaseSources = { pendingLegalWork?: readonly string[]; documents?: Record<string,string>; marketing?: unknown; legalLabels?: unknown };
+type ReleaseSources = { documents?: Record<string,string>; marketing?: unknown; legalLabels?: unknown };
 
 export function verifiedHttps(value: string | undefined) {
  if (!value) return undefined;
@@ -34,28 +33,46 @@ export function resolveLegalText(text:string,locale:'en'|'tr',env:Environment=pr
  return text.replaceAll('[LEGAL_PUBLICATION_DATE]',formatPublicationDate(env.LEGAL_PUBLICATION_DATE,locale)||(locale==='tr'?'Belge tarihi henüz belirlenmedi.':'Document date not yet set.'));
 }
 export function publicCopyIssues(value:unknown,prefix='public copy'):string[] {
- if(typeof value==='string')return /\bdraft\b|tasla[kğ]|local (?:website )?preview|yerel (?:web sitesi )?önizleme|to be verified|doğrulanmayı bekliyor/i.test(value)?[`Draft wording: ${prefix}`]:[];
+ if(typeof value==='string') {
+  if(/https?:\/\/(?:localhost|127(?:\.\d{1,3}){3}|0\.0\.0\.0|\[::1\])(?=[:/\s]|$)/i.test(value))return [`Local URL: ${prefix}`];
+  if(/\[[A-Z][A-Z0-9_]*\](?!\()/g.test(value))return [`Unresolved technical field: ${prefix}`];
+  return /\bdraft\b|tasla[kğ]|local (?:website )?preview|yerel (?:web sitesi )?önizleme|to be verified|doğrulanmayı bekliyor/i.test(value)?[`Draft wording: ${prefix}`]:[];
+ }
  return value&&typeof value==='object'?Object.entries(value).flatMap(([key,child])=>publicCopyIssues(child,`${prefix}.${key}`)):[];
 }
 /** Facts are checked automatically; legal/operational review is recorded in RELEASE-CHECKLIST.md. */
 export function releaseIssues(env:Environment=process.env,sources:ReleaseSources={}) {
- const issues:string[]=(sources.pendingLegalWork??pendingLegalWork).map(task=>`Pending legal work: ${task}`);
+ const issues:string[]=[];
  if(!verifiedHttps(env.NEXT_PUBLIC_SITE_URL))issues.push('A verified public HTTPS origin is missing (NEXT_PUBLIC_SITE_URL).');
  if(!verifiedPublicationDate(env.LEGAL_PUBLICATION_DATE))issues.push('A real legal document date is missing or invalid (LEGAL_PUBLICATION_DATE).');
  for(const [key,text]of Object.entries(sources.documents??legalDocuments)) {
   const resolved=resolveLegalText(text,key.startsWith('tr/')?'tr':'en',env);
-  const fields=[...resolved.matchAll(/\[([A-Z_]+)\](?!\()/g)].map(match=>match[1]);
+  if(/https?:\/\/(?:localhost|127(?:\.\d{1,3}){3}|0\.0\.0\.0|\[::1\])(?=[:/\s]|$)/i.test(resolved))issues.push(`${key}: local URL in public document.`);
+  const fields=[...resolved.matchAll(/\[([A-Z][A-Z0-9_]*)\](?!\()/g)].map(match=>match[1]);
   if(fields.length)issues.push(`${key}: unresolved fields — ${[...new Set(fields)].join(', ')}`);
   if(/\bdraft\b|tasla[kğ]/i.test(resolved))issues.push(`${key}: draft decisions remain; complete the real review/procedure before publication.`);
  }
  issues.push(...publicCopyIssues(sources.marketing??content,'content'),...publicCopyIssues(sources.legalLabels??legalCopy,'legal-copy'));
  return issues;
 }
+/** Netlify's own context takes precedence over any leftover Vercel variables. */
+export function isProductionEnvironment(env:Environment=process.env) {
+ return env.NETLIFY==='true'||env.CONTEXT!==undefined
+  ? env.CONTEXT==='production' && env.NETLIFY_PREVIEW_SERVER!=='true'
+  : env.VERCEL_ENV==='production';
+}
 export function isPreviewEnvironment(env:Environment=process.env) {
- return env.VERCEL_ENV==='preview'||(env.NETLIFY==='true'&&env.CONTEXT!=='production');
+ if(env.NETLIFY==='true'||env.CONTEXT!==undefined)return !isProductionEnvironment(env);
+ return env.VERCEL_ENV!==undefined && !isProductionEnvironment(env);
+}
+export function deploymentPreviewOrigin(env:Environment=process.env) {
+ if(env.NETLIFY==='true'||env.CONTEXT!==undefined) {
+  return verifiedHttps(env.DEPLOY_PRIME_URL)||verifiedHttps(env.DEPLOY_URL);
+ }
+ return vercelOrigin(env.VERCEL_URL);
 }
 export function assertPublicationBuild(env:Environment=process.env,sources:ReleaseSources={}) {
- const production=env.VERCEL_ENV==='production'||(env.NETLIFY==='true'&&env.CONTEXT==='production');
+ const production=isProductionEnvironment(env);
  if(production&&env.SITE_PUBLICATION_APPROVED!=='true')throw new Error('Publication blocked: SITE_PUBLICATION_APPROVED must be explicitly true for production.');
  // A preview always remains available and noindex, even if an approval was accidentally shared across environments.
  if(env.SITE_PUBLICATION_APPROVED==='true'&&!isPreviewEnvironment(env)) {
@@ -64,5 +81,5 @@ export function assertPublicationBuild(env:Environment=process.env,sources:Relea
  }
 }
 export function publicationEnabled(env:Environment=process.env,sources:ReleaseSources={}) {
- return env.SITE_PUBLICATION_APPROVED==='true'&&!isPreviewEnvironment(env)&&releaseIssues(env,sources).length===0;
+ return env.SITE_PUBLICATION_APPROVED==='true'&&isProductionEnvironment(env)&&releaseIssues(env,sources).length===0;
 }

@@ -1,8 +1,8 @@
-import { publicationEnabled, vercelOrigin, verifiedHttps } from './release';
+import { publicationEnabled, deploymentPreviewOrigin, verifiedHttps } from './release';
 import { siteDetails } from './site-details';
 export const site = {
  url: verifiedHttps(process.env.NEXT_PUBLIC_SITE_URL),
- previewUrl: vercelOrigin(process.env.VERCEL_URL),
+ previewUrl: deploymentPreviewOrigin(),
  email: siteDetails.supportEmail,
  operator: siteDetails.developer,
  indexable: publicationEnabled(),

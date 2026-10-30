@@ -1,4 +1,4 @@
-// Visitor-facing copy. Outstanding publication work is tracked in legal-review.ts.
+// Visitor-facing copy. Open legal follow-ups are documented in docs/LEGAL-FOLLOWUP.md, separately from build checks.
 export const legalDocuments: Record<string, string> = {
   "en/privacy": `# BreakLoop Privacy Policy
 
@@ -18,7 +18,7 @@ The managed diagnostic archive targets at least 14 days of history with a 50 MiB
 
 The site introduces BreakLoop and provides support and privacy information. There are no accounts, database, contact form, newsletter, advertising trackers or analytics. Your appearance choice is saved in this browser’s localStorage under \`breakloop-theme\`.
 
-The site is hosted on Vercel. Vercel may process IP addresses, request times, browser information and other technical access data to deliver and secure the site. This is separate from the app’s on-device processing. No blanket promise of “no personal data processing” or “no server logs” is made.
+The site is hosted on Netlify. Netlify may process IP addresses, request times, browser information and other technical access data to deliver and secure the site. This is separate from the app’s on-device processing. No blanket promise of “no personal data processing” or “no server logs” is made.
 
 ## 3. Email support and optional diagnostic sharing
 
@@ -54,7 +54,7 @@ Yönetilen tanılama arşivi, 50 MiB sınırıyla en az 14 günlük geçmiş hed
 
 Site, BreakLoop’u tanıtır; destek ve gizlilik bilgileri sunar. Üyelik, veritabanı, iletişim formu, bülten, reklam takibi veya analitik sistemi bulunmaz. Görünüm tercihiniz tarayıcının localStorage alanında \`breakloop-theme\` adıyla saklanır.
 
-Site Vercel üzerinde barındırılır. Vercel, sayfaları sunmak ve güvenliği sağlamak için IP adresi, istek zamanı, tarayıcı bilgisi ve benzeri teknik erişim verilerini işleyebilir. Bu, uygulamanın cihaz içi veri işlemesinden ayrıdır. “Hiçbir kişisel veri işlenmez” veya “sunucu kaydı tutulmaz” şeklinde bir garanti verilmez.
+Site Netlify üzerinde barındırılır. Netlify, sayfaları sunmak ve güvenliği sağlamak için IP adresi, istek zamanı, tarayıcı bilgisi ve benzeri teknik erişim verilerini işleyebilir. Bu, uygulamanın cihaz içi veri işlemesinden ayrıdır. “Hiçbir kişisel veri işlenmez” veya “sunucu kaydı tutulmaz” şeklinde bir garanti verilmez.
 
 ## 3. E-posta desteği ve isteğe bağlı tanılama paylaşımı
 
@@ -82,7 +82,7 @@ BreakLoop’un geliştiricisi ve bu metin kapsamındaki veri sorumlusu, bireysel
 
 ## 2. Hangi bilgiler, neden işlenir?
 
-**Web sitesi:** Site, Vercel üzerinde barındırılır. Vercel; sayfaları sunmak ve güvenliği sağlamak için IP adresi, istek zamanı, tarayıcı bilgisi ve teknik erişim verilerini işleyebilir. Sitede üyelik, veritabanı, iletişim formu veya analitik takip bulunmaz. Tema tercihiniz yalnızca tarayıcınızın yerel depolama alanında saklanır.
+**Web sitesi:** Site, Netlify üzerinde barındırılır. Netlify; sayfaları sunmak ve güvenliği sağlamak için IP adresi, istek zamanı, tarayıcı bilgisi ve teknik erişim verilerini işleyebilir. Sitede üyelik, veritabanı, iletişim formu veya analitik takip bulunmaz. Tema tercihiniz yalnızca tarayıcınızın yerel depolama alanında saklanır.
 
 **Destek e-postaları:** Bize yazdığınızda e-posta adresiniz, mesajınız ve eklemeyi seçtiğiniz dosyalar, talebinizi incelemek ve yanıtlamak amacıyla Apple iCloud Mail üzerinden alınır. Destek için gerekli olmayan kişisel bilgileri göndermemenizi öneririz.
 
@@ -90,7 +90,7 @@ BreakLoop’un geliştiricisi ve bu metin kapsamındaki veri sorumlusu, bireysel
 
 ## 3. Hizmet sağlayıcılar ve yurt dışı işleme
 
-Web sitesini sunmak için Vercel, destek e-postalarını almak ve yanıtlamak için Apple iCloud Mail kullanılır. Bu hizmetlerin kullanımı, teknik erişim verilerinin ve sizin gönderdiğiniz yazışmaların Türkiye dışında işlenmesini içerebilir. Uygulamanın cihazda tutulan bilgileri, bu hizmetlere geliştirici tarafından otomatik olarak yüklenmez.
+Web sitesini sunmak için Netlify, destek e-postalarını almak ve yanıtlamak için Apple iCloud Mail kullanılır. Bu hizmetlerin kullanımı, teknik erişim verilerinin ve sizin gönderdiğiniz yazışmaların Türkiye dışında işlenmesini içerebilir. Uygulamanın cihazda tutulan bilgileri, bu hizmetlere geliştirici tarafından otomatik olarak yüklenmez.
 
 ## 4. Kayıtlar ve silme talepleri
 

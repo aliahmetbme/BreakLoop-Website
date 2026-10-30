@@ -28,7 +28,7 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','
   assert.ok(html.includes(lang==='en'?'<h1>BreakLoop Privacy Policy</h1>':'<h1>BreakLoop Gizlilik Politikası</h1>'),url+' privacy title');
   assert.ok(html.includes('Ali Ahmet Erdoğdu'),url+' developer name');
   assert.ok(html.includes('mailto:breakloopSupport@icloud.com'),url+' support email link');
-  assert.ok(html.includes('Vercel'),url+' Vercel hosting disclosure');
+  assert.ok(html.includes('Netlify'),url+' Netlify hosting disclosure');
   assert.ok(html.includes('Apple iCloud Mail'),url+' Apple iCloud Mail support disclosure');
  }
  if(path==='/kvkk'){

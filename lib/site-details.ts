@@ -3,5 +3,5 @@ export const siteDetails = {
  developer: 'Ali Ahmet Erdoğdu',
  supportEmail: 'breakloopSupport@icloud.com',
  supportProvider: 'Apple iCloud Mail',
- hostingProvider: 'Vercel',
+ hostingProvider: 'Netlify',
 } as const;

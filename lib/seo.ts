@@ -13,7 +13,7 @@ export function pageMetadata(locale: Locale, path: string, config: SeoConfig): M
   const description = path === 'privacy' ? legal.privacyDescription : path === 'terms' ? legal.termsDescription : path === 'kvkk' ? legal.kvkkDescription : path === 'support' ? legal.supportIntro : path === 'how-it-works' ? c.howSeoDescription : c.seoDescription;
   const suffix = path ? `/${path}` : '';
   const prodOrigin = config.indexable ? verifiedHttps(config.url) : undefined;
-  const previewOrigin = !config.indexable ? vercelOrigin(config.previewUrl ?? config.vercelUrl ?? process.env.VERCEL_URL) : undefined;
+  const previewOrigin = !config.indexable ? vercelOrigin(config.previewUrl ?? config.vercelUrl) : undefined;
   const imageOrigin = prodOrigin || previewOrigin;
   const url = prodOrigin ? `${prodOrigin}/${locale}${suffix}` : undefined;
   const imageUrl = imageOrigin ? `${imageOrigin}/${locale}/og` : undefined;

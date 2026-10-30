@@ -6,12 +6,12 @@ import { createRequire } from 'node:module';
 import ts from 'typescript';
 const temp=fs.mkdtempSync(path.join(os.tmpdir(),'breakloop-release-check-'));
 try {
- for(const name of ['preview-copy','content','legal-copy','legal-documents','legal-review','release','seo']){
+ for(const name of ['preview-copy','content','legal-copy','legal-documents','release','seo']){
  const source=fs.readFileSync(`lib/${name}.ts`,'utf8');
  fs.writeFileSync(path.join(temp,`${name}.js`),ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText);
  }
  const require=createRequire(import.meta.url);
- const {releaseIssues,assertPublicationBuild,verifiedHttps,vercelOrigin,verifiedPublicationDate,formatPublicationDate,resolveLegalText,publicCopyIssues,publicationEnabled}=require(path.join(temp,'release.js'));
+ const {releaseIssues,assertPublicationBuild,verifiedHttps,vercelOrigin,verifiedPublicationDate,formatPublicationDate,resolveLegalText,publicCopyIssues,publicationEnabled,deploymentPreviewOrigin,isProductionEnvironment}=require(path.join(temp,'release.js'));
  const {legalDocuments}=require(path.join(temp,'legal-documents.js'));
  assert.ok(releaseIssues({}).length>0,'real missing prerequisites block publication');
  for(const url of ['http://verified.tld','https://localhost','https://site.example','https://127.0.0.1','https://user:pass@site.tld','https://site.tld/path','not a url'])assert.equal(verifiedHttps(url),undefined,url);
@@ -33,7 +33,7 @@ try {
   assert.ok(text.includes(locale==='tr'?'30 Ekim 2026':'October 30, 2026'));
   assert.ok(!resolveLegalText('[LEGAL_PUBLICATION_DATE]',locale,{}).includes('LEGAL_PUBLICATION_DATE'));
  }
- const env={NEXT_PUBLIC_SITE_URL:'https://verified.tld',LEGAL_PUBLICATION_DATE:'2026-10-30'};
+ const env={NETLIFY:'true',CONTEXT:'production',NEXT_PUBLIC_SITE_URL:'https://verified.tld',LEGAL_PUBLICATION_DATE:'2026-10-30'};
  const {content,getContent}=require(path.join(temp,'content.js'));
  const {legalCopy}=require(path.join(temp,'legal-copy.js'));
  const {pageMetadata}=require(path.join(temp,'seo.js'));
@@ -44,24 +44,40 @@ try {
   assert.notEqual(getContent(locale,false).rights,getContent(locale,true).rights);
  }
  const fixtureDocs=Object.fromEntries(['en/privacy','tr/privacy','en/terms','tr/terms','tr/kvkk'].map(key=>[key,'# Reviewed test fixture\nFinal test policy without unresolved fields.']));
- const fixture={documents:fixtureDocs,pendingLegalWork:[]};
- assert.ok(releaseIssues(env,{documents:fixtureDocs}).some(issue=>issue.includes('Pending legal work')),'clean visitor text cannot bypass outstanding actual legal work');
+ const fixture={documents:fixtureDocs};
+ assert.deepEqual(releaseIssues(env),[],'actual Coming Soon documents pass technical checks without legal task-list approval');
+ assert.equal(publicationEnabled({...env,SITE_PUBLICATION_APPROVED:'true'}),true);
  assert.deepEqual(releaseIssues(env,fixture),[]);
  assert.equal(publicationEnabled(env,fixture),false);
  assert.equal(publicationEnabled({...env,SITE_RELEASE_APPROVED:'true'},fixture),false,'legacy flag does not authorize publication');
  assert.equal(publicationEnabled({...env,SITE_PUBLICATION_APPROVED:'true'},fixture),true);
- for(const preview of [{VERCEL_ENV:'preview'},{NETLIFY:'true',CONTEXT:'deploy-preview'}]) {
+ for(const preview of [{NETLIFY:undefined,CONTEXT:undefined,VERCEL_ENV:'preview'},...['deploy-preview','branch-deploy','dev','unknown'].map(CONTEXT=>({NETLIFY:'true',CONTEXT})),{NETLIFY:'true',CONTEXT:undefined},{NETLIFY:'true',CONTEXT:'production',NETLIFY_PREVIEW_SERVER:'true'}]) {
   const e={...env,...preview,SITE_PUBLICATION_APPROVED:'true'};
   assert.equal(publicationEnabled(e,fixture),false);
   assert.doesNotThrow(()=>assertPublicationBuild(e));
  }
  assert.throws(()=>assertPublicationBuild({...env,VERCEL_ENV:'production'}),/explicitly true/);
- assert.throws(()=>assertPublicationBuild({...env,SITE_PUBLICATION_APPROVED:'true'}),/Publication blocked/,'actual unresolved documents stay blocked');
+ assert.doesNotThrow(()=>assertPublicationBuild({...env,SITE_PUBLICATION_APPROVED:'true'}));
+ for(const bad of [{NEXT_PUBLIC_SITE_URL:'http://localhost:3000'},{NEXT_PUBLIC_SITE_URL:''},{LEGAL_PUBLICATION_DATE:''},{LEGAL_PUBLICATION_DATE:'2026-02-30'}])assert.throws(()=>assertPublicationBuild({...env,...bad,SITE_PUBLICATION_APPROVED:'true'}),/Publication blocked/);
  assert.doesNotThrow(()=>assertPublicationBuild({...env,VERCEL_ENV:'production',SITE_PUBLICATION_APPROVED:'true'},fixture));
- assert.ok(releaseIssues(env).some(issue=>issue.includes('KVKK_APPLICATION_CHANNEL')));
- assert.ok(releaseIssues(env).some(issue=>issue.includes('SUPPORT_RETENTION')));
- assert.ok(releaseIssues(env,{...fixture,marketing:{...content,nested:{label:'Local website preview'}}}).some(v=>v.includes('content.nested.label')));
- assert.ok(releaseIssues(env,{...fixture,legalLabels:{label:'Gizlilik taslağını incele'}}).some(v=>v.includes('legal-copy.label')));
+ assert.equal(publicationEnabled({...env,NETLIFY:undefined,CONTEXT:undefined,SITE_PUBLICATION_APPROVED:'true'}),false,'local build cannot become indexable by approval alone');
+ assert.equal(isProductionEnvironment({...env,VERCEL_ENV:'preview'}),true,'Netlify context takes precedence');
+ assert.equal(deploymentPreviewOrigin({NETLIFY:'true',CONTEXT:'deploy-preview',DEPLOY_PRIME_URL:'https://deploy-preview-2--check.netlify.app',DEPLOY_URL:'https://unique--check.netlify.app',VERCEL_URL:'old.vercel.app'}),'https://deploy-preview-2--check.netlify.app');
+ assert.equal(deploymentPreviewOrigin({NETLIFY:'true',DEPLOY_PRIME_URL:'http://localhost:3000',DEPLOY_URL:'https://unique--check.netlify.app'}),'https://unique--check.netlify.app');
+ assert.equal(deploymentPreviewOrigin({NETLIFY:'true',URL:'https://production.netlify.app',VERCEL_URL:'old.vercel.app'}),undefined,'never substitute main URL or old host for missing preview URL');
+ for(const text of ['[MISSING_FIELD_2]','See http://127.0.0.1:3000/tr/privacy','See http://localhost:3000','Draft policy']) {
+  assert.throws(()=>assertPublicationBuild({...env,SITE_PUBLICATION_APPROVED:'true'},{documents:{'tr/privacy':text}}),/Publication blocked/);
+ }
+ assert.ok(releaseIssues(env,{...fixture,marketing:{nested:{label:'Local website preview'}}}).some(v=>v.includes('content.nested.label')));
+ assert.ok(releaseIssues(env,{...fixture,marketing:{link:'http://localhost:3000'}}).some(v=>v.includes('Local URL')));
+ assert.ok(releaseIssues(env,{...fixture,legalLabels:{label:'[MISSING_FIELD_2]'}}).some(v=>v.includes('Unresolved technical field')));
+ for(const context of ['deploy-preview','branch-deploy']) {
+  const meta=pageMetadata('en','privacy',{indexable:false,previewUrl:deploymentPreviewOrigin({NETLIFY:'true',CONTEXT:context,DEPLOY_PRIME_URL:`https://${context}--check.netlify.app`})});
+  assert.deepEqual(meta.robots,{index:false,follow:false});
+  assert.equal(meta.alternates,undefined);
+  assert.equal(meta.openGraph.images[0].url,`https://${context}--check.netlify.app/en/og`);
+  assert.equal(meta.twitter.images[0].url,`https://${context}--check.netlify.app/en/og`);
+ }
  for(const locale of ['en','tr'])for(const route of ['','how-it-works','privacy','support','terms',...(locale==='tr'?['kvkk']:[])]){
   const meta=pageMetadata(locale,route,{url:'https://verified.tld',previewUrl:'https://breakloop-preview.vercel.app',indexable:true});
   assert.deepEqual(meta.robots,{index:true,follow:true});
@@ -89,5 +105,5 @@ try {
  const kvkk=pageMetadata('tr','kvkk',{url:'https://verified.tld',indexable:true});
  assert.equal(kvkk.alternates.languages.en,undefined);
  console.log('PASS production-copy scan, negative contamination tests and isolated positive SEO/release fixtures');
- console.log('PASS publication blocks missing fields, unsafe URLs and unrevised drafts; unresolved actual legal fields remain blocked');
+ console.log('PASS publication blocks missing fields, unsafe URLs and unrevised drafts; legal follow-ups do not block technical publication');
 } finally {fs.rmSync(temp,{recursive:true,force:true});}
