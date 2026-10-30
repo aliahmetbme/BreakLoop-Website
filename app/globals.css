@@ -44,3 +44,6 @@
 @media(min-width:1000px){.scenario-row{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:56px}.scenario-visual-pair{gap:16px}}
 @media(min-width:761px) and (max-width:999px){.scenario-visual-pair,.scenario-copy{max-width:680px}}
 @media(max-width:760px){.scenario-section{padding-block:44px 40px}.scenario-list{gap:40px;margin-top:28px}.scenario-visual-pair{gap:10px}}
+
+/* Keep the full wordmark visible beside the controls on narrow phones. */
+@media(min-width:375px) and (max-width:430px){.header .brand{gap:6px}.header .controls{gap:4px}.header .theme-control{width:82px}.header .theme-control .theme-icon{display:none}.header .theme-control select{padding-left:10px;padding-right:24px;font-size:11px}.header .language{padding-left:10px}}
