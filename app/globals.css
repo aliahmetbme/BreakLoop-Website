@@ -71,3 +71,25 @@
 
 .mode-badge-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:550;letter-spacing:.03em;color:var(--rest);background:var(--subtle);border:1px solid var(--divider);padding:4px 10px;border-radius:8px;margin-block:6px 12px}
 
+/* Mode pages & tighter vertical rhythm: eliminate excessive empty gaps */
+.mode-hero{padding-top:18px;padding-bottom:32px}
+.mode-hero .eyebrow{margin-bottom:12px}
+.mode-hero h1{margin-bottom:6px}
+.mode-hero .mode-badge-tag{margin-block:4px 14px}
+.mode-hero .lead{margin-top:14px;max-width:560px}
+.mode-page .budget-section{padding-block:32px 48px}
+.mode-page .steps-section{padding-block:36px 48px}
+.mode-page .features{padding-block:36px 48px}
+.mode-page .note-section{padding:36px;margin-bottom:48px}
+.mode-navigation{text-align:center;margin-block:28px 44px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.how-hero{padding-block:36px 32px}
+@media(max-width:760px){
+  .mode-hero{padding-block:16px 24px}
+  .mode-page .budget-section{padding-block:24px 36px}
+  .mode-page .steps-section{padding-block:28px 36px}
+  .mode-page .features{padding-block:28px 36px}
+  .mode-page .note-section{padding:24px;margin-bottom:36px}
+  .how-hero{padding-block:28px 24px}
+}
+
+

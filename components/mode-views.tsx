@@ -8,7 +8,7 @@ export function FocusModeView({ locale }: { locale: Locale }) {
   const isEn = locale === 'en';
 
   return (
-    <main id="main">
+    <main id="main" className="mode-page">
       <nav aria-label={isEn ? 'Breadcrumb' : 'İçerik yolu'} className="wrap breadcrumb">
         <ol>
           <li>
@@ -19,7 +19,7 @@ export function FocusModeView({ locale }: { locale: Locale }) {
         </ol>
       </nav>
 
-      <section className="wrap how-hero">
+      <section className="wrap mode-hero">
         <p className="eyebrow">{c.modes[0][0]}</p>
         <h1>{isEn ? 'Focus Mode' : 'Odak Modu'}</h1>
         <p className="mode-badge-tag">{isEn ? 'iOS feature: Deep Focus' : 'iOS özelliği: Derin Odak'}</p>
@@ -37,7 +37,7 @@ export function FocusModeView({ locale }: { locale: Locale }) {
         </p>
       </section>
 
-      <section className="wrap" style={{ textAlign: 'center', margin: '2rem auto 3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
+      <section className="wrap mode-navigation">
         <p className="eyebrow">{isEn ? 'EXPLORE OTHER MODE' : 'DİĞER MODU KEŞFET'}</p>
         <Link className="button" href={`/${locale}/life-mode`}>
           {c.modes[1][3]} <span aria-hidden="true">→</span>
@@ -57,7 +57,7 @@ export function LifeModeView({ locale }: { locale: Locale }) {
   const isEn = locale === 'en';
 
   return (
-    <main id="main">
+    <main id="main" className="mode-page">
       <nav aria-label={isEn ? 'Breadcrumb' : 'İçerik yolu'} className="wrap breadcrumb">
         <ol>
           <li>
@@ -68,7 +68,7 @@ export function LifeModeView({ locale }: { locale: Locale }) {
         </ol>
       </nav>
 
-      <section className="wrap how-hero">
+      <section className="wrap mode-hero">
         <p className="eyebrow">{c.modes[1][0]}</p>
         <h1>{isEn ? 'Life Mode' : 'Yaşam Modu'}</h1>
         <p className="mode-badge-tag">{isEn ? 'iOS feature: Usage Cycle' : 'iOS özelliği: Kullanım Döngüsü'}</p>
@@ -104,7 +104,7 @@ export function LifeModeView({ locale }: { locale: Locale }) {
         <p className="feature-caption">{c.naturalRestNote}</p>
       </section>
 
-      <section className="wrap" style={{ textAlign: 'center', margin: '2rem auto 3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
+      <section className="wrap mode-navigation">
         <p className="eyebrow">{isEn ? 'EXPLORE OTHER MODE' : 'DİĞER MODU KEŞFET'}</p>
         <Link className="button" href={`/${locale}/focus-mode`}>
           {c.modes[0][3]} <span aria-hidden="true">→</span>
