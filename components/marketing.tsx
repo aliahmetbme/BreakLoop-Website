@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import { getContent } from '@/lib/content';
 import { site, type Locale } from '@/lib/config';
@@ -16,7 +17,9 @@ export function ModeOverview({ locale }: { locale: Locale }) {
             <p className="eyebrow">{eyebrow}</p>
             <h3>{title}</h3>
             <p>{description}</p>
-            <a className="text-link mode-link" href={i === 0 ? '#focus-mode' : '#life-mode'}>{link} <span aria-hidden="true">→</span></a>
+            <Link className="text-link mode-link" href={`/${locale}/${i === 0 ? 'focus-mode' : 'life-mode'}`}>
+              {link} <span aria-hidden="true">→</span>
+            </Link>
             <Image src={`/images/horizon-${i === 0 ? 'deepfocus' : 'cooldown'}.png`} width={250} height={250} alt="" />
             <small>{c.quiet} · {c.preview}</small>
           </article>

@@ -9,5 +9,5 @@ export const site = {
 };
 export const locales=['en','tr'] as const;
 export type Locale=typeof locales[number];
-export const paths=['','how-it-works','privacy','support','terms','kvkk'] as const;
+export const paths=['','how-it-works','focus-mode','life-mode','privacy','support','terms','kvkk'] as const;
 export function availablePaths(locale:Locale){return paths.filter(path=>path!=='kvkk'||locale==='tr');}

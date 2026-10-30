@@ -9,8 +9,8 @@ type SeoConfig = { url?: string; previewUrl?: string; vercelUrl?: string; indexa
 export function pageMetadata(locale: Locale, path: string, config: SeoConfig): Metadata {
   const c = getContent(locale, config.indexable);
   const legal = getLegalCopy(locale, config.indexable);
-  const title = path === 'privacy' ? legal.privacy : path === 'terms' ? legal.terms : path === 'kvkk' ? legal.kvkk : path === 'support' ? c.nav[2] : path === 'how-it-works' ? c.nav[0] : c.hero.join(' ');
-  const description = path === 'privacy' ? legal.privacyDescription : path === 'terms' ? legal.termsDescription : path === 'kvkk' ? legal.kvkkDescription : path === 'support' ? legal.supportIntro : path === 'how-it-works' ? c.howSeoDescription : c.seoDescription;
+  const title = path === 'privacy' ? legal.privacy : path === 'terms' ? legal.terms : path === 'kvkk' ? legal.kvkk : path === 'support' ? c.nav[2] : path === 'how-it-works' ? c.nav[0] : path === 'focus-mode' ? (locale === 'en' ? 'Focus Mode' : 'Odak Modu') : path === 'life-mode' ? (locale === 'en' ? 'Life Mode' : 'Yaşam Modu') : c.hero.join(' ');
+  const description = path === 'privacy' ? legal.privacyDescription : path === 'terms' ? legal.termsDescription : path === 'kvkk' ? legal.kvkkDescription : path === 'support' ? legal.supportIntro : path === 'how-it-works' ? c.howSeoDescription : path === 'focus-mode' ? (locale === 'en' ? 'Learn how BreakLoop’s Focus Mode uses fixed-duration Deep Focus sessions to shield selected apps and categories.' : 'BreakLoop Odak Modu ile sabit süreli Derin Odak oturumlarını başlatarak seçtiğin dikkat dağıtıcı uygulamalara ara ver.') : path === 'life-mode' ? (locale === 'en' ? 'Learn how BreakLoop’s Life Mode combines a shared screen time allowance, cooldowns, and estimated natural rest.' : 'BreakLoop Yaşam Modu ile ortak kullanım süresi, otomatik mola ve tahmini doğal dinlenmeyle kaydırmaya sakin bir ara ver.') : c.seoDescription;
   const suffix = path ? `/${path}` : '';
   const prodOrigin = config.indexable ? verifiedHttps(config.url) : undefined;
   const previewOrigin = !config.indexable ? vercelOrigin(config.previewUrl ?? config.vercelUrl) : undefined;

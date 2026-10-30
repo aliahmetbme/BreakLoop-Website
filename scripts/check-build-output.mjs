@@ -5,7 +5,10 @@ const [mode, productionOrigin, previewOrigin] = process.argv.slice(2);
 assert.ok(['production', 'preview', 'local'].includes(mode), 'mode: production | preview | local');
 const production = mode === 'production';
 const imageOrigin = production ? productionOrigin : mode === 'preview' ? previewOrigin : undefined;
-const routes = ['en', 'en/how-it-works', 'en/privacy', 'en/support', 'en/terms', 'tr', 'tr/how-it-works', 'tr/privacy', 'tr/support', 'tr/terms', 'tr/kvkk'];
+const routes = [
+ 'en', 'en/how-it-works', 'en/focus-mode', 'en/life-mode', 'en/privacy', 'en/support', 'en/terms',
+ 'tr', 'tr/how-it-works', 'tr/focus-mode', 'tr/life-mode', 'tr/privacy', 'tr/support', 'tr/terms', 'tr/kvkk'
+];
 for (const route of routes) {
  const html = fs.readFileSync(`.next/server/app/${route}.html`, 'utf8');
  const locale = route.split('/')[0];
@@ -31,11 +34,11 @@ const sitemap = fs.readFileSync('.next/server/app/sitemap.xml.body', 'utf8');
 if (production) {
  assert.ok(robots.includes('Allow: /'));
  assert.ok(robots.includes(`Sitemap: ${productionOrigin}/sitemap.xml`));
- assert.equal((sitemap.match(/<url>/g) || []).length, 11);
+ assert.equal((sitemap.match(/<url>/g) || []).length, 15);
  for (const route of routes) assert.ok(sitemap.includes(`<loc>${productionOrigin}/${route}</loc>`));
  assert.ok(!/localhost|127\.0\.0\.1/.test(sitemap));
 } else {
  assert.ok(robots.includes('Disallow: /'));
  assert.ok(!sitemap.includes('<url>'));
 }
-console.log(`PASS actual ${mode} build: 11 EN/TR pages, robots, canonical/hreflang, sitemap, HTTPS OG/Twitter and Netlify disclosure`);
+console.log(`PASS actual ${mode} build: 15 EN/TR pages, robots, canonical/hreflang, sitemap, HTTPS OG/Twitter and Netlify disclosure`);

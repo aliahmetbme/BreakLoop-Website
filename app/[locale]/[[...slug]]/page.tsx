@@ -5,21 +5,216 @@ import { getContent } from '@/lib/content';
 import { site, locales, paths, availablePaths, type Locale } from '@/lib/config';
 import { LegalDocument, LegalLinks } from '@/components/legal-document';
 import { getLegalCopy, previewLegalCopy } from '@/lib/legal-copy';
-import { ModeOverview, RealLifeScenarios, Philosophy, ProductWalkthrough } from '@/components/marketing';
+import { ModeOverview, RealLifeScenarios } from '@/components/marketing';
+import { FocusModeView, LifeModeView } from '@/components/mode-views';
 import { pageMetadata } from '@/lib/seo';
-import { Budget, Steps, Features, Preview } from '@/components/site';
-type Props={params:Promise<{locale:string;slug?:string[]}>};
-export const dynamicParams=false;
-export function generateStaticParams(){return locales.flatMap(locale=>availablePaths(locale).map(path=>({locale,slug:path?[path]:[]})));}
-async function resolve(params:Props['params']) {const p=await params;const path=p.slug?.join('/')||'';if(!locales.includes(p.locale as Locale)||!paths.includes(path as typeof paths[number])||(path==='kvkk'&&p.locale!=='tr'))notFound();return {locale:p.locale as Locale,path};}
-export async function generateMetadata({params}:Props):Promise<Metadata>{
- const {locale,path}=await resolve(params);
- return pageMetadata(locale,path,site);
+import { Preview } from '@/components/site';
+
+type Props = { params: Promise<{ locale: string; slug?: string[] }> };
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return locales.flatMap(locale =>
+    availablePaths(locale).map(path => ({ locale, slug: path ? [path] : [] }))
+  );
 }
-export default async function Page({params}:Props){const {locale,path}=await resolve(params);const c=getContent(locale,site.indexable);
-if(path==='privacy'||path==='terms'||path==='kvkk')return <LegalDocument locale={locale} page={path}/>;
-if(path==='support'){const legal=getLegalCopy(locale,site.indexable);return <main id="main" className="wrap document">{!site.indexable&&<p className="draft">{previewLegalCopy[locale].draft}</p>}<p className="eyebrow">BREAKLOOP / {c.nav[2]}</p><h1>{c.supportTitle}</h1><p className="lead">{c.supportLead}</p><section className="contact-card"><h2>{site.email?c.supportContactHeading:c.supportContact}</h2><p><strong>{c.supportEmailLabel}</strong></p><p>{site.email?<a href={`mailto:${site.email}`}>{site.email}</a>:<span className="legal-pending">{previewLegalCopy[locale].pending}: {locale==='en'?'VERIFIED SUPPORT EMAIL':'DOĞRULANMIŞ DESTEK EPOSTASI'}</span>}</p>{!site.email&&<p>{c.supportContactText}</p>}{c.supportContactNotes.map(note=><p key={note}>{note}</p>)}</section><div className="document-sections">{c.supportSections.map(([title,...paragraphs])=><section key={title}><h2>{title}</h2>{paragraphs.map(body=><p key={body}>{body}</p>)}</section>)}</div><section className="support-data-note"><h2>{c.supportPrivacyTitle}</h2><p>{c.supportPrivacyBody}</p><p><strong>{c.supportRelatedLabel}</strong> <Link href={`/${locale}/privacy`}>{legal.privacy}</Link>{locale==='tr'&&<> | <Link href="/tr/kvkk" lang="tr">{legal.kvkk}</Link></>}</p></section><LegalLinks locale={locale}/></main>;}
-if(path==='how-it-works')return <main id="main"><section className="wrap how-hero"><p className="eyebrow">BREAKLOOP / {c.nav[0]}</p><h1>{c.howTitle}</h1><p className="lead">{c.howIntro}</p></section><ModeOverview locale={locale}/><ProductWalkthrough locale={locale}/><Steps locale={locale} kind="focus"/><Budget locale={locale}/><Steps locale={locale}/><section className="wrap note-section"><h2>{c.howNoteTitle}</h2><p>{c.howNote}</p></section><Closing locale={locale}/></main>;
-return <main id="main"><section className="wrap hero"><div className="hero-copy"><p className="hero-badge"><span/> {c.badge}</p><h1>{c.hero[0]}<br/><em>{c.hero[1]}</em></h1><p className="lead">{c.intro}</p><div className="hero-actions"><a className="button" href="#coming-soon">{c.cta} <span aria-hidden="true">↗</span></a><Link className="text-link" href={`/${locale}/how-it-works`}>{c.secondary} <span aria-hidden="true">→</span></Link></div><p className="hero-note"><span aria-hidden="true">◌</span> {c.heroNote}</p></div><div className="hero-visual"><div className="orbital orbital-one"/><div className="orbital orbital-two"/><span className="orbit-star" aria-hidden="true">✧</span><div className="floating-note"><span aria-hidden="true">↻</span><div><strong>20 {c.minutes} / 15 {c.minutes}</strong><small>{c.rhythmNote}</small></div></div><Preview locale={locale}/></div></section><div className="wrap hero-divider"><span>{c.designed}</span><span>QUIET HORIZON / CALM MOTION</span><span>{c.cycle}</span></div><ModeOverview locale={locale}/><RealLifeScenarios locale={locale}/><Budget locale={locale}/><Steps locale={locale}/><Steps locale={locale} kind="focus"/><Philosophy locale={locale}/><Features locale={locale}/><section className="wrap privacy-section"><div className="privacy-symbol" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M32 6 52 14v17c0 13-20 25-20 25S12 44 12 31V14L32 6Z" stroke="currentColor" strokeWidth="2"/><path d="m23 30 6 6 13-14" stroke="currentColor" strokeWidth="2"/></svg></div><div><p className="eyebrow">{c.privacyKicker}</p><h2>{c.privacyTitle}</h2><p>{c.privacyBody}</p><Link className="text-link" href={`/${locale}/privacy`}>{c.privacyLink} ↗</Link></div></section><section className="wrap faq-section"><p className="eyebrow">{c.faqLabel}</p><h2>{c.faqTitle}</h2><div>{c.faqs.map(([q,a])=><details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section><Closing locale={locale}/></main>;
+
+async function resolve(params: Props['params']) {
+  const p = await params;
+  const path = p.slug?.join('/') || '';
+  if (
+    !locales.includes(p.locale as Locale) ||
+    !paths.includes(path as (typeof paths)[number]) ||
+    (path === 'kvkk' && p.locale !== 'tr')
+  ) {
+    notFound();
+  }
+  return { locale: p.locale as Locale, path };
 }
-function Closing({locale}:{locale:Locale}){const c=getContent(locale,site.indexable);return <section className="wrap closing" id="coming-soon"><span className="closing-loop" aria-hidden="true">∞</span><p className="eyebrow">BREAKLOOP</p><h2>{c.closing}</h2><p>{c.closingBody}</p><span className="coming-pill"><svg width="18" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 2c.1 2-1.5 4-3.5 4 .1-1.9 1.5-3.8 3.5-4ZM18 12c0-2 1.5-3.1 2-3.5C19 7 17.7 6.5 16.5 6.5c-1.5 0-2.5.8-3.5.8s-2-.8-3.4-.8C6.3 6.5 4 9.2 4 12.6 4 17 7 22 9.5 22c1.2 0 2-.7 3.5-.7s2.1.7 3.4.7c2 0 4.2-3.4 4.9-5.4-1.9-.8-3.3-2.4-3.3-4.6Z"/></svg>{c.soon}</span></section>;}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, path } = await resolve(params);
+  return pageMetadata(locale, path, site);
+}
+
+export default async function Page({ params }: Props) {
+  const { locale, path } = await resolve(params);
+  const c = getContent(locale, site.indexable);
+
+  if (path === 'privacy' || path === 'terms' || path === 'kvkk') {
+    return <LegalDocument locale={locale} page={path} />;
+  }
+
+  if (path === 'focus-mode') {
+    return <FocusModeView locale={locale} />;
+  }
+
+  if (path === 'life-mode') {
+    return <LifeModeView locale={locale} />;
+  }
+
+  if (path === 'support') {
+    const legal = getLegalCopy(locale, site.indexable);
+    return (
+      <main id="main" className="wrap document">
+        {!site.indexable && <p className="draft">{previewLegalCopy[locale].draft}</p>}
+        <p className="eyebrow">BREAKLOOP / {c.nav[2]}</p>
+        <h1>{c.supportTitle}</h1>
+        <p className="lead">{c.supportLead}</p>
+        <section className="contact-card">
+          <h2>{site.email ? c.supportContactHeading : c.supportContact}</h2>
+          <p><strong>{c.supportEmailLabel}</strong></p>
+          <p>
+            {site.email ? (
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            ) : (
+              <span className="legal-pending">
+                {previewLegalCopy[locale].pending}: {locale === 'en' ? 'VERIFIED SUPPORT EMAIL' : 'DOĞRULANMIŞ DESTEK EPOSTASI'}
+              </span>
+            )}
+          </p>
+          {!site.email && <p>{c.supportContactText}</p>}
+          {c.supportContactNotes.map(note => <p key={note}>{note}</p>)}
+        </section>
+        <div className="document-sections">
+          {c.supportSections.map(([title, ...paragraphs]) => (
+            <section key={title}>
+              <h2>{title}</h2>
+              {paragraphs.map(body => <p key={body}>{body}</p>)}
+            </section>
+          ))}
+        </div>
+        <section className="support-data-note">
+          <h2>{c.supportPrivacyTitle}</h2>
+          <p>{c.supportPrivacyBody}</p>
+          <p>
+            <strong>{c.supportRelatedLabel}</strong>{' '}
+            <Link href={`/${locale}/privacy`}>{legal.privacy}</Link>
+            {locale === 'tr' && (
+              <> | <Link href="/tr/kvkk" lang="tr">{legal.kvkk}</Link></>
+            )}
+          </p>
+        </section>
+        <LegalLinks locale={locale} />
+      </main>
+    );
+  }
+
+  if (path === 'how-it-works') {
+    return (
+      <main id="main">
+        <section className="wrap how-hero">
+          <p className="eyebrow">BREAKLOOP / {c.nav[0]}</p>
+          <h1>{c.howTitle}</h1>
+          <p className="lead">{c.howIntro}</p>
+        </section>
+        <ModeOverview locale={locale} />
+        <Closing locale={locale} />
+      </main>
+    );
+  }
+
+  // Homepage: 3 Core FAQ items
+  const coreFaqQuestions = [
+    'Does BreakLoop block all phone activity?',
+    'BreakLoop telefondaki her şeyi engeller mi?',
+    'Is BreakLoop available yet?',
+    'BreakLoop kullanıma açık mı?',
+    'Is BreakLoop free?',
+    'BreakLoop ücretsiz mi?',
+  ];
+  const homepageFaqs = c.faqs.filter(([q]) => coreFaqQuestions.includes(q));
+
+  return (
+    <main id="main">
+      <section className="wrap hero">
+        <div className="hero-copy">
+          <p className="hero-badge"><span /> {c.badge}</p>
+          <h1>{c.hero[0]}<br /><em>{c.hero[1]}</em></h1>
+          <p className="lead">{c.intro}</p>
+          <div className="hero-actions">
+            <a className="button" href="#coming-soon">{c.cta} <span aria-hidden="true">↗</span></a>
+            <Link className="text-link" href={`/${locale}/how-it-works`}>{c.secondary} <span aria-hidden="true">→</span></Link>
+          </div>
+          <p className="hero-note"><span aria-hidden="true">◌</span> {c.heroNote}</p>
+        </div>
+        <div className="hero-visual">
+          <div className="orbital orbital-one" />
+          <div className="orbital orbital-two" />
+          <span className="orbit-star" aria-hidden="true">✧</span>
+          <div className="floating-note">
+            <span aria-hidden="true">↻</span>
+            <div>
+              <strong>20 {c.minutes} / 15 {c.minutes}</strong>
+              <small>{c.rhythmNote}</small>
+            </div>
+          </div>
+          <Preview locale={locale} />
+        </div>
+      </section>
+
+      <div className="wrap hero-divider">
+        <span>{c.designed}</span>
+        <span>QUIET HORIZON / CALM MOTION</span>
+        <span>{c.cycle}</span>
+      </div>
+
+      {/* 1. Daily life scenarios */}
+      <RealLifeScenarios locale={locale} />
+
+      {/* 2. Mode overview cards (below daily life scenarios) */}
+      <ModeOverview locale={locale} />
+
+      {/* 3. Short privacy section */}
+      <section className="wrap privacy-section">
+        <div className="privacy-symbol" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none">
+            <path d="M32 6 52 14v17c0 13-20 25-20 25S12 44 12 31V14L32 6Z" stroke="currentColor" strokeWidth="2" />
+            <path d="m23 30 6 6 13-14" stroke="currentColor" strokeWidth="2" />
+          </svg>
+        </div>
+        <div>
+          <p className="eyebrow">{c.privacyKicker}</p>
+          <h2>{c.privacyTitle}</h2>
+          <p>{c.privacyBody}</p>
+          <Link className="text-link" href={`/${locale}/privacy`}>{c.privacyLink} ↗</Link>
+        </div>
+      </section>
+
+      {/* 4. Short FAQ (3 core questions) */}
+      <section className="wrap faq-section">
+        <p className="eyebrow">{c.faqLabel}</p>
+        <h2>{c.faqTitle}</h2>
+        <div>
+          {homepageFaqs.map(([q, a]) => (
+            <details key={q}>
+              <summary>{q}<span aria-hidden="true">+</span></summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. Coming soon on iOS */}
+      <Closing locale={locale} />
+    </main>
+  );
+}
+
+function Closing({ locale }: { locale: Locale }) {
+  const c = getContent(locale, site.indexable);
+  return (
+    <section className="wrap closing" id="coming-soon">
+      <span className="closing-loop" aria-hidden="true">∞</span>
+      <p className="eyebrow">BREAKLOOP</p>
+      <h2>{c.closing}</h2>
+      <p>{c.closingBody}</p>
+      <span className="coming-pill">
+        <svg width="18" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M16 2c.1 2-1.5 4-3.5 4 .1-1.9 1.5-3.8 3.5-4ZM18 12c0-2 1.5-3.1 2-3.5C19 7 17.7 6.5 16.5 6.5c-1.5 0-2.5.8-3.5.8s-2-.8-3.4-.8C6.3 6.5 4 9.2 4 12.6 4 17 7 22 9.5 22c1.2 0 2-.7 3.5-.7s2.1.7 3.4.7c2 0 4.2-3.4 4.9-5.4-1.9-.8-3.3-2.4-3.3-4.6Z" />
+        </svg>
+        {c.soon}
+      </span>
+    </section>
+  );
+}

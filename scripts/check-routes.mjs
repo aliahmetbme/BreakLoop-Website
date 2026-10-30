@@ -4,7 +4,7 @@ const messages={
  en:{headline:'Focus when you choose.',focus:'01 / FOCUS MODE',life:'02 / LIFE MODE',soon:'Coming soon on iOS',fixed:'not a usage budget',budget:'Shared usage budget'},
  tr:{headline:'İstediğinde odaklan.',focus:'01 / ODAK MODU',life:'02 / YAŞAM MODU',soon:'Yakında iOS’ta',fixed:'sabit süreli bir oturumdur',budget:'Ortak kullanım süresi'},
 };
-for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','/support','/terms',...(lang==='tr'?['/kvkk']:[])]){
+for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/focus-mode','/life-mode','/privacy','/support','/terms',...(lang==='tr'?['/kvkk']:[])]){
  const url=`/${lang}${path}`;const r=await fetch(origin+url);assert.equal(r.status,200,url);const html=await r.text();
  assert.ok(html.includes(`lang="${lang}"`),url+' language');
  assert.ok(html.includes('noindex, nofollow'),url+' noindex');
@@ -53,18 +53,38 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','
   assert.ok(html.includes(`href="/${lang}/terms"`),url+' terms link on support page');
   if(lang==='tr')assert.ok(html.includes('href="/tr/kvkk"'),url+' KVKK link on Turkish support page');
  }
+ if(path==='/focus-mode'){
+  const c=messages[lang];
+  assert.ok(html.includes(c.focus),url+' focus eyebrow');
+  assert.ok(html.includes(c.fixed),url+' fixed duration note');
+  assert.ok(html.includes('horizon-deepfocus.png'),url+' deep focus preview image');
+  assert.ok(html.includes(`href="/${lang}/life-mode"`),url+' link to other mode');
+ }
+ if(path==='/life-mode'){
+  const c=messages[lang];
+  assert.ok(html.includes(c.life),url+' life eyebrow');
+  assert.ok(html.includes(c.budget),url+' shared budget');
+  assert.ok(html.includes('horizon-cooldown.png'),url+' cooldown preview image');
+  assert.ok(html.includes(`href="/${lang}/focus-mode"`),url+' link to other mode');
+ }
  if(path===''||path==='/how-it-works'){
   const c=messages[lang];
-  for(const text of [c.focus,c.life,c.fixed,c.budget,c.soon])assert.ok(html.includes(text),`${url}: ${text}`);
-  for(const anchor of ['focus-mode','life-mode','coming-soon']){
-   assert.equal([...html.matchAll(new RegExp(`id="${anchor}"`,'g'))].length,1,`${url}: unique ${anchor}`);
-  }
+  assert.ok(html.includes(c.focus),`${url}: ${c.focus}`);
+  assert.ok(html.includes(c.life),`${url}: ${c.life}`);
+  assert.ok(html.includes(c.soon),`${url}: ${c.soon}`);
   for(const match of html.matchAll(/href="#([^"]+)"/g))assert.ok(html.includes(`id="${match[1]}"`),url+' valid anchor '+match[1]);
   assert.ok(!/href="https?:\/\/[^\"]*(?:apps\.apple\.com|testflight\.apple\.com)/.test(html),url+' no fake download');
   assert.ok(!/cure phone addiction|guaranteed productivity|100% unbreakable|world’s first shared/i.test(html),url+' no unsupported superlatives');
-  if(path==='/how-it-works')for(const image of ['preview-3.png','preview-1.png'])assert.ok(html.includes(image),url+' product preview '+image);
+  if(path==='/how-it-works'){
+   assert.ok(html.includes(`href="/${lang}/focus-mode"`),url+' link to focus mode');
+   assert.ok(html.includes(`href="/${lang}/life-mode"`),url+' link to life mode');
+  }
   if(path===''){
    assert.ok(html.includes(`<h1>${c.headline}<br/>`),url+' hero message');
+   // Order assertion: scenarios first, mode-overview second
+   assert.ok(html.indexOf('scenario-section')<html.indexOf('mode-overview'),url+' scenarios appear above mode overview');
+   // Short FAQ assertion: exactly 3 questions
+   assert.equal([...html.matchAll(/<details>/g)].length, 3, url+' exactly 3 FAQ items');
    for(const image of ['scenario-study-before-v2.webp','scenario-study-after-v2.webp','scenario-life-day-v2.webp','scenario-life-evening-v2.webp'])assert.ok(html.includes(`${image}&amp;w=3840&amp;q=90`),url+' scenario photo '+image+' q=90');
    assert.ok(html.includes(lang==='en'?'Illustrative scenes created with AI':'Yapay zekâyla oluşturulmuş temsilî sahnelerdir'),url+' honest scene provenance');
    assert.ok(html.includes('scenario-visual-pair'),url+' side-by-side time comparison');
@@ -72,9 +92,6 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','
    assert.ok(html.includes(lang==='en'?'You started studying':'Derse başladın'),url+' focus scenario first caption');
    assert.ok(html.includes(lang==='en'?'Then you got distracted':'Sonra telefona daldın'),url+' focus scenario second caption');
    assert.ok(html.includes(lang==='en'?'Hours later, you’re still scrolling.':'Saatler geçti, hâlâ oradasın.'),url+' time-passing caption');
-   assert.ok(html.includes(lang==='en'?'Pause the distractions.\nMake room for what matters.':'Dikkatini dağıtanlara ara ver.\nÖnemli olana yer aç.'),url+' brand philosophy headline');
-   assert.ok(!/Less autopilot|Daha az otomatik alışkanlık/i.test(html),url+' no legacy autopilot headline');
-   assert.ok(html.includes(lang==='en'?'create a little distance from the apps that take up your time and attention.':'zamanını alan uygulamalarla arana küçük bir mesafe koymana yardımcı olur.'),url+' brand philosophy body');
    assert.ok(new RegExp(`href="#coming-soon">${c.soon}`).test(html),url+' honest Coming Soon primary CTA');
    assert.ok(html.includes(`href="/${lang}/how-it-works"`),url+' localized secondary navigation');
    assert.ok(html.includes(lang==='en'?'Explore the privacy draft':'Gizlilik taslağını incele'),url+' preview privacy label preserved');
