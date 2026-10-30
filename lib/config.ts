@@ -1,6 +1,7 @@
-import { publicationEnabled, supportEmail, verifiedHttps } from './release';
+import { publicationEnabled, supportEmail, vercelOrigin, verifiedHttps } from './release';
 export const site = {
  url: verifiedHttps(process.env.NEXT_PUBLIC_SITE_URL),
+ previewUrl: vercelOrigin(process.env.VERCEL_URL),
  email: supportEmail(process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? 'breakloopSupport@icloud.com'),
  operator: process.env.NEXT_PUBLIC_OPERATOR?.trim() || 'Ali Ahmet Erdoğdu',
  indexable: publicationEnabled(),

@@ -14,6 +14,8 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/privacy','
  assert.ok(html.includes('/icon.png'),url+' favicon');
  assert.ok(html.includes("<script>(function(){try{var t=localStorage.getItem('breakloop-theme')"),url+' pre-paint theme script');
  assert.ok(html.includes(`<meta property="og:image" content="${origin}/${lang}/og"`)||html.includes(`<meta property="og:image" content="http://127.0.0.1:3000/${lang}/og"`),url+' localized OG tag');
+ assert.ok(html.includes('<meta name="twitter:card" content="summary_large_image"'),url+' twitter card');
+ assert.ok(html.includes(`<meta name="twitter:image" content="${origin}/${lang}/og"`)||html.includes(`<meta name="twitter:image" content="http://127.0.0.1:3000/${lang}/og"`),url+' localized Twitter image tag');
  assert.ok(!/aliahmet44@icloud\.com/i.test(html),url+' never exposes personal iCloud address');
  if(['/privacy','/terms','/kvkk'].includes(path)){
   assert.ok(html.includes('legal-toc'),url+' legal contents');

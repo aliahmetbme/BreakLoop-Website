@@ -6,6 +6,12 @@ export function verifiedHttps(value: string | undefined) {
  if (!value) return undefined;
  try { const u=new URL(value); if(u.protocol!=='https:'||u.username||u.password||u.port||u.pathname!=='/'||u.search||u.hash||u.hostname==='localhost'||u.hostname.endsWith('.example')||u.hostname.endsWith('.test')||u.hostname.endsWith('.invalid')||u.hostname.endsWith('.localhost')||/^\d+\.\d+\.\d+\.\d+$/.test(u.hostname)||u.hostname.includes(':')||!u.hostname.includes('.'))return undefined; return u.origin; }catch{return undefined;}
 }
+export function vercelOrigin(value: string | undefined) {
+ if (!value) return undefined;
+ const trimmed = value.trim();
+ if (!trimmed) return undefined;
+ return verifiedHttps(trimmed.startsWith('http://') || trimmed.startsWith('https://') ? trimmed : `https://${trimmed}`);
+}
 export function supportEmail(value: string | undefined) {
  if (!value) return undefined;
  const trimmed = value.trim();

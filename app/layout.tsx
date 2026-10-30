@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { site } from '@/lib/config';
 import './globals.css';
-// Local metadata base only resolves preview OG assets; it never creates a canonical.
-export const metadata: Metadata = { title: 'BreakLoop', applicationName: 'BreakLoop', metadataBase: new URL(site.url || 'http://127.0.0.1:3000') };
+// Local/preview metadataBase only resolves OG and Twitter image assets; it never creates a canonical.
+const assetOrigin = (site.indexable ? site.url : site.previewUrl) || site.url || 'http://127.0.0.1:3000';
+export const metadata: Metadata = { title: 'BreakLoop', applicationName: 'BreakLoop', metadataBase: new URL(assetOrigin) };
 export default function RootLayout({ children }: { children: React.ReactNode }) { return children; }

@@ -10,10 +10,13 @@ try {
  const source=fs.readFileSync(`lib/${name}.ts`,'utf8');
  fs.writeFileSync(path.join(temp,`${name}.js`),ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText);
  }
- const require=createRequire(import.meta.url);const {releaseIssues,websiteReleaseIssues,appStoreReleaseIssues,verifiedHttps,supportEmail,verifiedSupportEmail,resolveLegalText,publicCopyIssues,publicationEnabled}=require(path.join(temp,'release.js'));
+ const require=createRequire(import.meta.url);const {releaseIssues,websiteReleaseIssues,appStoreReleaseIssues,verifiedHttps,vercelOrigin,supportEmail,verifiedSupportEmail,resolveLegalText,publicCopyIssues,publicationEnabled}=require(path.join(temp,'release.js'));
  assert.ok(releaseIssues({}).length>10,'missing prerequisites must block publication');
  for(const url of ['http://verified.tld','https://localhost','https://site.example','https://127.0.0.1','https://user:pass@site.tld','https://site.tld/path','not a url'])assert.equal(verifiedHttps(url),undefined,url);
  assert.equal(verifiedHttps('https://verified.tld/'),'https://verified.tld');
+ assert.equal(vercelOrigin('breakloop-preview.vercel.app'),'https://breakloop-preview.vercel.app');
+ assert.equal(vercelOrigin('https://breakloop-preview.vercel.app/'),'https://breakloop-preview.vercel.app');
+ assert.equal(vercelOrigin('localhost:3000'),undefined);
  assert.equal(supportEmail('a@b.tld\nBcc:test@x.tld'),undefined);
  assert.equal(supportEmail('aliahmet44@icloud.com'),undefined,'personal iCloud address must never be accepted as public support email');
  assert.equal(supportEmail('ALIAHMET44@ICLOUD.COM'),undefined,'case-insensitive personal email block');
@@ -53,17 +56,29 @@ try {
  assert.ok(releaseIssues(env).length>0,'real legal publication remains blocked');
  assert.ok(releaseIssues(env,{documents:fixtureDocs,marketing:{...content,nested:{label:'Local website preview'}}}).some(v=>v.includes('content.nested.label')));
  assert.ok(releaseIssues(env,{documents:fixtureDocs,legalLabels:{label:'Gizlilik taslağını incele'}}).some(v=>v.includes('legal-copy.label')));
- for(const locale of ['en','tr'])for(const route of ['','how-it-works']){
-  const meta=pageMetadata(locale,route,{url:'https://verified.tld',indexable:true});
+ for(const locale of ['en','tr'])for(const route of ['','how-it-works','privacy','support','terms',...(locale==='tr'?['kvkk']:[])]){
+  const meta=pageMetadata(locale,route,{url:'https://verified.tld',previewUrl:'https://breakloop-preview.vercel.app',indexable:true});
   assert.deepEqual(meta.robots,{index:true,follow:true});
   assert.equal(meta.alternates.canonical,`https://verified.tld/${locale}${route?'/'+route:''}`);
-  assert.equal(meta.alternates.languages.en,`/en${route?'/'+route:''}`);
+  if(route!=='kvkk')assert.equal(meta.alternates.languages.en,`/en${route?'/'+route:''}`);
   assert.equal(meta.alternates.languages.tr,`/tr${route?'/'+route:''}`);
+  assert.equal(meta.openGraph.url,`https://verified.tld/${locale}${route?'/'+route:''}`);
   assert.equal(meta.openGraph.images[0].url,`https://verified.tld/${locale}/og`);
+  assert.equal(meta.twitter.card,'summary_large_image');
+  assert.equal(meta.twitter.images[0].url,`https://verified.tld/${locale}/og`);
   assert.deepEqual(publicCopyIssues(meta),[]);
+  const vercelPreview=pageMetadata(locale,route,{url:'https://verified.tld',vercelUrl:'breakloop-preview.vercel.app',indexable:false});
+  assert.equal(vercelPreview.alternates,undefined,'preview must never emit canonical URL');
+  assert.equal(vercelPreview.openGraph.url,undefined,'preview must not emit canonical og:url');
+  assert.deepEqual(vercelPreview.robots,{index:false,follow:false},'preview must remain noindex');
+  assert.equal(vercelPreview.openGraph.images[0].url,`https://breakloop-preview.vercel.app/${locale}/og`,'preview OG image uses VERCEL_URL');
+  assert.equal(vercelPreview.twitter.card,'summary_large_image');
+  assert.equal(vercelPreview.twitter.images[0].url,`https://breakloop-preview.vercel.app/${locale}/og`,'preview Twitter image uses VERCEL_URL');
   const preview=pageMetadata(locale,route,{indexable:false});
   assert.equal(preview.alternates,undefined);
   assert.deepEqual(preview.robots,{index:false,follow:false});
+  assert.equal(preview.openGraph.images[0].url,`/${locale}/og`);
+  assert.equal(preview.twitter.images[0].url,`/${locale}/og`);
  }
  const kvkk=pageMetadata('tr','kvkk',{url:'https://verified.tld',indexable:true});
  assert.equal(kvkk.alternates.languages.en,undefined);

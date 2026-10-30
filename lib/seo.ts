@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import { getContent } from './content';
 import { getLegalCopy } from './legal-copy';
+import { vercelOrigin, verifiedHttps } from './release';
 import type { Locale } from './config';
 
-type SeoConfig = { url?: string; indexable: boolean };
+type SeoConfig = { url?: string; previewUrl?: string; vercelUrl?: string; indexable: boolean };
 /** Pure metadata builder, also exercised with isolated publication fixtures. */
 export function pageMetadata(locale: Locale, path: string, config: SeoConfig): Metadata {
   const c = getContent(locale, config.indexable);
@@ -11,12 +12,17 @@ export function pageMetadata(locale: Locale, path: string, config: SeoConfig): M
   const title = path === 'privacy' ? legal.privacy : path === 'terms' ? legal.terms : path === 'kvkk' ? legal.kvkk : path === 'support' ? c.nav[2] : path === 'how-it-works' ? c.nav[0] : c.hero.join(' ');
   const description = path === 'privacy' ? legal.privacyDescription : path === 'terms' ? legal.termsDescription : path === 'kvkk' ? legal.kvkkDescription : path === 'support' ? legal.supportIntro : path === 'how-it-works' ? c.howSeoDescription : c.seoDescription;
   const suffix = path ? `/${path}` : '';
-  const url = config.url ? `${config.url}/${locale}${suffix}` : undefined;
+  const prodOrigin = config.indexable ? verifiedHttps(config.url) : undefined;
+  const previewOrigin = !config.indexable ? vercelOrigin(config.previewUrl ?? config.vercelUrl ?? process.env.VERCEL_URL) : undefined;
+  const imageOrigin = prodOrigin || previewOrigin;
+  const url = prodOrigin ? `${prodOrigin}/${locale}${suffix}` : undefined;
+  const imageUrl = `${imageOrigin || ''}/${locale}/og`;
+  const imageAlt = `BreakLoop — ${c.hero.join(' ')}`;
   return {
     title: `BreakLoop — ${title}`, description,
     robots: { index: config.indexable, follow: config.indexable },
-    ...(config.url ? {
-      metadataBase: new URL(config.url),
+    ...(imageOrigin ? { metadataBase: new URL(imageOrigin) } : {}),
+    ...(prodOrigin ? {
       alternates: {
         canonical: url,
         languages: { ...(path !== 'kvkk' ? { en: `/en${suffix}` } : {}), tr: `/tr${suffix}`, 'x-default': path === 'kvkk' ? '/tr/kvkk' : `/en${suffix}` },
@@ -27,9 +33,14 @@ export function pageMetadata(locale: Locale, path: string, config: SeoConfig): M
       locale: locale === 'en' ? 'en_US' : 'tr_TR',
       ...(path !== 'kvkk' ? { alternateLocale: locale === 'en' ? 'tr_TR' : 'en_US' } : {}),
       type: 'website',
-      // A relative locale image works in preview; metadataBase resolves only asset URLs.
-      images: [{ url: `${config.url || ''}/${locale}/og`, width: 1200, height: 630, alt: `BreakLoop — ${c.hero.join(' ')}` }],
+      // In preview, VERCEL_URL resolves OG/Twitter image URLs without enabling canonicals or indexing; in local dev, relative paths work.
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: imageAlt }],
       ...(url ? { url } : {}),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `BreakLoop — ${title}`, description,
+      images: [{ url: imageUrl, alt: imageAlt }],
     },
   };
 }
