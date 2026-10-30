@@ -141,26 +141,6 @@ export default async function Page({ params }: Props) {
           <p className="hero-badge"><span /> {c.badge}</p>
           <h1>{c.hero[0]}<br /><em>{c.hero[1]}</em></h1>
           <p className="lead">{c.intro}</p>
-
-          <div className="hero-modes-pill" role="region" aria-label={locale === 'en' ? 'Core experiences summary' : 'Temel özellik özeti'}>
-            <div className="hero-mode-item">
-              <div className="hero-mode-header">
-                <span className="hero-mode-dot dot-focus" aria-hidden="true" />
-                <strong>{c.heroExperiences[0].title}</strong>
-                <small>({c.heroExperiences[0].mode})</small>
-              </div>
-              <p>{c.heroExperiences[0].desc}</p>
-            </div>
-            <div className="hero-mode-item">
-              <div className="hero-mode-header">
-                <span className="hero-mode-dot dot-cycle" aria-hidden="true" />
-                <strong>{c.heroExperiences[1].title}</strong>
-                <small>({c.heroExperiences[1].mode})</small>
-              </div>
-              <p>{c.heroExperiences[1].desc}</p>
-            </div>
-          </div>
-
           <div className="hero-actions">
             <Link className="button" href={`/${locale}/how-it-works`}>
               {c.secondary} <span aria-hidden="true">→</span>

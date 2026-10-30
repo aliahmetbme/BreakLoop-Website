@@ -57,7 +57,6 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/focus-mode
   const c=messages[lang];
   assert.ok(html.includes(c.focus),url+' focus eyebrow');
   assert.ok(html.includes(c.fixed),url+' fixed duration note');
-  assert.ok(html.includes('horizon-deepfocus.png'),url+' deep focus preview image');
   assert.ok(html.includes(`href="/${lang}/life-mode"`),url+' link to other mode');
   assert.ok(html.includes('breadcrumb'),url+' breadcrumb navigation');
   assert.ok(html.includes(`href="/${lang}"`),url+' breadcrumb home link');
@@ -87,7 +86,6 @@ for(const lang of ['en','tr'])for(const path of ['','/how-it-works','/focus-mode
   }
   if(path===''){
    assert.ok(html.includes(`<h1>${c.headline}<br/>`),url+' hero message');
-   assert.ok(html.includes('hero-modes-pill'),url+' hero compact two-experience explainer');
    // Order assertion: scenarios first, mode-overview second
    assert.ok(html.indexOf('scenario-section')<html.indexOf('mode-overview'),url+' scenarios appear above mode overview');
    // Short FAQ assertion: exactly 3 questions

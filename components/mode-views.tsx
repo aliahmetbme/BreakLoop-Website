@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { getContent } from '@/lib/content';
 import { site, type Locale } from '@/lib/config';
 import { Budget, Steps } from './site';
@@ -25,20 +24,6 @@ export function FocusModeView({ locale }: { locale: Locale }) {
         <h1>{isEn ? 'Focus Mode' : 'Odak Modu'}</h1>
         <p className="mode-badge-tag">{isEn ? 'iOS feature: Deep Focus' : 'iOS özelliği: Derin Odak'}</p>
         <p className="lead">{c.modes[0][2]}</p>
-      </section>
-
-      <section className="wrap feature-card focus" style={{ margin: '0 auto 3rem', maxWidth: '720px', textAlign: 'center', padding: '2.5rem 1.5rem' }}>
-        <Image
-          src="/images/horizon-deepfocus.png"
-          width={240}
-          height={240}
-          alt={isEn ? 'Deep Focus session preview' : 'Derin Odak oturumu önizlemesi'}
-          style={{ margin: '0 auto 1.5rem' }}
-        />
-        <h3>{isEn ? 'Make room for what matters.' : 'Önem verdiğin şeye alan aç.'}</h3>
-        <p className="body-copy" style={{ maxWidth: '580px', margin: '0.75rem auto 0' }}>
-          {c.focusIntro}
-        </p>
       </section>
 
       <Steps locale={locale} kind="focus" />
@@ -90,20 +75,6 @@ export function LifeModeView({ locale }: { locale: Locale }) {
         <p className="lead">{c.modes[1][2]}</p>
       </section>
 
-      <section className="wrap feature-card cooldown" style={{ margin: '0 auto 3rem', maxWidth: '720px', textAlign: 'center', padding: '2.5rem 1.5rem' }}>
-        <Image
-          src="/images/horizon-cooldown.png"
-          width={240}
-          height={240}
-          alt={isEn ? 'Life Mode cooldown preview' : 'Yaşam Modu mola önizlemesi'}
-          style={{ margin: '0 auto 1.5rem' }}
-        />
-        <h3>{isEn ? 'Catch the scroll before it takes over.' : 'Kaydırmaya bir ara ver.'}</h3>
-        <p className="body-copy" style={{ maxWidth: '580px', margin: '0.75rem auto 0' }}>
-          {c.budgetBody}
-        </p>
-      </section>
-
       <Budget locale={locale} />
 
       <Steps locale={locale} kind="life" />
@@ -118,7 +89,7 @@ export function LifeModeView({ locale }: { locale: Locale }) {
               <h3>{c.features[0][1]}</h3>
               <p>{c.features[0][2]}</p>
             </div>
-            <Image src="/images/horizon-cooldown.png" width={220} height={220} alt="" />
+            <img src="/images/horizon-cooldown.png" width={220} height={220} alt="" />
             <small>{c.quiet} · {c.preview}</small>
           </article>
           <article className="feature-card rest">
